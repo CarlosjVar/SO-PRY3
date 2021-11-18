@@ -1,0 +1,13 @@
+<root>
+    <usuarios>
+        <usuario username="Feterro" password="Feterro" />
+        <usuario username="Pitotito" password="PICHUDO" />
+        <usuario username="Pitotito" password="PICHUDO" />
+        <usuario username="Velvet" password="Gato02" />
+        <usuario username="Velveto" password="Gato02" />
+        <usuario username="Velvetota" password="Gato02" />
+        <usuario username="Velvetin" password="Gato02" />
+        <usuario username="Velvetino" password="Gato02" />
+        <usuario username="Velvetun" password="Gato02" />
+    </usuarios>
+</root>
