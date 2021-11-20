@@ -1,5 +1,4 @@
 
-import xml.etree.ElementTree as ET
 from flask import Flask, request, Blueprint
 from flask_cors import CORS, cross_origin
 from controllers.xml_controller import register_user
@@ -7,7 +6,7 @@ import json
 user_module = Blueprint('user_module', __name__)
 
 
-@user_module.route("/signup", methods=["POST"])
+@user_module.route("/api/users/signup", methods=["POST"])
 @cross_origin()
 def signup():
     signup_info = request.get_json()

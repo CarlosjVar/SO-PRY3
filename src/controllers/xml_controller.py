@@ -1,43 +1,58 @@
 from os import path
+from typing import cast
 import xml.etree.ElementTree as ET
 from models.user import User
 from controllers.fs_controller import DRIVE_LOCAL_ROUTE, create_drive, create_dir
 XML_PATH = './data/userInfo.xml'
 
 
-def write_dir(username, type, target_dir, attrib):
-    print("Entró")
+def write_dir(username, type, target_dir, args):
+    result = [None, []]
+
     tree = ET.parse(XML_PATH)
     root = tree.getroot()
     users = root.find("usuarios")
     selected_user = None
+    # Searches for selected user
     for usuario in users.findall("usuario"):
         if (usuario.get("username") == username):
             selected_user = usuario
     if selected_user is None:
-        # Return error
-        pass
+        result[1].append(
+            "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+
+    # Searches for target dir
     dirs = selected_user.findall("dir")
-    search_dir([], dirs[0], attrib, type)
+    target_dir_element = search_dir(target_dir,
+                                    dirs[0])
+
+    if(type == "dir"):
+        local_dir = target_dir_element.get("local")
+        dir_result = create_dir(args["name"], local_dir)
+        if len(dir_result[1]) > 0:
+            result[1] += dir_result[1]
+            return result
+        attrib = {"local": dir_result[0][0], "virtual": args["name"]}
+        child_dir = target_dir_element.makeelement("dir", attrib)
+        target_dir_element.append(child_dir)
     tree.write(XML_PATH)
-    return
+    result[0] = {"msg": "Velvet logró crear su directorio"}
+    return result
 
 
-def search_dir(path_array, element, args: dict, type):
-
+def search_dir(path_array: list, element):
+    # Stop condition, already in requested dir
     if(len(path_array) == 0):
-        local_dir = element.get("local")
-        if type == "dir":
-            dir_result = create_dir(args["name"], local_dir)
-            attrib = {"local": dir_result[0][0], "virtual": args["name"]}
-            child_dir = element.makeelement("dir", attrib)
-            element.append(child_dir)
-        else:
-            # TODO create file
-            pass
-        element.makeelement(type, args)
+        print("Encontré")
+        return element
+    # Keep going inside dirs until path list is empty
     else:
-        pass
+        dirs = element.findall("dir")
+        dir_search = path_array.pop()
+        for directory in dirs:
+            if directory.get("virtual") == dir_search:
+                return search_dir(path_array, directory)
 
 
 def register_user(signup_info):

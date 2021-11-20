@@ -13,12 +13,20 @@
         <usuario username="Atuncito" password="Gato02" />
         <usuario username="Prueba2" password="Gato02">
             <dir local="../Drive/Prueba2_Mis carpetas" virtual="Mis carpetas">
-                <dir local="../Drive/Prueba2_Mis carpetas/Carpeta nueva" virtual="Carpeta nueva" />
+                <dir local="../Drive/Prueba2_Mis carpetas/Carpeta nueva" virtual="Carpeta nueva">
+                    <dir local="../Drive/Prueba2_Mis carpetas/Carpeta nueva/Carpeta nueva" virtual="Carpeta nueva" />
+                    <dir local="../Drive/Prueba2_Mis carpetas/Carpeta nueva/Fabrizio putito" virtual="Fabrizio putito">
+                        <dir local="../Drive/Prueba2_Mis carpetas/Carpeta nueva/Fabrizio putito/Fabrizio reputito" virtual="Fabrizio reputito" />
+                    </dir>
+                </dir>
             </dir>
 
         </usuario>
         <usuario username="Prueba3" password="Gato02">
             <dir local="../Drive/Prueba3_Mis carpetas" virtual="Mis carpetas" />
+        </usuario>
+        <usuario username="Titovare" password="Gato02">
+            <dir local="../Drive/Titovare_My drive" virtual="My drive"><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin"><dir local="../Drive/Titovare_My drive/Genshin/Jabonsote" virtual="Jabonsote" /></dir><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /></dir>
         </usuario>
     </usuarios>
 </root>
