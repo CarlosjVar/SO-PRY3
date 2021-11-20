@@ -7,10 +7,20 @@ def create_drive(username, name):
     try:
         drive_route = f"{DRIVE_LOCAL_ROUTE}/{username}_{name}"
         os.mkdir(drive_route)
-        for dir in os.listdir(DRIVE_LOCAL_ROUTE):
-            print(dir)
         result[0] = [drive_route, name]
         return result
     except FileExistsError:
-        result[1].append("Ya existe un directorio con este nombre")
+        result[1].append("Ya existe un velvetorio con este nombre")
+        return result
+
+
+def create_dir(name, target_dir):
+    result = [None, []]
+    try:
+        drive_route = f"{target_dir}/{name}"
+        os.mkdir(drive_route)
+        result[0] = [drive_route, name]
+        return result
+    except FileExistsError:
+        result[1].append("Ya existe un velvetorio con este nombre")
         return result

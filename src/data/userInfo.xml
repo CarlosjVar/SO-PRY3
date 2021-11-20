@@ -9,5 +9,16 @@
         <usuario username="Velvetin" password="Gato02" />
         <usuario username="Velvetino" password="Gato02" />
         <usuario username="Velvetun" password="Gato02" />
+        <usuario username="At&#250;n" password="Gato02" />
+        <usuario username="Atuncito" password="Gato02" />
+        <usuario username="Prueba2" password="Gato02">
+            <dir local="../Drive/Prueba2_Mis carpetas" virtual="Mis carpetas">
+                <dir local="../Drive/Prueba2_Mis carpetas/Carpeta nueva" virtual="Carpeta nueva" />
+            </dir>
+
+        </usuario>
+        <usuario username="Prueba3" password="Gato02">
+            <dir local="../Drive/Prueba3_Mis carpetas" virtual="Mis carpetas" />
+        </usuario>
     </usuarios>
 </root>
