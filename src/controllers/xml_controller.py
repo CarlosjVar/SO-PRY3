@@ -2,6 +2,8 @@ from os import path
 from typing import cast
 import xml.etree.ElementTree as ET
 from models.user import User
+from models.directory import Directory
+from models.file import File
 from controllers.fs_controller import DRIVE_LOCAL_ROUTE, create_drive, create_dir
 XML_PATH = './data/userInfo.xml'
 
@@ -86,4 +88,40 @@ def register_user(signup_info):
     # Write xml
     tree.write(XML_PATH)
     result[0] = User(username, password, drive_info[0][0], drive_info[0][1])
+    return result
+
+
+def listContent(target_dir, username):
+    directories = []
+    files = []
+    result = [None, []]
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+    users = root.find("usuarios")
+    selected_user = None
+    # Searches for selected user
+    for usuario in users.findall("usuario"):
+        if (usuario.get("username") == username):
+            selected_user = usuario
+    if selected_user is None:
+        result[1].append(
+            "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+    # Searches for target dir
+    dirs = selected_user.findall("dir")[0]
+    element = search_dir(target_dir, dirs)
+
+    for file_elem in element.findall("file"):
+        newFile = File(file_elem.get("name"), file_elem.get(
+            ("ext")), file_elem.get(("date_created")), file_elem.get(("date_modified")), file_elem.get(("size")))
+        files.append(newFile)
+
+    for directory in element.findall("dir"):
+        newDir = Directory(directory.get("virtual"),
+                           directory.get("local"),
+                           0)
+        directories.append(newDir)
+    directory = Directory(element.get("virtual"),
+                          element.get("local"), 0, directories)
+    result[0] = directory
     return result

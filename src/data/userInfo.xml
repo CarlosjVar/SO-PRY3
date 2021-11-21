@@ -26,7 +26,7 @@
             <dir local="../Drive/Prueba3_Mis carpetas" virtual="Mis carpetas" />
         </usuario>
         <usuario username="Titovare" password="Gato02">
-            <dir local="../Drive/Titovare_My drive" virtual="My drive"><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin"><dir local="../Drive/Titovare_My drive/Genshin/Jabonsote" virtual="Jabonsote" /></dir><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /></dir>
+            <dir local="../Drive/Titovare_My drive" virtual="My drive"><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin"><dir local="../Drive/Titovare_My drive/Genshin/Jabonsote" virtual="Jabonsote" /></dir><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /><dir local="../Drive/Titovare_My drive/Genshin" virtual="Genshin" /><dir local="../Drive/Titovare_My drive/Gallito" virtual="Gallito"><dir local="../Drive/Titovare_My drive/Gallito/Roo" virtual="Roo" /></dir></dir>
         </usuario>
     </usuarios>
 </root>

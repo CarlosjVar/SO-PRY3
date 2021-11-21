@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 from routes.user_routes import user_module
 from routes.directory_routes import directory_module
 from controllers.fs_controller import create_drive
-from controllers.xml_controller import write_dir
+from controllers.xml_controller import write_dir, listContent
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
