@@ -1,5 +1,13 @@
 <root>
     <usuarios>
-       
-    <usuario username="Testing" password="Gato02"><dir local="../Drive/Testing_Drive" virtual="Drive"><dir local="../Drive/Testing_Drive/Prueba 1" virtual="Prueba 1"><dir local="../Drive/Testing_Drive/Prueba 1/Prueba 2" virtual="Prueba 2" /></dir><dir local="../Drive/Testing_Drive/Prueba 2" virtual="Prueba 2" /></dir></usuario></usuarios>
+
+        <usuario username="Testing" password="Gato02">
+            <dir local="../Drive/Testing_Drive" virtual="Drive">
+                <dir local="../Drive/Testing_Drive/Prueba 1" virtual="Prueba 1">
+                    <dir local="../Drive/Testing_Drive/Prueba 1/Prueba 2" virtual="Prueba 2" />
+                </dir>
+                <dir local="../Drive/Testing_Drive/Prueba 2" virtual="Prueba 2" />
+            </dir>
+        </usuario>
+    </usuarios>
 </root>
