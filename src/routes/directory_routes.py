@@ -35,4 +35,5 @@ def listItems():
     result = listContent(target_dir, username)
     if len(result[1]) > 0:
         return {"errors": result[1]}
-    return result[0].__dict__
+
+    return (result[0].toJson())

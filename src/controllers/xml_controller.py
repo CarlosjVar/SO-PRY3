@@ -117,6 +117,7 @@ def listContent(target_dir, username):
         files.append(newFile)
 
     for directory in element.findall("dir"):
+        print(directory.get("virtual"))
         newDir = Directory(directory.get("virtual"),
                            directory.get("local"),
                            0)
