@@ -10,4 +10,4 @@ class User:
     def toJson(self):
         return json.dumps(self, default=lambda o: o.__dict__)
     def __str__(self):
-        return f"Username {self.username} password {self.password} dir {self.virtual_root_direcotry}"
+        return f"Username {self.username} password {self.password} dir {self.virtual_root_directory}"
