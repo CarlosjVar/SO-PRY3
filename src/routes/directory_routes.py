@@ -22,7 +22,7 @@ def create_dir():
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
         return Response(str(response_data), status=500, mimetype='application/json')
-    return result[0]
+    return (result[0].toJson())
 
 
 @directory_module.route("/api/dirs/get", methods=["GET"])
