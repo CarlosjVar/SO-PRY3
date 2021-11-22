@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"Testing\",\r\n    \"name\":\"Prueba 4\",\r\n    \"type\": \"dir\",\r\n    \"target_dir\":\"Drive/Prueba 2\"\r\n\r\n}"
+					"raw": "{\r\n    \"username\":\"Testing\",\r\n    \"name\":\"Prueba 4-4\",\r\n    \"target_dir\":\"Drive/Prueba 4\"\r\n\r\n}"
 				},
 				"url": {
 					"raw": "localhost:5000/api/dirs/create",
@@ -71,7 +71,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:5000/api/dirs/get?target_dir=Drive&username=Testing",
+					"raw": "localhost:5000/api/dirs/get?target_dir=Drive/Prueba 1&username=Testing",
 					"host": [
 						"localhost"
 					],
@@ -84,7 +84,7 @@
 					"query": [
 						{
 							"key": "target_dir",
-							"value": "Drive"
+							"value": "Drive/Prueba 1"
 						},
 						{
 							"key": "username",
@@ -108,17 +108,17 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"Testing\",\r\n    \"name\":\"Archivo1\",\r\n    \"ext\": \"txt\",\r\n    \"date_created\":\"11/18/2021 12:44 PM\",\r\n    \"date_modified\":\"11/18/2021 12:44 PM\",\r\n    \"content\":\"ME CAGO EN SO\",\r\n    \"type\": \"file\",\r\n    \"target_dir\":\"Drive\",\r\n    \"size\" : \"1\"\r\n\r\n}"
+					"raw": "{\r\n    \"username\":\"Testing\",\r\n    \"name\":\"Archivo2\",\r\n    \"ext\": \"txt\",\r\n    \"date_created\":\"11/18/2021 12:44 PM\",\r\n    \"date_modified\":\"11/18/2021 12:44 PM\",\r\n    \"content\":\"ME CAGO EN SO número\",\r\n    \"target_dir\":\"Drive/Prueba 4/Prueba 4-2\",\r\n    \"size\" : \"1\"\r\n\r\n}"
 				},
 				"url": {
-					"raw": "localhost:5000/api/dirs/create",
+					"raw": "localhost:5000/api/file/create",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
 						"api",
-						"dirs",
+						"file",
 						"create"
 					]
 				}
@@ -138,7 +138,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n    \"username\":\"Testing\",\r\n    \"password\":\"Gato02\"\r\n}"
+					"raw": "{\r\n\r\n    \"username\":\"Testing\",\r\n    \"password\":\"Gato0\"\r\n}"
 				},
 				"url": {
 					"raw": "localhost:5000/api/users/login",
