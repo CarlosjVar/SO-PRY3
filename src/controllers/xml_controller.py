@@ -124,7 +124,7 @@ def listContent(target_dir, username):
 
     for file_elem in element.findall("file"):
         newFile = File(file_elem.get("name"), file_elem.get(
-            ("ext")), file_elem.get(("date_created")), file_elem.get(("date_modified")), file_elem.get(("size")), file_elem.get(("content")))
+            ("ext")), file_elem.get(("date_created")), file_elem.get(("date_modified")), file_elem.get(("size")), file_elem.get(("content")),)
         files.append(newFile)
 
     for directory in element.findall("dir"):
@@ -135,7 +135,7 @@ def listContent(target_dir, username):
         directories.append(newDir)
     print(f"El espacio de este directorio es {messureSize(element)}")
     directory = Directory(element.get("virtual"),
-                          0, directories, files)
+                          0, directories, files, name)
     result[0] = directory
     return result
 
