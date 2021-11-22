@@ -1,6 +1,8 @@
 from logging import log
 from os import path
 import xml.etree.ElementTree as ET
+
+from werkzeug.wrappers.request import PlainRequest
 from models.user import User
 from models.directory import Directory
 from models.file import File
@@ -124,15 +126,14 @@ def listContent(target_dir, username):
 
     for file_elem in element.findall("file"):
         newFile = File(file_elem.get("name"), file_elem.get(
-            ("ext")), file_elem.get(("date_created")), file_elem.get(("date_modified")), file_elem.get(("size")), file_elem.get(("content")),)
+            ("ext")), file_elem.get(("date_created")), file_elem.get(("date_modified")), file_elem.get(("size")), file_elem.get(("content")), name)
         files.append(newFile)
 
     for directory in element.findall("dir"):
         print(f"El espacio de este directorio es {messureSize(directory)}")
-        newDir = Directory(directory.get("virtual"),
-                           directory.get("local"),
-                           0)
+        newDir = Directory(directory.get("virtual"), 0, [], [], parent=name)
         directories.append(newDir)
+
     print(f"El espacio de este directorio es {messureSize(element)}")
     directory = Directory(element.get("virtual"),
                           0, directories, files, name)

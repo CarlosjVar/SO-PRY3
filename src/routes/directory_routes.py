@@ -9,6 +9,7 @@ directory_module = Blueprint('directory_module', __name__)
 @directory_module.route("/api/dirs/create", methods=["POST"])
 @cross_origin()
 def create_dir():
+
     args = request.get_json()
     username = args["username"]
     type = args["type"]
@@ -28,7 +29,6 @@ def create_dir():
 @directory_module.route("/api/dirs/get", methods=["GET"])
 @cross_origin()
 def listItems():
-
     # Aquí se preparan los datos
     username = request.args.get("username")
     target_dir = request.args.get('target_dir')
