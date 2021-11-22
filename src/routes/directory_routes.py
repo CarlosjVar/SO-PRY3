@@ -1,5 +1,5 @@
 
-from flask import Flask, request, Blueprint
+from flask import Flask, request, Blueprint, Response
 from flask_cors import CORS, cross_origin
 from controllers.xml_controller import listContent, xml_write, listContent
 import json
@@ -20,7 +20,8 @@ def create_dir():
         target_dir.reverse()
     result = xml_write(username, type, target_dir, args)
     if len(result[1]) > 0:
-        return {"errors": result[1]}
+        response_data = {"errors": result[1]}
+        return Response(str(response_data), status=500, mimetype='application/json')
     return result[0]
 
 
@@ -39,6 +40,7 @@ def listItems():
   # se llama la función
     result = listContent(target_dir, username)
     if len(result[1]) > 0:
-        return {"errors": result[1]}
+        response_data = {"errors": result[1]}
+        return Response(str(response_data), status=500, mimetype='application/json')
 
     return (result[0].toJson())

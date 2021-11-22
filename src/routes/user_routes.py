@@ -12,7 +12,8 @@ def signup():
     signup_info = request.get_json()
     result = register_user(signup_info)
     if len(result[1]) > 0:
-        return {"errors": result[1]}
+        response_data= {"errors": result[1]}
+        return Response(str(response_data), status=500, mimetype='application/json')
     return result[0].__dict__
 
 
