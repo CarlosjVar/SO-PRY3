@@ -1,5 +1,5 @@
 
-from flask import Flask, request, Blueprint
+from flask import Flask, request, Blueprint,Response
 from flask_cors import CORS, cross_origin
 from controllers.xml_controller import register_user, login_user
 import json
@@ -22,6 +22,7 @@ def login():
     login_info = request.get_json()
     result = login_user(login_info["username"], login_info["password"])
     if len(result[1]) > 0:
-        return {"errors": result[1]}
+        response_data ={"errors": result[1]}
+        return Response(str(response_data), status=500, mimetype='application/json')
     print(result[0])
     return result[0].__dict__
