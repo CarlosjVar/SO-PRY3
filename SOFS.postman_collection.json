@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "cf564d15-061c-4c4a-ae13-6b210a8d9cf8",
+		"name": "SOFS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Prueba3\",\r\n    \"password\":\"Gato02\",\r\n    \"drive_name\":\"Mis carpetas\",\r\n    \"size\":10\r\n    }"
+				},
+				"url": {
+					"raw": "localhost:5000/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateDir",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Titovare\",\r\n    \"dir_name\":\"Jabonsote\",\r\n    \"target_dir\":\"My drive/Genshin\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "localhost:5000/api/dirs/create",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"dirs",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List dir",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Create file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Testing\",\r\n    \"name\":\"Archivo1\",\r\n    \"ext\": \"txt\",\r\n    \"date_created\":\"11/18/2021 12:44 PM\",\r\n    \"date_modified\":\"11/18/2021 12:44 PM\",\r\n    \"content\":\"ME CAGO EN SO\",\r\n    \"type\": \"type\",\r\n    \"target_dir\":\"Drive\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "localhost:5000/api/dirs/create",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"dirs",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}

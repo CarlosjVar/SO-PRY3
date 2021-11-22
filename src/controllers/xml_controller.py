@@ -1,5 +1,4 @@
 from os import path
-from typing import cast
 import xml.etree.ElementTree as ET
 from models.user import User
 from models.directory import Directory
@@ -8,7 +7,7 @@ from controllers.fs_controller import DRIVE_LOCAL_ROUTE, create_drive, create_di
 XML_PATH = './data/userInfo.xml'
 
 
-def write_dir(username, type, target_dir, args):
+def xml_write(username, type, target_dir, args):
     result = [None, []]
 
     tree = ET.parse(XML_PATH)
@@ -21,40 +20,49 @@ def write_dir(username, type, target_dir, args):
             selected_user = usuario
     if selected_user is None:
         result[1].append(
-            "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+            "Nuestros Velvuscadores no pudieron encontrar ningún directorio relacionado con este usuario.")
         return result
-
     # Searches for target dir
-    dirs = selected_user.findall("dir")
-    target_dir_element = search_dir(target_dir,
-                                    dirs[0])
-
-    if(type == "dir"):
-        local_dir = target_dir_element.get("local")
-        dir_result = create_dir(args["name"], local_dir)
-        if len(dir_result[1]) > 0:
-            result[1] += dir_result[1]
-            return result
-        attrib = {"local": dir_result[0][0], "virtual": args["name"]}
-        child_dir = target_dir_element.makeelement("dir", attrib)
+    print(target_dir)
+    target_dir_element_result = (search_dir(target_dir,
+                                            selected_user, ""))[0]
+    target_dir_element = target_dir_element_result[0]
+    if(type == "file"):
+        attrib = {"name": args["name"], "ext": args["ext"], "date_created": args["date_created"],
+                  "date_modified": args["date_modified"], "size": args["size"], "content": args["content"]}
+        child_dir = target_dir_element.makeelement(type, attrib)
         target_dir_element.append(child_dir)
+        result[0] = {"msg": "Velvet logró crear su archivo!"}
+    elif(type == "dir"):
+        attrib = {"virtual": args["name"]}
+        child_dir = target_dir_element.makeelement(type, attrib)
+        target_dir_element.append(child_dir)
+        result[0] = {"msg": "Velvet logró crear su directorio!"}
     tree.write(XML_PATH)
-    result[0] = {"msg": "Velvet logró crear su directorio"}
     return result
 
 
-def search_dir(path_array: list, element):
+def messureSize(element):
+#    finalSize = 0
+   for directory in element.findall("dir"):
+      for file in dir.findall("file"):
+          finalSize = finalSize + int(file.get("size"))
+   return finalSize
+
+
+def search_dir(path_array: list, element, name):
     # Stop condition, already in requested dir
     if(len(path_array) == 0):
         print("Encontré")
-        return element
+        return [element, name[:-1]]
     # Keep going inside dirs until path list is empty
     else:
         dirs = element.findall("dir")
         dir_search = path_array.pop()
         for directory in dirs:
             if directory.get("virtual") == dir_search:
-                return search_dir(path_array, directory)
+                name = name + directory.get("virtual") + "/"
+                return search_dir(path_array, directory, name)
 
 
 def register_user(signup_info):
@@ -75,23 +83,21 @@ def register_user(signup_info):
     attrib = {"username": username,
               "password": password}
     user = users.makeelement("usuario", attrib)
-    # Drive creation
-    drive_info = create_drive(username, drive_name)
-    if len(drive_info[1]) > 0:
-        result[1] += drive_info[1]
-        return result
     # Create dir on xml
-    attrib = {"local": drive_info[0][0], "virtual": drive_info[0][1]}
+    attrib = {"virtual": drive_name}
     directory = user.makeelement("dir", attrib)
     user.append(directory)
+    shared = user.makeelement("dir", {"virtual": "My shared files"})
+    user.append(shared)
     users.append(user)
     # Write xml
     tree.write(XML_PATH)
-    result[0] = User(username, password, drive_info[0][0], drive_info[0][1])
+    result[0] = User(username, password, drive_name)
     return result
 
 
 def listContent(target_dir, username):
+    print(target_dir)
     directories = []
     files = []
     result = [None, []]
@@ -108,12 +114,15 @@ def listContent(target_dir, username):
             "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
         return result
     # Searches for target dir
-    dirs = selected_user.findall("dir")[0]
-    element = search_dir(target_dir, dirs)
+    # dirs = selected_user.findall("dir")[0]
+    # element = search_dir(target_dir, dirs)
+    print("Antes depepito")
+    element, name = (search_dir(target_dir, selected_user, ""))
 
+    print(name)
     for file_elem in element.findall("file"):
         newFile = File(file_elem.get("name"), file_elem.get(
-            ("ext")), file_elem.get(("date_created")), file_elem.get(("date_modified")), file_elem.get(("size")))
+            ("ext")), file_elem.get(("date_created")), file_elem.get(("date_modified")), file_elem.get(("size")), file_elem.get(("content")))
         files.append(newFile)
 
     for directory in element.findall("dir"):
@@ -123,6 +132,30 @@ def listContent(target_dir, username):
                            0)
         directories.append(newDir)
     directory = Directory(element.get("virtual"),
-                          element.get("local"), 0, directories)
+                          0, directories,files)
     result[0] = directory
+    return result
+
+
+def login_user(username, password):
+
+    result = [None, []]
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+    users = root.find("usuarios")
+    selected_user = None
+    # Searches for selected user
+    for usuario in users.findall("usuario"):
+        if (usuario.get("username") == username):
+            selected_user = usuario
+    if selected_user is None:
+        result[1].append(
+            "No se velvet encontró ningún velvet usuario, que velvet lástima")
+        return result
+    print(f"Del user {selected_user.get('password')} del login info {password}")
+    if (selected_user.get("password") != password):
+        result[1].append(
+            "No sea velvet pendejo, ponga su velvet contraseña bien")
+        return result
+    result[0] = User(username, password, "")
     return result

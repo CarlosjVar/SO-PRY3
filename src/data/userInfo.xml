@@ -1,13 +1,13 @@
 <root>
     <usuarios>
-
         <usuario username="Testing" password="Gato02">
-            <dir local="../Drive/Testing_Drive" virtual="Drive">
-                <dir local="../Drive/Testing_Drive/Prueba 1" virtual="Prueba 1">
-                    <dir local="../Drive/Testing_Drive/Prueba 1/Prueba 2" virtual="Prueba 2" />
+            <dir virtual="Drive">
+                <dir virtual="Prueba 2">
+                    <dir virtual="Prueba 4" />
                 </dir>
-                <dir local="../Drive/Testing_Drive/Prueba 2" virtual="Prueba 2" />
+                <file name="Archivo1" ext="txt" date_created="11/18/2021 12:44 PM" date_modified="11/18/2021 12:44 PM" size="1" content="ME CAGO EN SO" />
             </dir>
+            <dir virtual="My shared files" />
         </usuario>
     </usuarios>
 </root>
