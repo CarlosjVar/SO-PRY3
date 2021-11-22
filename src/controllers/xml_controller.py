@@ -23,7 +23,6 @@ def xml_write(username, type, target_dir, args):
             "Nuestros Velvuscadores no pudieron encontrar ningún directorio relacionado con este usuario.")
         return result
     # Searches for target dir
-    print(target_dir)
     target_dir_element_result = (search_dir(target_dir,
                                             selected_user, ""))[0]
     target_dir_element = target_dir_element_result[0]
@@ -43,17 +42,18 @@ def xml_write(username, type, target_dir, args):
 
 
 def messureSize(element):
-#    finalSize = 0
-   for directory in element.findall("dir"):
-      for file in dir.findall("file"):
-          finalSize = finalSize + int(file.get("size"))
-   return finalSize
+    finalSize = 0
+    for directory in element.findall("dir"):
+        for file in directory.findall("file"):
+            finalSize = finalSize + int(file.get("size"))       
+    for file in element.findall("file"):
+        finalSize = finalSize + int(file.get("size"))
+    return finalSize
 
 
 def search_dir(path_array: list, element, name):
     # Stop condition, already in requested dir
     if(len(path_array) == 0):
-        print("Encontré")
         return [element, name[:-1]]
     # Keep going inside dirs until path list is empty
     else:
@@ -97,7 +97,6 @@ def register_user(signup_info):
 
 
 def listContent(target_dir, username):
-    print(target_dir)
     directories = []
     files = []
     result = [None, []]
@@ -116,21 +115,21 @@ def listContent(target_dir, username):
     # Searches for target dir
     # dirs = selected_user.findall("dir")[0]
     # element = search_dir(target_dir, dirs)
-    print("Antes depepito")
     element, name = (search_dir(target_dir, selected_user, ""))
 
-    print(name)
+
     for file_elem in element.findall("file"):
         newFile = File(file_elem.get("name"), file_elem.get(
             ("ext")), file_elem.get(("date_created")), file_elem.get(("date_modified")), file_elem.get(("size")), file_elem.get(("content")))
         files.append(newFile)
 
     for directory in element.findall("dir"):
-        print(directory.get("virtual"))
+        print(f"El espacio de este directorio es {messureSize(directory)}")
         newDir = Directory(directory.get("virtual"),
                            directory.get("local"),
                            0)
         directories.append(newDir)
+    print(f"El espacio de este directorio es {messureSize(element)}")
     directory = Directory(element.get("virtual"),
                           0, directories,files)
     result[0] = directory

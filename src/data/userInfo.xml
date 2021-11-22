@@ -3,7 +3,14 @@
         <usuario username="Testing" password="Gato02">
             <dir virtual="Drive">
                 <dir virtual="Prueba 2">
-                    <dir virtual="Prueba 4" />
+                    <dir virtual="Prueba 4" >
+                        <file name="Archivo1" ext="txt" date_created="11/18/2021 12:44 PM" date_modified="11/18/2021 12:44 PM" size="1" content="ME CAGO EN SO" />
+                        <file name="Archivo2" ext="txt" date_created="11/18/2021 12:44 PM" date_modified="11/18/2021 12:44 PM" size="12" content="ME CAGO EN SO" />
+                    </dir>
+                    <dir virtual="Prueba 5" >
+                        <file name="Archivo1" ext="txt" date_created="11/18/2021 12:44 PM" date_modified="11/18/2021 12:44 PM" size="1" content="ME CAGO EN SO" />
+                        <file name="Archivo2" ext="txt" date_created="11/18/2021 12:44 PM" date_modified="11/18/2021 12:44 PM" size="12" content="ME CAGO EN SO" />
+                    </dir>
                 </dir>
                 <file name="Archivo1" ext="txt" date_created="11/18/2021 12:44 PM" date_modified="11/18/2021 12:44 PM" size="1" content="ME CAGO EN SO" />
             </dir>

@@ -4,10 +4,12 @@ import json
 import xml.etree.ElementTree as ET
 from routes.user_routes import user_module
 from routes.directory_routes import directory_module
-
+from controllers.xml_controller import messureSize
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.register_blueprint(user_module)
 app.register_blueprint(directory_module)
+
+
