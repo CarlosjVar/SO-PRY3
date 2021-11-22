@@ -24,7 +24,7 @@ def xml_write(username, type, target_dir, args):
         return result
     # Searches for target dir
     target_dir_element_result = (search_dir(target_dir,
-                                            selected_user, ""))[0]
+                                            selected_user, ""))
     target_dir_element = target_dir_element_result[0]
     if(type == "file"):
         attrib = {"name": args["name"], "ext": args["ext"], "date_created": args["date_created"],
@@ -45,7 +45,7 @@ def messureSize(element):
     finalSize = 0
     for directory in element.findall("dir"):
         for file in directory.findall("file"):
-            finalSize = finalSize + int(file.get("size"))       
+            finalSize = finalSize + int(file.get("size"))
     for file in element.findall("file"):
         finalSize = finalSize + int(file.get("size"))
     return finalSize
@@ -117,7 +117,6 @@ def listContent(target_dir, username):
     # element = search_dir(target_dir, dirs)
     element, name = (search_dir(target_dir, selected_user, ""))
 
-
     for file_elem in element.findall("file"):
         newFile = File(file_elem.get("name"), file_elem.get(
             ("ext")), file_elem.get(("date_created")), file_elem.get(("date_modified")), file_elem.get(("size")), file_elem.get(("content")))
@@ -131,7 +130,7 @@ def listContent(target_dir, username):
         directories.append(newDir)
     print(f"El espacio de este directorio es {messureSize(element)}")
     directory = Directory(element.get("virtual"),
-                          0, directories,files)
+                          0, directories, files)
     result[0] = directory
     return result
 
@@ -151,7 +150,8 @@ def login_user(username, password):
         result[1].append(
             "No se velvet encontró ningún velvet usuario, que velvet lástima")
         return result
-    print(f"Del user {selected_user.get('password')} del login info {password}")
+    print(
+        f"Del user {selected_user.get('password')} del login info {password}")
     if (selected_user.get("password") != password):
         result[1].append(
             "No sea velvet pendejo, ponga su velvet contraseña bien")
