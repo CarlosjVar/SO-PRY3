@@ -226,18 +226,20 @@ def copy_dir(source_dir, target_dir, object, username, type):
             result[1].append(
                 "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
             return result
+        if(not validateName(target_dir_element, object, "dir")):
+            delete_item(target_dir_element, object, "dir")
         target_dir_element.append(selected_dir)
     elif(type == "file"):
         selected_file = None
         for file in source_dir_element.findall("file"):
-            print(source_dir_element.get("virtual"))
-            print(file.get(name))
             if(file.get("name") == object):
                 selected_file = file
         if selected_file == None:
             result[1].append(
                 "Nuestros Velvebuscadores no puedieron encontrar ningún archivo relacionado con este usuario.")
             return result
+        if(not validateName(target_dir_element, object, "file")):
+            delete_item(target_dir_element, object, "file")
         target_dir_element.append(selected_file)
     tree.write(XML_PATH)
     result[0] = {
