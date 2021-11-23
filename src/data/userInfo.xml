@@ -42,7 +42,7 @@
                         </dir>
                     </dir>
                 </dir>
-            </dir>
+            <dir virtual="pepito" /></dir>
             <dir virtual="My shared files" />
         </usuario>
     </usuarios>

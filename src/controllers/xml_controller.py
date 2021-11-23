@@ -28,6 +28,11 @@ def xml_write(username, type, target_dir, args):
     # Searches for target dir
     target_dir_element_result = (search_dir(target_dir,
                                             selected_user, ""))
+
+    if target_dir_element_result == None:
+        result[1].append(
+            "Nuestros Velvuscadores no pudieron encontrar este directorio")
+        return result
     target_dir_element = target_dir_element_result[0]
 
     if(type == "file"):
