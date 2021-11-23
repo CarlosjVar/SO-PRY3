@@ -1,7 +1,7 @@
 
 from flask import Flask, request, Blueprint, Response
 from flask_cors import CORS, cross_origin
-from controllers.xml_controller import listContent, xml_write, listContent, copy_dir, delete_dir
+from controllers.xml_controller import listContent, xml_write, listContent, copy_dir, delete_dir, modifyFileHelper, move_item
 import json
 directory_module = Blueprint('directory_module', __name__)
 
@@ -112,3 +112,49 @@ def deleteItem():
     message = "Su item cayó ante las ya no tan grandes pero aún majestusas garras de Velvet" if result[
         0] else "Velvet no pudo obliterar su item porque no lo encontró"
     return {"message": message}
+
+
+@directory_module.route("/api/file/modify", methods=["POST"])
+@cross_origin()
+def modifyFile():
+    args = request.get_json()
+    username = args["username"]
+    target_dir = args["target_dir"]
+    if target_dir == '':
+        target_dir = []
+    else:
+        target_dir = target_dir.split("/")
+        target_dir.reverse()
+    del args["username"]
+    del args["target_dir"]
+    result = modifyFileHelper(target_dir, args, args["old_name"], username)
+    if len(result[1]) > 0:
+        response_data = {"errors": result[1]}
+        return Response(str(response_data), status=500, mimetype='application/json')
+    return result[0].__dict__
+
+
+@directory_module.route("/api/dir/move", methods=["POST"])
+@cross_origin()
+def moveItem():
+    args = request.get_json()
+    source_dir = args["from_directory"]
+    if source_dir == '':
+        source_dir = []
+    else:
+        source_dir = source_dir.split("/")
+        source_dir.reverse()
+    target_dir = args["to_directory"]
+    if target_dir == '':
+        target_dir = []
+    else:
+        target_dir = target_dir.split("/")
+        target_dir.reverse()
+    type = args["type"]
+    element = args["target_element"]
+    username = args["username"]
+    result = move_item(source_dir, target_dir, element, username, type)
+    if len(result[1]) > 0:
+        response_data = {"errors": result[1]}
+        return Response(str(response_data), status=500, mimetype='application/json')
+    return {"message": result[0]}

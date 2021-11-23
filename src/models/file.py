@@ -2,7 +2,7 @@ import json
 
 
 class File:
-    def __init__(self, name, ext, date_created, date_modified, size, content, parent) -> None:
+    def __init__(self, name, ext, date_created, date_modified, size, content, parent=None) -> None:
         self.name = name
         self.ext = ext
         self.date_created = date_created

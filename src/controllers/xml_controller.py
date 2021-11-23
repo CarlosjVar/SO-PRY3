@@ -76,8 +76,42 @@ def modifyFile(element, attributes, name):
     for file in element.findall("file"):
         if file.get("name") == name:
             for key, value in attributes.items():
-                file.set(value, key)
-            return
+                file.set(key, value)
+            return File(file.get("name"), file.get("ext"), file.get("date_created"), file.get("date_modified"), file.get("size"), file.get("content"))
+
+
+def modifyFileHelper(target_dir, attributes, name, username):
+    result = [None, []]
+
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+    users = root.find("usuarios")
+    selected_user = None
+    # Searches for selected user
+    for usuario in users.findall("usuario"):
+        if (usuario.get("username") == username):
+            selected_user = usuario
+    if selected_user is None:
+        result[1].append(
+            "Nuestros Velvuscadores no pudieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+    # Searches for target dir
+    target_dir_element_result = (search_dir(target_dir,
+                                            selected_user, ""))
+    if target_dir_element_result == None:
+        result[1].append(
+            "Nuestros Velvuscadores no pudieron encontrar este directorio")
+        return result
+    modified_file = modifyFile(target_dir_element_result[0], attributes, name)
+
+    if(modified_file == None):
+        result[1].append(
+            "Velvet tuvo problemas editando su gato archivo, por favor quítese esas lagañas y revise que hizo mal")
+        return result
+    tree.write(XML_PATH)
+    modified_file.parent = target_dir_element_result[1]
+    result[0] = modified_file
+    return result
 
 
 def validateName(element, name, type):
@@ -158,8 +192,12 @@ def listContent(target_dir, username):
     # Searches for target dir
     # dirs = selected_user.findall("dir")[0]
     # element = search_dir(target_dir, dirs)
-    element, name = (search_dir(target_dir, selected_user, ""))
-
+    dir_result = (search_dir(target_dir, selected_user, ""))
+    if dir_result is None:
+        result[1].append(
+            "Nuestros Velvuscadores no pudieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+    element, name = dir_result
     for file_elem in element.findall("file"):
         newFile = File(file_elem.get("name"), file_elem.get(
 
@@ -249,6 +287,39 @@ def copy_dir(source_dir, target_dir, object, username, type):
     tree.write(XML_PATH)
     result[0] = {
         "msg": "El omnipotente Velvet rompió las leyes de la metafísica y clonó su item"}
+    return result
+
+
+def move_item(source_dir, target_dir, object, username, type):
+    result = [None, []]
+    source_dir_copy = [element for element in source_dir]
+    target_dir_copy = [element for element in target_dir]
+    copy_result = copy_dir(source_dir, target_dir, object, username, type)
+    if(len(copy_result[1]) > 0):
+        result[1] += copy_result[1]
+        return result
+
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+    users = root.find("usuarios")
+    for usuario in users.findall("usuario"):
+        if (usuario.get("username") == username):
+            selected_user = usuario
+    if selected_user is None:
+        result[1].append(
+            "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+    source_dir_element_result = search_dir(source_dir_copy, selected_user, "")
+
+    source_dir_element = source_dir_element_result[0]
+
+    print(source_dir)
+    delete_result = delete_item(source_dir_element, object, type)
+    if(not delete_result):
+        result[1] += ["velvet perdio interes en borrar el archivo"]
+        return result
+    tree.write(XML_PATH)
+    result[0] = "Gatoexito"
     return result
 
 
