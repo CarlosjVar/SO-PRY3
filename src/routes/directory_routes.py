@@ -1,7 +1,7 @@
 
 from flask import Flask, request, Blueprint, Response
 from flask_cors import CORS, cross_origin
-from controllers.xml_controller import listContent, xml_write, listContent
+from controllers.xml_controller import listContent, xml_write, listContent, copy_dir, delete_dir
 import json
 directory_module = Blueprint('directory_module', __name__)
 
@@ -12,14 +12,31 @@ def create_dir():
 
     args = request.get_json()
     username = args["username"]
-    type = args["type"]
     target_dir = args["target_dir"]
     if target_dir == '':
         target_dir = []
     else:
         target_dir = target_dir.split("/")
         target_dir.reverse()
-    result = xml_write(username, type, target_dir, args)
+    result = xml_write(username, "dir", target_dir, args)
+    if len(result[1]) > 0:
+        response_data = {"errors": result[1]}
+        return Response(str(response_data), status=500, mimetype='application/json')
+    return (result[0].toJson())
+
+
+@directory_module.route("/api/file/create", methods=["POST"])
+@cross_origin()
+def create_file():
+    args = request.get_json()
+    username = args["username"]
+    target_dir = args["target_dir"]
+    if target_dir == '':
+        target_dir = []
+    else:
+        target_dir = target_dir.split("/")
+        target_dir.reverse()
+    result = xml_write(username, "file", target_dir, args)
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
         return Response(str(response_data), status=500, mimetype='application/json')
@@ -37,10 +54,61 @@ def listItems():
     else:
         target_dir = target_dir.split("/")
         target_dir.reverse()
-  # se llama la función
+    # se llama la función
     result = listContent(target_dir, username)
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
         return Response(str(response_data), status=500, mimetype='application/json')
 
     return (result[0].toJson())
+
+
+@directory_module.route("/api/dirs/copy", methods=["POST"])
+@cross_origin()
+def copyItem():
+    args = request.get_json()
+    source_dir = args["from_directory"]
+    if source_dir == '':
+        source_dir = []
+    else:
+        source_dir = source_dir.split("/")
+        source_dir.reverse()
+    target_dir = args["to_directory"]
+    if target_dir == '':
+        target_dir = []
+    else:
+        target_dir = target_dir.split("/")
+        target_dir.reverse()
+    type = args["type"]
+    element = args["target_element"]
+    username = args["username"]
+
+    result = copy_dir(source_dir, target_dir, element, username, type)
+    if len(result[1]) > 0:
+        response_data = {"errors": result[1]}
+        return Response(str(response_data), status=500, mimetype='application/json')
+
+    return (result[0])
+
+
+@directory_module.route("/api/dirs/delete", methods=["POST"])
+@cross_origin()
+def deleteItem():
+    args = request.get_json()
+    source_dir = args["from_directory"]
+    if source_dir == '':
+        source_dir = []
+    else:
+        source_dir = source_dir.split("/")
+        source_dir.reverse()
+    element = args["target_element"]
+    username = args["username"]
+    type = args["type"]
+    result = delete_dir(source_dir, element, type, username)
+    if len(result[1]) > 0:
+        response_data = {"errors": result[1]}
+        return Response(str(response_data), status=500, mimetype='application/json')
+
+    message = "Su item cayó ante las ya no tan grandes pero aún majestusas garras de Velvet" if result[
+        0] else "Velvet no pudo obliterar su item porque no lo encontró"
+    return {"message": message}

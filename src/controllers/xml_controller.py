@@ -1,5 +1,5 @@
 from logging import log
-from os import path
+from os import name, path
 import xml.etree.ElementTree as ET
 
 from werkzeug.wrappers.request import PlainRequest
@@ -30,8 +30,13 @@ def xml_write(username, type, target_dir, args):
                                             selected_user, ""))
     target_dir_element = target_dir_element_result[0]
 
-    print(target_dir_element_result[1])
     if(type == "file"):
+
+        if(not validateName(target_dir_element, args["name"], "file")):
+            result[1].append(
+                "A nuestro Velvet buscador le parece que ya existe un velvet archivo con ese nombre")
+            return result
+
         attrib = {"name": args["name"], "ext": args["ext"], "date_created": args["date_created"],
                   "date_modified": args["date_modified"], "size": args["size"], "content": args["content"]}
         child_dir = target_dir_element.makeelement(type, attrib)
@@ -39,6 +44,10 @@ def xml_write(username, type, target_dir, args):
         result[0] = File(args["name"], args["ext"], args["date_created"],
                          args["date_modified"], args["size"], args["content"], target_dir_element_result[1])
     elif(type == "dir"):
+        if(not validateName(target_dir_element, args["name"], "dir")):
+            result[1].append(
+                "A nuestro Velvet buscador le parece que ya existe un velvet directorio con ese nombre")
+            return result
         attrib = {"virtual": args["name"]}
         child_dir = target_dir_element.makeelement(type, attrib)
         target_dir_element.append(child_dir)
@@ -48,7 +57,7 @@ def xml_write(username, type, target_dir, args):
     return result
 
 
-def messureSize(element):
+def meassureSize(element):
     finalSize = 0
     for directory in element.findall("dir"):
         for file in directory.findall("file"):
@@ -56,6 +65,28 @@ def messureSize(element):
     for file in element.findall("file"):
         finalSize = finalSize + int(file.get("size"))
     return finalSize
+
+
+def modifyFile(element, attributes, name):
+    for file in element.findall("file"):
+        if file.get("name") == name:
+            for key, value in attributes.items():
+                file.set(value, key)
+            return
+
+
+def validateName(element, name, type):
+    finalSize = 0
+    available = True
+    if type == "dir":
+        for directory in element.findall("dir"):
+            if(directory.get("virtual") == name):
+                available = False
+    elif type == "file":
+        for file in element.findall("file"):
+            if(file.get("name") == name):
+                available = False
+    return available
 
 
 def search_dir(path_array: list, element, name):
@@ -126,15 +157,17 @@ def listContent(target_dir, username):
 
     for file_elem in element.findall("file"):
         newFile = File(file_elem.get("name"), file_elem.get(
+
             ("ext")), file_elem.get(("date_created")), file_elem.get(("date_modified")), file_elem.get(("size")), file_elem.get(("content")), name)
         files.append(newFile)
 
     for directory in element.findall("dir"):
-        print(f"El espacio de este directorio es {messureSize(directory)}")
+        print(f"El espacio de este directorio es {meassureSize(directory)}")
         newDir = Directory(directory.get("virtual"), 0, [], [], parent=name)
         directories.append(newDir)
 
-    print(f"El espacio de este directorio es {messureSize(element)}")
+    print(validateName(element, "pepito2", "dir"))
+    print(f"El espacio de este directorio es {meassureSize(element)}")
     directory = Directory(element.get("virtual"),
                           0, directories, files, name)
     result[0] = directory
@@ -164,3 +197,87 @@ def login_user(username, password):
         return result
     result[0] = User(username, password, "")
     return result
+
+
+def copy_dir(source_dir, target_dir, object, username, type):
+
+    result = [None, []]
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+    users = root.find("usuarios")
+    for usuario in users.findall("usuario"):
+        if (usuario.get("username") == username):
+            selected_user = usuario
+    if selected_user is None:
+        result[1].append(
+            "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+    source_dir_element_result = search_dir(source_dir, selected_user, "")
+    target_dir_element_result = search_dir(target_dir, selected_user, "")
+    source_dir_element = source_dir_element_result[0]
+    target_dir_element = target_dir_element_result[0]
+    if(type == "dir"):
+        selected_dir = None
+        for directory in source_dir_element.findall("dir"):
+            if(directory.get("virtual") == object):
+                selected_dir = directory
+            pass
+        if selected_dir == None:
+            result[1].append(
+                "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+            return result
+        target_dir_element.append(selected_dir)
+    elif(type == "file"):
+        selected_file = None
+        for file in source_dir_element.findall("file"):
+            print(source_dir_element.get("virtual"))
+            print(file.get(name))
+            if(file.get("name") == object):
+                selected_file = file
+        if selected_file == None:
+            result[1].append(
+                "Nuestros Velvebuscadores no puedieron encontrar ningún archivo relacionado con este usuario.")
+            return result
+        target_dir_element.append(selected_file)
+    tree.write(XML_PATH)
+    result[0] = {
+        "msg": "El omnipotente Velvet rompió las leyes de la metafísica y clonó su item"}
+    return result
+
+
+def delete_dir(source_dir, name, type, username):
+    result = [None, []]
+
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+    users = root.find("usuarios")
+    selected_user = None
+    # Searches for selected user
+    for usuario in users.findall("usuario"):
+        if (usuario.get("username") == username):
+            selected_user = usuario
+    if selected_user is None:
+        result[1].append(
+            "Nuestros Velvuscadores no pudieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+    source_dir_element_result = search_dir(source_dir, selected_user, "")
+
+    source_dir_element = source_dir_element_result[0]
+    result[0] = delete_item(source_dir_element, name, type)
+    # Searches for target dir
+    tree.write(XML_PATH)
+    return result
+
+
+def delete_item(element, name, type):
+    if(type == "dir"):
+        for directory in element.findall("dir"):
+            if directory.get("virtual") == name:
+                element.remove(directory)
+                return True
+    else:
+        for file in element.findall("file"):
+            if file.get("name") == name:
+                element.remove(file)
+                return True
+    return False

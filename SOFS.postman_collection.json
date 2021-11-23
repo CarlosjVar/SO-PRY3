@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"Testing\",\r\n    \"name\":\"Prueba 4-4\",\r\n    \"target_dir\":\"Drive/Prueba 4\"\r\n\r\n}"
+					"raw": "{\r\n    \"username\":\"Testing\",\r\n    \"name\":\"pepito\",\r\n    \"target_dir\":\"Drive/Prueba 1\"\r\n\r\n}"
 				},
 				"url": {
 					"raw": "localhost:5000/api/dirs/create",
@@ -150,6 +150,36 @@
 						"api",
 						"users",
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from_directory\":\"Drive/Prueba 1\",\r\n    \"target_element\":\"pepito\",\r\n    \"target_directory\":\"Drive/Prueba 2\",\r\n    \"usuario\":\"Testing\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:5000/api/dirs/move",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"dirs",
+						"move"
 					]
 				}
 			},
