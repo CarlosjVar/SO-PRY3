@@ -71,7 +71,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:5000/api/dirs/get?target_dir=Drive/Prueba 1&username=Testing",
+					"raw": "localhost:5000/api/dirs/get?target_dir=Drive/Prueba 1/Prueba 1-1&username=Testing",
 					"host": [
 						"localhost"
 					],
@@ -84,7 +84,7 @@
 					"query": [
 						{
 							"key": "target_dir",
-							"value": "Drive/Prueba 1"
+							"value": "Drive/Prueba 1/Prueba 1-1"
 						},
 						{
 							"key": "username",
@@ -156,7 +156,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "Copy Item",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -168,10 +168,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"from_directory\":\"Drive/Prueba 1\",\r\n    \"target_element\":\"pepito\",\r\n    \"target_directory\":\"Drive/Prueba 2\",\r\n    \"usuario\":\"Testing\"\r\n}"
+					"raw": "{\r\n    \"from_directory\":\"Drive\",\r\n    \"target_element\":\"Prueba 2\",\r\n    \"to_directory\":\"Drive/Prueba 3/Prueba 3-2\",\r\n    \"username\":\"Testing\",\r\n    \"type\":\"dir\"\r\n\r\n}"
 				},
 				"url": {
-					"raw": "localhost:5000/api/dirs/move",
+					"raw": "localhost:5000/api/dirs/copy",
 					"host": [
 						"localhost"
 					],
@@ -179,7 +179,37 @@
 					"path": [
 						"api",
 						"dirs",
-						"move"
+						"copy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from_directory\":\"Drive\",\r\n    \"target_element\":\"Prueba 4\",\r\n    \"username\":\"Testing\",\r\n    \"type\":\"dir\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:5000/api/dirs/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"dirs",
+						"delete"
 					]
 				}
 			},
