@@ -1,0 +1,40 @@
+
+<mat-toolbar *ngIf=" hasRoute('home')" >
+  <a [routerLink]="['/']"> <img src="../../../assets/img/logo-3.png"> </a>
+
+
+  <span class="example-spacer"></span>
+  <button mat-stroked-button color="empty" [routerLinkActive]="['active']" [routerLink]="['/login']">Iniciar Sesión</button>
+  <span class="mr-2"></span>
+  <button mat-flat-button color="full" [routerLinkActive]="['active']" [routerLink]="['/signup']">Crear Cuenta</button>
+</mat-toolbar>
+
+
+<mat-toolbar *ngIf=" hasRoute('login')">
+  <a [routerLink]="['/']"> <img src="../../../assets/img/logo-3.png"> </a>
+
+  <span class="example-spacer"></span>
+  <button mat-flat-button color="full" [routerLinkActive]="['active']" [routerLink]="['/signup']">Crear Cuenta</button>
+</mat-toolbar>
+
+
+
+
+
+<mat-toolbar *ngIf=" hasRoute('signup')">
+  <a [routerLink]="['/']"> <img src="../../../assets/img/logo-3.png"> </a>
+  
+  <span class="example-spacer"></span>
+  <button mat-stroked-button color="empty" [routerLinkActive]="['active']" [routerLink]="['/login']">Iniciar Sesión</button>
+  </mat-toolbar>
+
+
+
+
+<mat-toolbar *ngIf=" hasRoute('my-drive')">
+  <img src="../../../assets/img/logo-3.png">
+
+  <span class="example-spacer"></span>
+  <span class="mr-2"></span>
+  <button  mat-flat-button color="full" [routerLinkActive]="['active']" (click)="logout()">Cerrar Sesión</button>
+</mat-toolbar>

@@ -1,0 +1,101 @@
+
+.container-b{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.general-container{
+    background-color: rgba(255, 255, 255, 0.9) ;
+    overflow: auto;
+}
+
+.mat-tree-node{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #495057;
+    background-color: transparent;
+    
+}
+
+.mat-tree {
+    background: #ffffff52;
+}
+
+ button:focus {
+    outline: none !important;
+}
+
+.mat-tree-node:hover{
+    background-color: rgba(0,0,0,.04);
+}
+
+.mat-button{
+    width: 100%;
+}
+
+.general-container .mat-button{
+    display: flex;
+    
+}
+
+.mat-button:hover {
+    background-color: transparent;
+}
+
+.mat-raised-button{
+    background-color: #004baddc;
+}
+
+.mat-icon{
+    color: #f1cb4f;
+}
+
+.mat-icon .white{
+    color: white;
+}
+
+.title{
+    overflow: hidden;
+}
+
+.title{
+    color: #495057;
+    text-align: center;
+}
+
+
+.title img{
+    width: 180%;
+    
+}
+
+.title h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+.title h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #495057;
+    font-weight: 500;
+    
+}
+
+.container-b{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+

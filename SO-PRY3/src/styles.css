@@ -1,0 +1,89 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/*Botones*/
+.mat-empty {
+  color: #004aad;
+  border: 1px solid;
+  border-color: #004aad !important;
+}
+.mat-full {
+  background-color: #004aad  !important;
+  color: white  !important;
+}
+
+.mat-empty:hover {
+  transition: 1s;
+  color: #004baddc;
+  background-color: #004bad46;
+}
+.mat-full:hover  {
+  transition: 1s;
+  color: white;
+  background-color: #004baddc;
+}
+
+ .mat-stroked-button.mat-primary.mat-button-disabled, .mat-stroked-button.mat-accent.mat-button-disabled, .mat-stroked-button.mat-warn.mat-button-disabled, .mat-stroked-button.mat-button-disabled.mat-button-disabled{
+  color: #2e303341;
+  border-color: #2e303341 !important;
+}
+
+
+.mat-stroked-button.mat-primary.mat-button-disabled:hover, .mat-stroked-button.mat-accent.mat-button-disabled:hover, .mat-stroked-button.mat-warn.mat-button-disabled:hover, .mat-stroked-button.mat-button-disabled.mat-button-disabled:hover{
+  color: #2e303341;
+  border-color: #2e303341 !important;
+  background-color: white;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.63); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+.mat-dialog-container{
+  background-color: white !important;
+  color: #495057 !important;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate{
+  background-color: #004aad  !important;
+  color: white  !important;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color:  #004aad  !important;
+}
+
+.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {
+  color: white !important;
+}

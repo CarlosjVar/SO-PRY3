@@ -1,0 +1,29 @@
+*{
+    display: flex;
+    justify-content: center;
+}
+
+img{
+    width: 70%;
+}
+
+::ng-deep.mat-select-content{
+    width:2000px;
+    background-color: red;
+    font-size: 10px;  
+    color: #A5A5A5 !important; 
+}
+
+.central-container{
+    display: flex;
+    flex-direction: column;
+}
+
+mat-pseudo-checkbox.mat-pseudo-checkbox.mat-option-pseudo-checkbox.ng-star-inserted.mat-pseudo-checkbox-checked{
+    background: #f1cb4f;
+    color: #A5A5A5;
+}
+
+span.mat-option-text{
+    color: #A5A5A5;
+}

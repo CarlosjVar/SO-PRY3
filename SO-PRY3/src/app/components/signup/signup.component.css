@@ -1,0 +1,44 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-card {
+  color: black;
+  background: rgba(255, 255, 255, 0.863);
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.6px);
+  -webkit-backdrop-filter: blur(6.6px);
+  width: 80vh;
+}
+
+.logo {
+  max-width: 300px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.alert {
+  padding-top: 5px;
+}
+
+.alert p {
+  color: red;
+  font-size: 13px;
+}
+
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42A948;
+  /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442;
+  /* red */
+}

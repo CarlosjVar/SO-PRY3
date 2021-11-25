@@ -1,0 +1,72 @@
+
+.mat-raised-button img{
+    width: 60%;
+}
+
+.mat-raised-button{
+    background-color: white;
+    color: #495057;
+}
+
+
+.mat-dialog-actions{
+    display: flex;
+    justify-content: flex-end;
+    min-height: 20px !important;
+}
+
+.mat-button.close {
+    font-size: 10px;
+    text-decoration: none;
+    color: #A5A5A5;
+}
+
+::ng-deep .example-tooltip-red{
+    white-space: pre-line;
+}
+
+
+.mat-hint{
+    font-size: 10px;
+    color: #A5A5A5;
+}
+
+.gif{
+    width: 30%;
+}
+
+.content-file pre{
+    overflow-y: auto;
+    white-space: pre-wrap; 
+    word-break: break-word;
+}
+
+.text{
+    text-align: center;
+}
+
+::ng-deep.mat-menu-panel.my-class {
+    background: white;
+  }
+
+.mat-menu-item{
+    background-color: white;
+    color:#495057;
+}
+
+button:hover.mat-menu-item{
+    background-color: #e8f0fe;
+    color: #004AAD;
+}
+
+button:focus {
+    outline: none !important;
+}
+
+textarea{
+    min-height: 150px;
+}
+
+button.mat-focus-indicator.mat-stroked-button.mat-button-base.mat-full{
+    color: white !important;
+}

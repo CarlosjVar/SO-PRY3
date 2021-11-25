@@ -1,0 +1,36 @@
+<div mat-dialog-actions>
+  <button class="close" (click)="onNoClick()" >x</button>
+</div>
+<div class="row" style="align-items: center;">
+  <img class="gif" src="../../../../assets/img/elfo.gif" />
+  <div class="text">
+      <h2 mat-dialog-title class="mb-1" style="text-align: left">
+        {{data.name}}
+      </h2>
+      <h3 style="text-align: left">¿A donde desea mover el {{data.type}}?</h3>
+  </div>
+</div>
+<hr>
+<div mat-dialog-content>
+  <br>
+  <div class="form-group mb-3">
+    <label for="name" >Nueva dirección</label>
+    <input
+      type="name"
+      required
+      [(ngModel)]="this.data.new_direction"
+      class="form-control"
+      placeholder="Ex. Drive/Carpeta/Carpeta 2"
+      />
+    <div class="alert" *ngIf="">
+      <p class="m-0">(*) Espacio requerido</p>
+    </div>
+  </div>
+  <div class="text-center">
+    <br>
+    <button mat-stroked-button class="mr-2" color="empty" (click)="onNoClick()"
+      >Cancelar</button>
+    <button mat-stroked-button color="full" (click)="onMove()" >Guardar</button>
+  </div>
+  <br>
+</div>

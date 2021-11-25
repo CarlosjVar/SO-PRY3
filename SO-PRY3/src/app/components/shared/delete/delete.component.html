@@ -1,0 +1,32 @@
+<div class="central-container" *ngIf="!this.data.type">
+    <h3>¿Seguro que desea eliminar?</h3>
+    <img class="container" src="../../../../assets/img/gatoBota.gif">
+    <div class="container">
+        <button mat-stroked-button class="mr-2" color="empty"
+            [mat-dialog-close]="false">No</button>
+        <button mat-flat-button color="full" [mat-dialog-close]="true">Sí</button>
+    </div>
+</div>
+<div class="central-container" *ngIf="this.data.type">
+    <h2>¿Qué archivos desea eliminar?</h2>
+    <img class="container" src="../../../../assets/img/gatoBota.gif">
+    <mat-form-field class="container" appearance="fill">
+        <mat-label>Archivos</mat-label>
+        <mat-select [formControl]="archivos" multiple>
+            <mat-select-trigger>
+                {{archivos.value ? archivos.value[0] : ''}}
+                <span *ngIf="archivos.value?.length> 1"
+                    class="example-additional-selection">
+                    (+{{archivos.value.length - 1}} {{archivos.value?.length ===
+                    2 ? 'other' : 'others'}})
+                </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let archivo of filesList" [value]="archivo">{{archivo}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="container">
+        <button mat-stroked-button class="mr-2" color="empty"
+            [mat-dialog-close]="archivos">Cancelar</button>
+        <button mat-flat-button color="full" [mat-dialog-close]="archivos">Eliminar</button>
+    </div>
+</div>

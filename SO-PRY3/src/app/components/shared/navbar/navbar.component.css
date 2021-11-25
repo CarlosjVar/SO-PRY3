@@ -1,0 +1,24 @@
+.mat-toolbar{
+    background: rgba(255, 255, 255, 0.863);
+    border-bottom: 1px solid rgba(190, 190, 190, 0.521);
+    backdrop-filter: blur(6.6px);
+    -webkit-backdrop-filter: blur(6.6px);
+    padding: 0 30px;
+}
+
+.mat-toolbar img{
+    width:13%
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.form-control{
+    width: 20%;
+}
+
+.btn-search{
+    padding-top: 0.5px;
+}
+

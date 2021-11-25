@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-center pt-4">
+    <mat-card class="card">
+        <div class="card-body display-inline">
+            <div class="container">
+                <img class="logo" src="../../../assets/img/logo-3.png">
+            </div>
+            <form class="m-2" #userSignUpForm="ngForm">
+                <div class="form-group mb-3">
+                    <label for="username">Usuario</label>
+                    <input type="text" required ngModel name="username" #username="ngModel" class="form-control" id="username" placeholder="Introduzca su nombre de usuario">
+                    <div class="alert" *ngIf="username.touched && !username.valid">
+                        <p class="m-0">(*) Espacio requerido</p>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password">Contraseña</label>
+                    <input type="text" required ngModel name="password" #password="ngModel" class="form-control" id="password" placeholder="Ingrese su contraseña">
+                    <div class="alert" *ngIf="password.touched && !password.valid">
+                        <p class="m-0">(*) Espacio requerido</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group mb-3">
+                    <label for="d_name">Nombre del drive</label>
+                    <input type="text" required ngModel name="d_name" #d_name="ngModel" class="form-control" id="d_name" placeholder="Ingrese el nombre del drive">
+                    <div class="alert" *ngIf="d_name.touched && !d_name.valid">
+                        <p class="m-0">(*) Espacio requerido</p>
+                    </div>
+                </div>
+                <div class="form-group mb-1">
+                    <label for="d_size">Tamaño de bytes del drive</label>
+                    <input type="number" required ngModel name="d_size" #password="ngModel" class="form-control" id="d_size" min="1" max="1024" placeholder="Ingrese un tamaño para el drive">
+                </div>
+                <br>
+                <div class="text-center">
+                    <button mat-stroked-button color="empty" (click)="sendData(userSignUpForm)" [disabled]="!username.valid || !password.valid">Crear cuenta</button>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</div>

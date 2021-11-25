@@ -1,0 +1,61 @@
+<div *ngIf="!this.edit">
+    <div mat-dialog-actions>
+        <button class="close mr-1" [matMenuTriggerFor]="belowMenu">
+            <mat-icon>more_horiz</mat-icon>
+        </button>
+        <mat-menu class="my-class" #belowMenu="matMenu" yPosition="below">
+            <button mat-menu-item (click)="editMode()">Editar</button>
+            <button mat-menu-item (click)="openDialogDelete()">Eliminar</button>
+            <button mat-menu-item (click)="move()">Mover</button>
+            <button mat-menu-item (click)="onNoClick()">Copiar</button>
+            <button mat-menu-item (click)="onNoClick()">Compartir</button>
+        </mat-menu>
+        <button class="close mr-1" #tooltip="matTooltip"
+            (click)="tooltip.show()" matTooltip="{{this.info}}"
+            matTooltipClass="example-tooltip-red">
+            <mat-icon>info_outline</mat-icon>
+        </button>
+        <button class="close" (click)="onNoClick()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <div class="text">
+        <h2 mat-dialog-title>
+            {{ data.name }}
+        </h2>
+    </div>
+
+    <hr />
+    <div mat-dialog-content>
+        <div class="content-file m-1">
+            <pre>{{data.content}}</pre>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.edit">
+    <div mat-dialog-actions>
+        <button class="close" (click)="onNoClick()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <div class="text">
+        <h2 mat-dialog-title>
+            Editando: {{ data.name }}
+        </h2>
+    </div>
+
+    <hr />
+    <div mat-dialog-content>
+        <div class="content-file m-1">
+            <textarea [(ngModel)]="data.content" class="form-control">{{data.content}}</textarea>
+        </div>
+    </div>
+    <div class="text-center">
+        <br>
+        <button mat-stroked-button class="mr-2" color="empty" (click)="cancelarEdit()">Cancelar</button>
+        <button mat-stroked-button color="full" (click)="guardarEdit()">Guardar</button>
+    </div>
+</div>

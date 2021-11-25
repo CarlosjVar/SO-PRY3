@@ -1,0 +1,49 @@
+<div class="home">
+
+    <app-sidebar (nameEvent)="nameEventHander($event)"></app-sidebar>
+
+    <div class="app-data col" *ngIf="actual!=null && actual!=''">
+        <div class="container-title">
+            <div class="row-content">
+                <div class="ml-2 row-title">
+                    <h2>{{this.complete_parent}}</h2>
+                    <mat-icon *ngIf="this.complete_parent!=''">chevron_right </mat-icon>
+                    <h2> {{this.actual}}</h2>
+                </div>
+                <div class="btn-container">
+                    <br>
+                    <button mat-mini-fab (click)="openDialogMove()" *ngIf="complete_parent!=null && complete_parent!=''" matTooltip="Mover directorio"><mat-icon >drive_file_move_outline</mat-icon></button>
+                    <button mat-mini-fab matTooltip="Copiar directorio"><mat-icon >content_copy</mat-icon></button>
+                    <button mat-mini-fab matTooltip="Compartir directorio"><mat-icon >folder_shared</mat-icon></button>
+                    <button mat-mini-fab (click)="openDialogDelete()" *ngIf="complete_parent!=null && complete_parent!=''" matTooltip="Eliminar directorio"> <mat-icon >folder_delete</mat-icon></button>
+                    <button mat-mini-fab (click)="openDialogDeleteFiles()" matTooltip="Eliminar archivos"><mat-icon>delete_outline</mat-icon></button>
+                    <br>
+                </div>
+            </div>
+            <hr class="mt-0">
+        </div>
+
+        <div class="m-2 container-data">
+            <p>Archivos</p>
+            <div class="container-cards" *ngIf="this.DATA.length !== 0">
+                <div class="card mb-3" *ngFor="let i of DATA"
+                    (click)="openDialog(i)">
+                    <img class="card-img-top" src="../../../assets/img/6.png"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h3 class="pt-2 card-title"><mat-icon>chrome_reader_mode</mat-icon>{{i.name}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="container-cards" *ngIf="this.DATA.length === 0" style="justify-content: center;">
+                <img  src="../../../assets/img/empty.gif" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="app-data-null container" *ngIf="actual==null || actual==''">
+        <div class="container">
+            <img src="../../../assets/img/bg.png">
+        </div>
+    </div>
+</div>

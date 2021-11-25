@@ -1,0 +1,132 @@
+.home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+app-sidebar{
+    margin: 0;
+    padding: 0;
+    width: 40vh;
+    height: 90vh;
+    border-right: 1px solid rgba(190, 190, 190, 0.521);
+}
+
+
+.app-data-null .container{
+    display: flex;
+    justify-content: center;
+}
+
+.app-data {
+    width: calc(100vh - 40vh);
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.container-data p{
+    font-size: 13px;
+    color: #495057;
+    font-weight: 500;
+}
+
+.container-cards{
+    display: flex;
+    gap: 3%;
+    flex-wrap: wrap;
+}
+
+.card{
+    max-width: 200px;
+}
+.card .card-body{
+    border-top: 1px solid rgba(0,0,0,.125);
+    padding: 0.5rem;    
+}
+
+.card-title{
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-title mat-icon{
+    color: #c52826;
+}
+
+.card:hover{
+    border-color: #004AAD;
+    cursor: pointer;
+}
+.card:hover .card-body{
+    background-color: #e8f0fe;
+    color: #004AAD;
+    border-top: 1px solid #004AAD;
+}
+
+.row-title{
+    display: flex;
+    align-items: center;
+}
+
+.row-title h2{
+    margin: 0;
+    color: #495057;
+
+}
+
+.row-title .mat-flat-button{
+    background-color: white;
+    color:#495057;
+    padding-left: 0px;
+}
+
+::ng-deep.mat-menu-panel.my-class {
+    background: white;
+  }
+
+.mat-menu-item{
+    background-color: white;
+    color:#495057;
+}
+
+button:hover.mat-menu-item{
+    background-color: #e8f0fe;
+    color: #004AAD;
+}
+
+button:focus {
+    outline: none !important;
+}
+
+img.cookies{
+    width: 15vh;
+}
+
+.row-content{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-right: 1%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrow{
+    color:#495057 !important;   
+}
+
+.mat-mini-fab{
+    color:#f1cb4f !important; 
+    background-color: #004AAD;
+    margin-right: 2%;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 30vh;
+    justify-content: flex-end;
+}

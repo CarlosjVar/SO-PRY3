@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-center pt-4">
+    <mat-card class="card">
+        <div class="card-body display-inline">
+            <div class="container">
+                <img class="logo" src="../../../assets/img/logo-3.png">
+            </div>
+            <h2 class="my-2 text-center">Iniciar sesión</h2>
+            <form class="m-2" #userLoginForm="ngForm">
+                <div class="form-group mb-3">
+                    <label for="username">Usuario</label>
+                    <input type="username" required ngModel name="username"
+                        class="form-control" #username="ngModel" id="username" placeholder="Introduzca su nombre de usuario">
+                    <div class="alert" *ngIf="username.touched && !username.valid">
+                        <p class="m-0">(*) Espacio requerido</p>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password">Contraseña</label>
+                    <input type="password" required ngModel name="password"
+                        class="form-control" #password="ngModel" id="password" placeholder="Ingrese su contraseña">
+                    <div class="alert" *ngIf="password.touched && !password.valid">
+                        <p class="m-0">(*) Espacio requerido</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button mat-stroked-button color="empty" (click)="sendData(userLoginForm)" [disabled]="!username.valid || !password.valid">Iniciar Sesión</button>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</div>

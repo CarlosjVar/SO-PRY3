@@ -1,0 +1,33 @@
+.logo{
+    max-width: 600px;
+}
+
+*{
+    color: #5f6368;
+}
+
+.init{
+    display: flex;
+    height: 90vh;
+    align-items: center;
+}
+
+.init-container{
+    text-align: center;
+    width: 40%;
+}
+
+.img-icon{
+    width: 55%;
+}
+
+h1{
+    font-size: 70px;
+    font-family: 'Sacramento', cursive;
+}
+h3{
+    font-size: 30px;
+}
+h4{
+    font-size: 20px;
+}
