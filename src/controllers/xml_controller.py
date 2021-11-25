@@ -251,6 +251,7 @@ def copy_dir(source_dir, target_dir, object, username, type):
     for usuario in users.findall("usuario"):
         if (usuario.get("username") == username):
             selected_user = usuario
+
     if selected_user is None:
         result[1].append(
             "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
@@ -287,6 +288,66 @@ def copy_dir(source_dir, target_dir, object, username, type):
     tree.write(XML_PATH)
     result[0] = {
         "msg": "El omnipotente Velvet rompió las leyes de la metafísica y clonó su item"}
+    return result
+
+
+def share_item(source_dir, object, username, username_target, type):
+    result = [None, []]
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+    users = root.find("usuarios")
+    for usuario in users.findall("usuario"):
+        if (usuario.get("username") == username):
+            selected_user = usuario
+        if (usuario.get("username") == username_target):
+            selected_user_target = usuario
+    if selected_user is None:
+        result[1].append(
+            "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+    if selected_user_target is None:
+        result[1].append(
+            "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+    source_dir_element_result = search_dir(source_dir, selected_user, "")
+    if source_dir_element_result is None:
+        result[1].append(
+            "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+
+    source_dir_element = source_dir_element_result[0]
+
+    target_dir_element_result = search_dir(
+        ["My shared files"], selected_user_target, "")
+    target_dir_element = target_dir_element_result[0]
+
+    if(type == "dir"):
+        selected_dir = None
+        for directory in source_dir_element.findall("dir"):
+            if(directory.get("virtual") == object):
+                selected_dir = directory
+        if selected_dir == None:
+            result[1].append(
+                "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+            return result
+        if(not validateName(target_dir_element, object, "dir")):
+            delete_item(target_dir_element, object, "dir")
+        target_dir_element.append(selected_dir)
+    elif(type == "file"):
+        selected_file = None
+        for file in source_dir_element.findall("file"):
+            if(file.get("name") == object):
+                selected_file = file
+        if selected_file == None:
+            result[1].append(
+                "Nuestros Velvebuscadores no puedieron encontrar ningún archivo relacionado con este usuario.")
+            return result
+        if(not validateName(target_dir_element, object, "file")):
+            delete_item(target_dir_element, object, "file")
+        target_dir_element.append(selected_file)
+    tree.write(XML_PATH)
+    result[0] = {
+        "msg": "El omnipotente Velvet rompió las leyes de la metafísica y compartió su item"}
     return result
 
 

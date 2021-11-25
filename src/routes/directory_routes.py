@@ -1,7 +1,7 @@
 
 from flask import Flask, request, Blueprint, Response
 from flask_cors import CORS, cross_origin
-from controllers.xml_controller import listContent, xml_write, listContent, copy_dir, delete_dir, modifyFileHelper, move_item
+from controllers.xml_controller import listContent, xml_write, listContent, copy_dir, delete_dir, modifyFileHelper, move_item, share_item
 import json
 directory_module = Blueprint('directory_module', __name__)
 
@@ -45,7 +45,7 @@ def create_file():
 
 @directory_module.route("/api/dirs/get", methods=["GET"])
 @cross_origin()
-def listItems():
+def list_items():
     # Aquí se preparan los datos
     username = request.args.get("username")
     target_dir = request.args.get('target_dir')
@@ -65,7 +65,7 @@ def listItems():
 
 @directory_module.route("/api/dirs/copy", methods=["POST"])
 @cross_origin()
-def copyItem():
+def copy_item():
     args = request.get_json()
     source_dir = args["from_directory"]
     if source_dir == '':
@@ -93,19 +93,32 @@ def copyItem():
 
 @directory_module.route("/api/dirs/delete", methods=["POST"])
 @cross_origin()
-def deleteItem():
+def delete_item():
     args = request.get_json()
-    source_dir = args["from_directory"]
+
+    item_list = args["items"]
+
+    source_dir = item_list[0]["from_directory"]
     if source_dir == '':
         source_dir = []
     else:
         source_dir = source_dir.split("/")
         source_dir.reverse()
-    element = args["target_element"]
-    username = args["username"]
-    type = args["type"]
-    result = delete_dir(source_dir, element, type, username)
-    if len(result[1]) > 0:
+
+    username = item_list[0]["username"]
+    errors = []
+    for item in item_list:
+        source_dir = item["from_directory"]
+        if source_dir == '':
+            source_dir = []
+        else:
+            source_dir = source_dir.split("/")
+            source_dir.reverse()
+        element = item["target_element"]
+        type = item["type"]
+        result = delete_dir(source_dir, element, type, username)
+        errors += result[1]
+    if len(errors) > 0:
         response_data = {"errors": result[1]}
         return Response(str(response_data), status=500, mimetype='application/json')
 
@@ -116,7 +129,7 @@ def deleteItem():
 
 @directory_module.route("/api/file/modify", methods=["POST"])
 @cross_origin()
-def modifyFile():
+def modify_file():
     args = request.get_json()
     username = args["username"]
     target_dir = args["target_dir"]
@@ -136,7 +149,7 @@ def modifyFile():
 
 @directory_module.route("/api/dir/move", methods=["POST"])
 @cross_origin()
-def moveItem():
+def move_item_r():
     args = request.get_json()
     source_dir = args["from_directory"]
     if source_dir == '':
@@ -154,6 +167,27 @@ def moveItem():
     element = args["target_element"]
     username = args["username"]
     result = move_item(source_dir, target_dir, element, username, type)
+    if len(result[1]) > 0:
+        response_data = {"errors": result[1]}
+        return Response(str(response_data), status=500, mimetype='application/json')
+    return {"message": result[0]}
+
+
+@directory_module.route("/api/dir/share", methods=["POST"])
+@cross_origin()
+def share_item_r():
+    args = request.get_json()
+    source_dir = args["from_directory"]
+    if source_dir == '':
+        source_dir = []
+    else:
+        source_dir = source_dir.split("/")
+        source_dir.reverse()
+    username = args["username"]
+    target_username = args["target_username"]
+    element = args["target_element"]
+    type = args["type"]
+    result = share_item(source_dir, element, username, target_username, type)
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
         return Response(str(response_data), status=500, mimetype='application/json')

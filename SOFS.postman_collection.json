@@ -18,7 +18,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"Testing\",\r\n    \"password\":\"Gato02\",\r\n    \"drive_name\":\"Drive\",\r\n    \"size\":10\r\n    }"
+					"raw": "{\r\n    \"username\":\"Testing2\",\r\n    \"password\":\"Gato02\",\r\n    \"drive_name\":\"Drive\",\r\n    \"size\":10\r\n    }"
 				},
 				"url": {
 					"raw": "localhost:5000/api/users/signup",
@@ -270,6 +270,36 @@
 						"api",
 						"dir",
 						"move"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Share",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n    \"from_directory\":\"Drive/Prueba 3/Prueba 3-2\",\r\n    \"target_element\":\"Archivo1\",\r\n    \"username\":\"Testing\",\r\n    \"target_username\":\"Testing2\",\r\n    \"type\":\"file\"\r\n    }"
+				},
+				"url": {
+					"raw": "localhost:5000/api/dir/share",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"dir",
+						"share"
 					]
 				}
 			},
