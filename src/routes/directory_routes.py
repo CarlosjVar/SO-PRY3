@@ -21,7 +21,7 @@ def create_dir():
     result = xml_write(username, "dir", target_dir, args)
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
-        return Response(str(response_data), status=500, mimetype='application/json')
+        return Response(result[1], status=500, mimetype='application/json')
     return (result[0].toJson())
 
 
@@ -39,7 +39,7 @@ def create_file():
     result = xml_write(username, "file", target_dir, args)
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
-        return Response(str(response_data), status=500, mimetype='application/json')
+        return Response(result[1], status=500, mimetype='application/json')
     return (result[0].toJson())
 
 
@@ -58,7 +58,7 @@ def list_items():
     result = listContent(target_dir, username)
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
-        return Response(str(response_data), status=500, mimetype='application/json')
+        return Response(result[1], status=500, mimetype='application/json')
 
     return (result[0].toJson())
 
@@ -86,7 +86,7 @@ def copy_item():
     result = copy_dir(source_dir, target_dir, element, username, type)
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
-        return Response(str(response_data), status=500, mimetype='application/json')
+        return Response(result[1], status=500, mimetype='application/json')
 
     return (result[0])
 
@@ -119,12 +119,10 @@ def delete_item():
         result = delete_dir(source_dir, element, type, username)
         errors += result[1]
     if len(errors) > 0:
-        response_data = {"errors": result[1]}
-        return Response(str(response_data), status=500, mimetype='application/json')
-
-    message = "Su item cayó ante las ya no tan grandes pero aún majestusas garras de Velvet" if result[
+        response_data = {"errors": result[1][0]}
+        return Response(result[1], status=500, mimetype='application/json')
+    return "Su item cayó ante las ya no tan grandes pero aún majestusas garras de Velvet" if result[
         0] else "Velvet no pudo obliterar su item porque no lo encontró"
-    return {"message": message}
 
 
 @directory_module.route("/api/file/modify", methods=["POST"])
@@ -143,7 +141,7 @@ def modify_file():
     result = modifyFileHelper(target_dir, args, args["old_name"], username)
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
-        return Response(str(response_data), status=500, mimetype='application/json')
+        return Response(result[1], status=500, mimetype='application/json')
     return result[0].__dict__
 
 
@@ -169,7 +167,7 @@ def move_item_r():
     result = move_item(source_dir, target_dir, element, username, type)
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
-        return Response(str(response_data), status=500, mimetype='application/json')
+        return Response(result[1], status=500, mimetype='application/json')
     return {"message": result[0]}
 
 
@@ -190,5 +188,5 @@ def share_item_r():
     result = share_item(source_dir, element, username, target_username, type)
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
-        return Response(str(response_data), status=500, mimetype='application/json')
-    return {"message": result[0]}
+        return Response(result[1], status=500, mimetype='application/json')
+    return result[0]
