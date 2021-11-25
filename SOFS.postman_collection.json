@@ -71,7 +71,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:5000/api/dirs/get?target_dir=&username=Testing",
+					"raw": "localhost:5000/api/dirs/get?target_dir=Drive&username=Testing",
 					"host": [
 						"localhost"
 					],
@@ -84,7 +84,7 @@
 					"query": [
 						{
 							"key": "target_dir",
-							"value": ""
+							"value": "Drive"
 						},
 						{
 							"key": "username",
