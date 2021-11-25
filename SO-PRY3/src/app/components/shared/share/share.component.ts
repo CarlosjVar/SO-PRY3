@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { toShare } from 'src/app/models/shared.model';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-share',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShareComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<ShareComponent>,
+    private _sharedService: SharedService,
+    @Inject(MAT_DIALOG_DATA) public data: toShare) {console.log(this.data)}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
   ngOnInit(): void {
   }
 
+  share():void{
+
+    this._sharedService.share(this.data).subscribe({
+      error:(err:any)=>{
+        console.log(err);
+      }
+    })
+  }
 }

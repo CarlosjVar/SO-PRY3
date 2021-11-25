@@ -237,10 +237,13 @@ export class HomeComponent implements OnInit {
   }
 
   openDialogShare():void{
+    let dir = this.complete_parent;
+    if(this.complete_parent!=null && this.complete_parent.endsWith("/"))
+      dir=this.complete_parent.substring(0,this.complete_parent.length-1);
     const dialogRef = this.dialog.open(ShareComponent, {
       width: '100vh',
       data: {
-        from_directory:this.complete_parent,
+        from_directory:dir,
         target_element:this.actual,
         username:this.name,
         target_username:"",
@@ -250,6 +253,7 @@ export class HomeComponent implements OnInit {
   }
 
   chooseImg(): void {
+    this.imglist=[];
     let cont = 3;
     for (let index = 0; index < this.DATA.length; index++) {
       this.imglist.push("../../../assets/img/"+cont.toString()+".png");
