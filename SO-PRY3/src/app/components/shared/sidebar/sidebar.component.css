@@ -99,3 +99,16 @@
     flex-wrap: wrap;
 }
 
+h2.space{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mat-icon.cloud{
+    color: #76aff8;
+}
+
+button.mat-focus-indicator.b-principal.mat-raised-button.mat-button-base.mat-button-disabled .mat-icon.mat-icon.notranslate.white.mat-icon-rtl-mirror.material-icons.mat-icon-no-color{
+    color: white !important; 
+}

@@ -22,3 +22,11 @@
     padding-top: 0.5px;
 }
 
+.name{
+    border-right: 1px solid rgba(190, 190, 190, 0.521);
+}
+
+.p.mb-0.pr-2 {
+    display: flex;
+    align-items: center;
+}

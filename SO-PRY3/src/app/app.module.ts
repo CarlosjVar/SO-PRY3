@@ -24,6 +24,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
 import { ToastrModule } from 'ngx-toastr';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -56,7 +57,7 @@ import { ShareComponent } from './components/shared/share/share.component';
     ReadFileComponent,
     DeleteComponent,
     MoveComponent,
-    ShareComponent,
+    ShareComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +81,7 @@ import { ShareComponent } from './components/shared/share/share.component';
     MatSelectModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

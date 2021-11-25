@@ -2,15 +2,25 @@
 <div class="title" *ngIf="this.actual== ''">
   <br>
   <h2>¡Bienvenido a tu Drive!</h2>
-  <hr>
 </div>
 
 
-<div class="title" *ngIf="this.actual!= ''">
+<div *ngIf="this.actual!= ''">
   <br>
-  <h3><mat-icon class="white mat-icon-rtl-mirror">folder_open</mat-icon>Directorio</h3>
+  <div class="container-b my-2">
+    <button mat-raised-button class="b-principal mr-2" (click)="volver()">
+      <mat-icon class="white mat-icon-rtl-mirror">arrow_back</mat-icon>
+      Volver
+    </button>
+    <button mat-raised-button class="b-principal" (click)="openDialog()" [disabled]="this.actual=='My shared files'">
+      <mat-icon class="white mat-icon-rtl-mirror">
+        add_circle_outline
+      </mat-icon>
+      Agregar
+    </button>
+  </div>
+  <br>
 </div>
-
 <div class="general-container" *ngIf='this.dataSource.data.length != 0'>
   <mat-tree [dataSource]="dataSource" [treeControl]="treeControl"
     class="example-tree">
@@ -33,18 +43,12 @@
 </div>
 
 
-<div *ngIf="this.actual!= ''">
-  <div class="container-b my-2">
-    <button mat-raised-button class="b-principal mr-2" (click)="volver()">
-      <mat-icon class="white mat-icon-rtl-mirror">arrow_back</mat-icon>
-      Volver
-    </button>
-    <button mat-raised-button class="b-principal" (click)="openDialog()">
-      <mat-icon class="white mat-icon-rtl-mirror">
-        add_circle_outline
-      </mat-icon>
-      Agregar
-    </button>
+<div>
+  <div class="container-c my-2">
+  <h2 class="space"><mat-icon class="cloud mr-3">cloud_queue</mat-icon>Almacenamiento</h2>
+  <div class="container">
+    <mat-progress-bar mode="determinate" value={{this.result}}></mat-progress-bar>
+    <p>{{this.actual_size}} B de {{this.max_size}} B usado</p>
   </div>
-  <hr>
+  </div>
 </div>

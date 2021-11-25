@@ -32,6 +32,9 @@ export class SidebarComponent implements OnInit {
   actual: string = '';
   complete_parent: string = '';
   myDate: Date | undefined;
+  max_size: string | null  = "";
+  actual_size: string | null = "";
+  result: number = 0;
 
   private _transformer = (node: Directory, level: number) => {
     return {
@@ -67,14 +70,31 @@ export class SidebarComponent implements OnInit {
     this._dirService.geDirectories(this.name).subscribe({
       complete: () => {
         this.dataSource.data = this.TREE_DATA;
+        this.max_size = localStorage.getItem('max_drive_size');
+        this.calculateSpace();
+        console.log(this.result)
       },
       next: (res) => {
         this.TREE_DATA = res.directories;
+        this.actual_size = res.size;
+        localStorage.setItem('actual_size',res.size);
+        console.log(res)
       },
       error: (errors: Error) => {
         console.log(errors);
       },
     });
+  }
+
+
+  calculateSpace() {
+    if(this.max_size!=null && this.actual_size!=null){
+      let total_s = parseInt(this.max_size);
+      let actual_s = parseInt(this.actual_size);
+      console.log(this.actual_size)
+      console.log(actual_s)
+      this.result = (actual_s*100)/total_s;
+    }
   }
 
   ngOnInit(): void {}

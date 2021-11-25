@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   parent: string | null;
   public DATA!: createFile_[];
   imglist: string[] = [];
+  max_size: string | null = "";
 
   constructor(
     private _dirService: DirectoriesService,
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
     this.complete_parent = '';
     this.parent = '';
     this.DATA = [];
+    this.max_size = localStorage.getItem('max_drive_size');
   }
 
   cargarArchivos() {
