@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserLogin } from '../../models/user.model';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   username: string = '';
   newUser: UserLogin | undefined;
 
-  constructor(private _userService: UserService, private router: Router) {
+  constructor(private _userService: UserService, private router: Router, private toastr: ToastrService) {
     document.body.style.backgroundImage =
       'url("../../../assets/img/login-bg.png")';
   }
@@ -34,10 +35,12 @@ export class LoginComponent implements OnInit {
       next: (user: UserLogin) => {
         localStorage.setItem('username', user.username);
         this.router.navigate(['/', 'my-drive']);
-        console.log(user);
+        this.toastr.success("Sesión iniciada con éxito","Bienvenido")
       }, // completeHandler
-      error: (errors: Error) => {
-        console.log(errors);
+      error: (errors: any) => {
+        let str:string = errors.error;
+        let res = str.split("[",-1);
+        this.toastr.error(res[1].split("'")[1],"ERROR")
       }, // errorHandler
     });
   }
