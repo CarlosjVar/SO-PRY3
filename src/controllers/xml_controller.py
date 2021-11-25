@@ -153,7 +153,7 @@ def register_user(signup_info):
             return result
 
     attrib = {"username": username,
-              "password": password}
+              "password": password, "size": str(size)}
     user = users.makeelement("usuario", attrib)
     # Create dir on xml
     attrib = {"virtual": drive_name}
@@ -164,7 +164,7 @@ def register_user(signup_info):
     users.append(user)
     # Write xml
     tree.write(XML_PATH)
-    result[0] = User(username, password, drive_name)
+    result[0] = User(username, password, drive_name, int(size))
     return result
 
 
@@ -232,7 +232,7 @@ def login_user(username, password):
         result[1].append(
             "No sea velvet pendejo, ponga su velvet contraseña bien")
         return result
-    result[0] = User(username, password, "")
+    result[0] = User(username, password, "", int(selected_user.get("size")))
     return result
 
 
