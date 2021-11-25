@@ -88,7 +88,7 @@ def copy_item():
         response_data = {"errors": result[1]}
         return Response(result[1], status=500, mimetype='application/json')
 
-    return (result[0])
+    return {"msg": (result[0])}
 
 
 @directory_module.route("/api/dirs/delete", methods=["POST"])
@@ -121,8 +121,8 @@ def delete_item():
     if len(errors) > 0:
         response_data = {"errors": result[1][0]}
         return Response(result[1], status=500, mimetype='application/json')
-    return "Su item cayó ante las ya no tan grandes pero aún majestusas garras de Velvet" if result[
-        0] else "Velvet no pudo obliterar su item porque no lo encontró"
+    return {"msg": "Su item cayó ante las ya no tan grandes pero aún majestusas garras de Velvet" if result[
+        0] else "Velvet no pudo obliterar su item porque no lo encontró"}
 
 
 @directory_module.route("/api/file/modify", methods=["POST"])
@@ -168,7 +168,7 @@ def move_item_r():
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
         return Response(result[1], status=500, mimetype='application/json')
-    return {"message": result[0]}
+    return {"msg": result[0]}
 
 
 @directory_module.route("/api/dir/share", methods=["POST"])
@@ -189,4 +189,22 @@ def share_item_r():
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
         return Response(result[1], status=500, mimetype='application/json')
-    return result[0]
+    return {"msg": result[0]}
+
+
+# @directory_module.route("/api/dir/upload", methods=["POST"])
+# @cross_origin()
+# def upload_bulk():
+#     args = request.get_json()
+#     username = args["username"]
+#     target_dir = args["target_dir"]
+#     if target_dir == '':
+#         target_dir = []
+#     else:
+#         target_dir = target_dir.split("/")
+#         target_dir.reverse()
+
+#     if len(result[1]) > 0:
+#         response_data = {"errors": result[1]}
+#         return Response(result[1], status=500, mimetype='application/json')
+#     return result[0]
