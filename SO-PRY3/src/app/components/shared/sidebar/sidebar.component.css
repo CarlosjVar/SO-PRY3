@@ -112,3 +112,10 @@ h2.space{
 button.mat-focus-indicator.b-principal.mat-raised-button.mat-button-base.mat-button-disabled .mat-icon.mat-icon.notranslate.white.mat-icon-rtl-mirror.material-icons.mat-icon-no-color{
     color: white !important; 
 }
+
+.container-c{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

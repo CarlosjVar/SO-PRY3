@@ -1,4 +1,4 @@
-
+<div class="up">
 <div class="title" *ngIf="this.actual== ''">
   <br>
   <h2>¡Bienvenido a tu Drive!</h2>
@@ -12,7 +12,7 @@
       <mat-icon class="white mat-icon-rtl-mirror">arrow_back</mat-icon>
       Volver
     </button>
-    <button mat-raised-button class="b-principal" (click)="openDialog()" [disabled]="this.actual=='My shared files'">
+    <button mat-raised-button class="b-principal" (click)="openDialog()" [disabled]="isInSharedFiles()">
       <mat-icon class="white mat-icon-rtl-mirror">
         add_circle_outline
       </mat-icon>
@@ -41,14 +41,18 @@
   <h3>No hay carpetas agregadas</h3>
   <hr>
 </div>
+</div>
 
-
+<div class="down">
 <div>
   <div class="container-c my-2">
-  <h2 class="space"><mat-icon class="cloud mr-3">cloud_queue</mat-icon>Almacenamiento</h2>
+  <mat-icon class="cloud mr-3">cloud_queue</mat-icon>
+  <h2 class="space">Almacenamiento</h2>
   <div class="container">
     <mat-progress-bar mode="determinate" value={{this.result}}></mat-progress-bar>
     <p>{{this.actual_size}} B de {{this.max_size}} B usado</p>
+    <br>
   </div>
   </div>
+</div>
 </div>

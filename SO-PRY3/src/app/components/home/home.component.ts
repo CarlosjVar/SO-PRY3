@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result == 1) {
+      if (result == 1) { //eliminar
         if (this.complete_parent != null && this.actual != null)
           this._dirService
             .getInside(this.name, this.complete_parent + this.actual)
@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit {
               complete: () => {},
               next: (res) => {
                 this.DATA = res.files;
-                console.log(this.DATA);
+                console.log(res);
               },
               error: (errors: Error) => {
                 console.log(errors);
@@ -265,5 +265,7 @@ export class HomeComponent implements OnInit {
     }
     console.log( this.imglist)
   }
+
+
   
 }
