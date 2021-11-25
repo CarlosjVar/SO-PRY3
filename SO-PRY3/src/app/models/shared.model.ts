@@ -6,7 +6,7 @@ export interface toDelete {
 }
 
 export interface itemsToDelete {
-  items : toDelete[]
+  items: toDelete[];
 }
 
 export interface toMove {
@@ -14,5 +14,13 @@ export interface toMove {
   target_element: string;
   to_directory: string;
   username: string;
+  type: string;
+}
+
+export interface toShare {
+  from_directory: string;
+  target_element: string;
+  username: string;
+  target_username: string;
   type: string;
 }
