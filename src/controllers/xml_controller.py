@@ -424,6 +424,8 @@ def calc_subfolders(element):
     name = element.get("virtual")
 
     for directory in element.findall("dir"):
+        if(directory.get("virtual") == 'My shared files'):
+            continue
         size += calc_subfolders(directory)
         print(f"El folder {element.get('virtual')} pesa {size}")
     size += meassureSize(element)
