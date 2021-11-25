@@ -16,7 +16,8 @@
                     <button mat-mini-fab matTooltip="Copiar directorio"><mat-icon >content_copy</mat-icon></button>
                     <button mat-mini-fab (click)="openDialogShare()" matTooltip="Compartir directorio"><mat-icon >folder_shared</mat-icon></button>
                     <button mat-mini-fab (click)="openDialogDelete()" *ngIf="complete_parent!=null && complete_parent!=''" matTooltip="Eliminar directorio"> <mat-icon >folder_delete</mat-icon></button>
-                    <button mat-mini-fab (click)="openDialogDeleteFiles()" matTooltip="Eliminar archivos"><mat-icon>delete_outline</mat-icon></button>
+                    <div class="divider"></div>
+                    <button mat-mini-fab class="ml-2" (click)="openDialogDeleteFiles()" matTooltip="Eliminar archivos"><mat-icon>delete_outline</mat-icon></button>
                     <br>
                 </div>
             </div>

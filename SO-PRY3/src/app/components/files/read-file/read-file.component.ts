@@ -10,6 +10,7 @@ import { SharedService } from 'src/app/services/shared.service';
 import { DeleteComponent } from '../../shared/delete/delete.component';
 import { DatePipe } from '@angular/common';
 import { MoveComponent } from '../../shared/move/move.component';
+import { ShareComponent } from '../../shared/share/share.component';
 
 @Component({
   selector: 'app-read-file',
@@ -128,6 +129,22 @@ export class ReadFileComponent implements OnInit {
       if (result) {
         window.location.reload();
       }
+    });
+  }
+
+  share():void{
+    let dir = this.data.target_dir;
+    if(this.data.target_dir!=null && this.data.target_dir.endsWith("/"))
+      dir=this.data.target_dir.substring(0,this.data.target_dir.length-1);
+    const dialogRef = this.dialog.open(ShareComponent, {
+      width: '90vh',
+      data: {
+        from_directory:dir,
+        target_element:this.data.name,
+        username:this.data.username,
+        target_username:"",
+        type:"file",
+        },
     });
   }
 

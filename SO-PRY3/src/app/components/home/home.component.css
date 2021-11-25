@@ -130,3 +130,10 @@ img.cookies{
     width: 30vh;
     justify-content: flex-end;
 }
+
+
+.divider{
+    width: 1vh;
+    height: 100%;
+    border-right: 1px solid rgba(190, 190, 190, 0.521);
+}
