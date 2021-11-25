@@ -61,7 +61,7 @@
 
             </dir>
         </usuario>
-        <usuario username="Titovare" password="titovare">
+        <usuario username="Titovare" password="titovare" size="20">
             <dir virtual="Drive mio">
                 <dir virtual="Scripts" />
                 <file name="Velvet.txt" ext="txt" date_created="Nov 24, 2021, 10:08:16 PM" date_modified="Nov 24, 2021, 10:08:16 PM" size="29" content="Velvet es en efecto muy guapo" />
@@ -91,9 +91,6 @@
         <usuario username="Paolanc" password="123456" size="2000">
             <dir virtual="Velvet">
                 <dir virtual="Gato" />
-                <file name="1" ext="1" date_created="Nov 25, 2021, 3:12:15 PM" date_modified="Nov 25, 2021, 3:12:15 PM" size="1" content="f" />
-                <file name="3" ext="3" date_created="Nov 25, 2021, 3:12:19 PM" date_modified="Nov 25, 2021, 3:12:19 PM" size="1" content="f" />
-                <file name="4" ext="4" date_created="Nov 25, 2021, 3:12:24 PM" date_modified="Nov 25, 2021, 3:12:24 PM" size="1" content="g" />
                 <file name="g" ext="g" date_created="Nov 25, 2021, 3:12:27 PM" date_modified="Nov 25, 2021, 3:12:27 PM" size="1" content="g" />
                 <file name="f" ext="f" date_created="Nov 25, 2021, 3:12:31 PM" date_modified="Nov 25, 2021, 3:12:31 PM" size="1" content="f" />
                 <file name="d" ext="d" date_created="Nov 25, 2021, 3:12:42 PM" date_modified="Nov 25, 2021, 3:12:42 PM" size="1" content="d" />
