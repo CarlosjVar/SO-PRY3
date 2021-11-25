@@ -61,5 +61,12 @@
 
             </dir>
         </usuario>
-    </usuarios>
+        <usuario username="Titovare" password="titovare">
+            <dir virtual="Drive mio">
+                <dir virtual="Scripts" />
+                <file name="Velvet.txt" ext="txt" date_created="Nov 24, 2021, 10:08:16 PM" date_modified="Nov 24, 2021, 10:08:16 PM" size="29" content="Velvet es en efecto muy guapo" />
+            </dir>
+            <dir virtual="My shared files" />
+        </usuario>
+    <usuario username="Testing3" password="Gato02" size="10"><dir virtual="Drive" /><dir virtual="My shared files" /></usuario></usuarios>
 </root>
