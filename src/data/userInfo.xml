@@ -20,17 +20,6 @@
                         </dir>
                     </dir>
                     <dir virtual="Prueba 3-3" />
-                    <dir virtual="Prueba 2">
-                        <dir virtual="Prueba 2-1">
-                            <file name="Archivo1" ext="txt" date_created="11/18/2021 12:44 PM" date_modified="11/18/2021 12:44 PM" size="1" content="ME CAGO EN SO n&#250;mero" />
-                        </dir>
-                        <dir virtual="Prueba 2-2">
-                            <file name="Archivo1" ext="txt" date_created="11/18/2021 12:44 PM" date_modified="11/18/2021 12:44 PM" size="1" content="ME CAGO EN SO n&#250;mero" />
-                        </dir>
-                        <dir virtual="Prueba 2-3">
-                            <file name="Archivo1" ext="txt" date_created="11/18/2021 12:44 PM" date_modified="11/18/2021 12:44 PM" size="1" content="ME CAGO EN SO n&#250;mero" />
-                        </dir>
-                    </dir>
                 </dir>
                 <dir virtual="pepito" />
             </dir>

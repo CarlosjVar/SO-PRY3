@@ -1,13 +1,11 @@
-from logging import log
-from os import name, path
+
 import xml.etree.ElementTree as ET
 
-from werkzeug.wrappers.request import PlainRequest
 from models.user import User
 from models.directory import Directory
 from models.file import File
-from controllers.fs_controller import DRIVE_LOCAL_ROUTE, create_drive, create_dir
-XML_PATH = './data/userInfo.xml'
+
+XML_PATH = "./data/userInfo.xml"
 
 
 def xml_write(username, type, target_dir, args):
@@ -64,9 +62,6 @@ def xml_write(username, type, target_dir, args):
 
 def meassureSize(element):
     finalSize = 0
-    for directory in element.findall("dir"):
-        for file in directory.findall("file"):
-            finalSize = finalSize + int(file.get("size"))
     for file in element.findall("file"):
         finalSize = finalSize + int(file.get("size"))
     return finalSize
@@ -190,8 +185,6 @@ def listContent(target_dir, username):
             "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
         return result
     # Searches for target dir
-    # dirs = selected_user.findall("dir")[0]
-    # element = search_dir(target_dir, dirs)
     dir_result = (search_dir(target_dir, selected_user, ""))
     if dir_result is None:
         result[1].append(
@@ -210,9 +203,10 @@ def listContent(target_dir, username):
         directories.append(newDir)
 
     print(validateName(element, "pepito2", "dir"))
-    print(f"El espacio de este directorio es {meassureSize(element)}")
+    size = calc_subfolders(element)
+    print(f"El espacio de este directorio es {size}")
     directory = Directory(element.get("virtual"),
-                          0, directories, files, name)
+                          size, directories, files, name)
     result[0] = directory
     return result
 
@@ -354,7 +348,7 @@ def share_item(source_dir, object, username, username_target, type):
 def move_item(source_dir, target_dir, object, username, type):
     result = [None, []]
     source_dir_copy = [element for element in source_dir]
-    target_dir_copy = [element for element in target_dir]
+
     copy_result = copy_dir(source_dir, target_dir, object, username, type)
     if(len(copy_result[1]) > 0):
         result[1] += copy_result[1]
@@ -420,3 +414,29 @@ def delete_item(element, name, type):
                 element.remove(file)
                 return True
     return False
+
+
+def calc_subfolders(element):
+    size = 0
+    name = element.get("virtual")
+
+    for directory in element.findall("dir"):
+        size += calc_subfolders(directory)
+        print(f"El folder {element.get('virtual')} pesa {size}")
+    size += meassureSize(element)
+
+    return size
+
+
+def test():
+    username = "Testing"
+    result = [None, []]
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+    users = root.find("usuarios")
+    for usuario in users.findall("usuario"):
+        if (usuario.get("username") == username):
+            selected_user = usuario
+    drive = search_dir(["Drive"], selected_user, "")[0]
+    print("#")
+    print(f"El espacio total es {calc_subfolders(drive)}")
