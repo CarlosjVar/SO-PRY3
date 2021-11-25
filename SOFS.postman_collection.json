@@ -198,7 +198,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"from_directory\":\"Drive/Prueba 2/Prueba 2-1\",\r\n    \"target_element\":\"Archivo2\",\r\n    \"username\":\"Testing\",\r\n    \"type\":\"file\"\r\n}"
+					"raw": "{\r\n    \"items\":[\r\n        {\r\n            \"from_directory\":\"Drive\",\r\n            \"target_element\":\"Archivo1\",\r\n            \"type\":\"file\",\r\n            \"username\":\"Testing\"\r\n        },\r\n        {\r\n            \"from_directory\":\"Drive\",\r\n            \"target_element\":\"Archivo2\",\r\n            \"type\":\"file\",\r\n            \"username\":\"Testing\"\r\n        }\r\n\r\n    ]\r\n}"
 				},
 				"url": {
 					"raw": "localhost:5000/api/dirs/delete",
@@ -258,7 +258,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{    \"from_directory\":\"Drive/Prueba 2/Prueba 2-1\",\r\n    \"target_element\":\"VelvetChimichanga\",\r\n    \"to_directory\":\"Drive/Prueba 2/Prueba 2-2\",\r\n    \"username\":\"Testing\",\r\n    \"type\":\"file\"}"
+					"raw": "{    \"from_directory\":\"Drive/Prueba 2/Prueba 2-1\",\r\n    \"target_element\":\"VelvetChimichanga\",\r\n    \"to_directory\":\"Drive/Prueba 2/Prueba 2-2\",\r\n    \"username\":\"Testing\",\r\n    \"type\":\"file\"\r\n    }"
 				},
 				"url": {
 					"raw": "localhost:5000/api/dir/move",
@@ -288,7 +288,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n    \"from_directory\":\"Drive/Prueba 3/Prueba 3-2\",\r\n    \"target_element\":\"Archivo1\",\r\n    \"username\":\"Testing\",\r\n    \"target_username\":\"Testing2\",\r\n    \"type\":\"file\"\r\n    }"
+					"raw": "    {\r\n    \"from_directory\":\"Drive\",\r\n    \"target_element\":\"Archivo3\",\r\n    \"username\":\"Testing\",\r\n    \"target_username\":\"Testing2\",\r\n    \"type\":\"file\"\r\n    }"
 				},
 				"url": {
 					"raw": "localhost:5000/api/dir/share",
