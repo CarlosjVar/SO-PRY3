@@ -83,10 +83,7 @@ export class SidebarComponent implements OnInit {
     this.dataSource.data.forEach((x) => {
       if (x.virtual_route === nombre) {
         this.complete_parent = x.parent;
-        if (this.complete_parent != '') {
-          this.complete_parent += '/';
-          this.complete_parent + nombre;
-        }
+        this.checkCompleteParent();
         this.parent = this.actual;
         this.actual = nombre;
         localStorage.setItem('actual', this.actual);
@@ -99,10 +96,11 @@ export class SidebarComponent implements OnInit {
       .getInside(this.name, this.complete_parent + nombre)
       .subscribe({
         complete: () => {
-          this.dataSource.data = this.TREE_DATA;
+          /*this.dataSource.data = this.TREE_DATA;*/
         },
         next: (res) => {
           this.TREE_DATA = res.directories;
+          this.dataSource.data = this.TREE_DATA;
         },
         error: (errors: Error) => {
           console.log(errors);
@@ -124,10 +122,8 @@ export class SidebarComponent implements OnInit {
         }
         this.actual = this.parent;
         this.parent = this.complete_parent;
+        this.checkCompleteParent();
         this.dataSource.data = this.TREE_DATA;
-        localStorage.setItem('actual', this.actual);
-        localStorage.setItem('complete_parent', this.complete_parent);
-        localStorage.setItem('parent', this.parent);
         this.onNameChange ();
       },
       next: (res) => {
@@ -150,7 +146,8 @@ export class SidebarComponent implements OnInit {
           this.parent = path_.substring(lastOcurr + 1, path_.length);
         }
         this.actual = name_;
-        this.complete_parent = path_ + '/';
+        this.complete_parent = path_;
+        this.checkCompleteParent();
         this.onNameChange ();
       },
       next: (res) => {
@@ -236,7 +233,18 @@ export class SidebarComponent implements OnInit {
   }
 
   onNameChange () {
+    localStorage.setItem('actual', this.actual);
+    localStorage.setItem('complete_parent', this.complete_parent);
+    localStorage.setItem('parent', this.parent);
     this.nameEvent.emit(this.actual);
+  }
+
+  checkCompleteParent(){
+    if(this.complete_parent!= null && this.complete_parent!=""){
+      if (!this.complete_parent.endsWith('/')) {
+        this.complete_parent = this.complete_parent+"/";
+      }
+    }
   }
 
 }

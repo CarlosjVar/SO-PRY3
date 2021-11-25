@@ -87,3 +87,20 @@ button:focus {
 .mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {
   color: white !important;
 }
+
+.alert p {
+  color: red;
+  font-size: 13px;
+}
+
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42A948;
+  /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442;
+  /* red */
+}

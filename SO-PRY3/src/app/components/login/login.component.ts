@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     console.log(this.username);
     console.log(this.password);
 
-    this.newUser = { username: this.username, password: this.password };
+    this.newUser = { username: this.username, password: this.password, max_drive_size:0 };
     this._userService.logIn(this.newUser).subscribe({
       next: (user: UserLogin) => {
         localStorage.setItem('username', user.username);

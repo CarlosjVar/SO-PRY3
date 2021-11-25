@@ -6,6 +6,8 @@ import { ReadFileComponent } from '../files/read-file/read-file.component';
 import { DeleteComponent } from '../shared/delete/delete.component';
 import { SharedService } from 'src/app/services/shared.service';
 import { MoveComponent } from '../shared/move/move.component';
+import { ToastrService } from 'ngx-toastr';
+import { ShareComponent } from '../shared/share/share.component';
 
 @Component({
   selector: 'app-home',
@@ -14,23 +16,26 @@ import { MoveComponent } from '../shared/move/move.component';
 })
 export class HomeComponent implements OnInit {
   user = localStorage.getItem('username');
+  complete_p: string | null = '';
   name: string = this.user !== null ? this.user : '';
   actual: string | null;
   complete_parent: string | null;
   parent: string | null;
   public DATA!: createFile_[];
+  imglist: string[] = [];
 
   constructor(
     private _dirService: DirectoriesService,
-    public dialog: MatDialog,
+    public dialog: MatDialog, private toastr: ToastrService,
     private _sharedService: SharedService
   ) {
-    document.body.style.backgroundImage = 'none';
+    document.body.style.backgroundImage = "none";
     document.body.style.backgroundAttachment = 'fixed';
+    document.body.style.scale = 'cover';
     this.actual = '';
     this.complete_parent = '';
     this.parent = '';
-    this.DATA=[];
+    this.DATA = [];
   }
 
   cargarArchivos() {
@@ -53,40 +58,37 @@ export class HomeComponent implements OnInit {
     this.actual = localStorage.getItem('actual');
     this.complete_parent = localStorage.getItem('complete_parent');
     this.parent = localStorage.getItem('parent');
-    if (
-      this.complete_parent != null &&
-      this.complete_parent != '' &&
-      !this.complete_parent.endsWith('/')
-    ) {
-      this.complete_parent += '/';
+    this.complete_p = this.complete_parent;
+    if (this.complete_parent != null && this.complete_parent.endsWith('/')) {
+      this.complete_p = this.complete_parent.substring(
+        0,
+        this.complete_parent.length - 1
+      );
     }
     this.DATA = [];
     if (this.complete_parent != null && this.actual != null)
       this._dirService
         .getInside(this.name, this.complete_parent + this.actual)
         .subscribe({
-          complete: () => {},
+          complete: () => {
+            if(this.DATA.length>this.imglist.length)
+              this.chooseImg()
+          },
           next: (res) => {
             this.DATA = res.files;
-            console.log(this.DATA);
           },
           error: (errors: Error) => {
             console.log(errors);
           },
         });
-    if (this.complete_parent != null && this.complete_parent.endsWith('/')) {
-      this.complete_parent = this.complete_parent.substring(
-        0,
-        this.complete_parent.length - 1
-      );
-    }
+   
   }
 
   ngOnInit(): void {}
 
   openDialog(file: any): void {
     const dialogRef = this.dialog.open(ReadFileComponent, {
-      width: '100vh',
+      width: '90vh',
       data: {
         username: this.name,
         name: file.name,
@@ -140,16 +142,18 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(this.complete_parent);
-        console.log(this.actual);
         if (this.complete_parent != null && this.actual != null)
           this._sharedService
-            .delete({items:[{
-              from_directory: this.complete_parent,
-              target_element: this.actual,
-              username: this.name,
-              type: 'dir',
-            }]})
+            .delete({
+              items: [
+                {
+                  from_directory: this.complete_parent.substring(0,this.complete_parent.length-1),
+                  target_element: this.actual,
+                  username: this.name,
+                  type: 'dir',
+                },
+              ],
+            })
             .subscribe({
               next: (res: any) => {
                 window.location.reload();
@@ -157,9 +161,14 @@ export class HomeComponent implements OnInit {
                 localStorage.setItem('complete_parent', '');
                 localStorage.setItem('parent', '');
                 this.cargarArchivos();
+                let str: string = res.message;
+                let msg: string = str.slice(str.indexOf('[') + 1, str.length);
+                this.toastr.success(msg, 'Exito');
               },
-              error: (err: any) => {
-                console.log(err);
+              error: (errors) => {
+                let str: string = errors.error;
+                let msg: string = str.slice(str.indexOf('[') + 2, str.length - 3);
+                this.toastr.error(msg, 'ERROR');
               },
             });
       }
@@ -168,42 +177,45 @@ export class HomeComponent implements OnInit {
 
   openDialogDeleteFiles(): void {
     let lista_: string[] = [];
-    this.DATA.filter(x => {lista_.push(x.name)})
+    this.DATA.filter((x) => {
+      lista_.push(x.name);
+    });
     const dialogRef = this.dialog.open(DeleteComponent, {
       width: '60vh',
-      data: { type: true, list : lista_ },
+      data: { type: true, list: lista_ },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result.value!=null) {
-        let lista_: { from_directory: string | null; target_element: any; username: string; type: string; }[]=[]
+      if (result.value != null) {
+        let lista_: {
+          from_directory: string | null;
+          target_element: any;
+          username: string;
+          type: string;
+        }[] = [];
         result.value.forEach((element: any) => {
           let dir = this.complete_parent;
-          if(this.complete_parent!= null && !this.complete_parent.endsWith("/")) 
-            dir+="/";
-          if(this.actual!= null)
-            dir+=this.actual
+          if (this.actual != null) dir += this.actual;
           lista_.push({
             from_directory: dir,
             target_element: element,
             username: this.name,
             type: 'file',
-          })
+          });
         });
-        let resultado = {items:lista_};
-        this._sharedService
-            .delete(resultado)
-            .subscribe({
-              next: (res: any) => {
-                window.location.reload();
-                this.cargarArchivos();
-              },
-              error: (err: any) => {
-                console.log(err);
-              },
-            });
+        let resultado = { items: lista_ };
+        this._sharedService.delete(resultado).subscribe({
+          next: (res: any) => {
+            window.location.reload();
+            this.cargarArchivos();
+          },
+          error: (errors) => {
+            let str: string = errors.error;
+            let msg: string = str.slice(str.indexOf('[') + 2, str.length - 3);
+            this.toastr.error(msg, 'ERROR');
+          },
+        });
       }
     });
-
   }
 
   openDialogMove(): void {
@@ -224,11 +236,28 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getRandomImg() : string{
-    const  min = Math.ceil(3);
-    const  max = Math.floor(6);
-    let res =  Math.floor(Math.random() * (max - min + 1)) + min; 
-    let file = "../../../assets/img/"+res.toString()+".png"
-    return file;
+  openDialogShare():void{
+    const dialogRef = this.dialog.open(ShareComponent, {
+      width: '100vh',
+      data: {
+        from_directory:this.complete_parent,
+        target_element:this.actual,
+        username:this.name,
+        target_username:"",
+        type:"dir",
+        },
+    });
   }
+
+  chooseImg(): void {
+    let cont = 3;
+    for (let index = 0; index < this.DATA.length; index++) {
+      this.imglist.push("../../../assets/img/"+cont.toString()+".png");
+      cont++;
+      cont > 6 ? cont=3 : true;
+      
+    }
+    console.log( this.imglist)
+  }
+  
 }

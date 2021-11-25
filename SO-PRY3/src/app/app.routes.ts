@@ -3,9 +3,10 @@ import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { InitComponent } from "./components/init/init.component";
 import { HomeComponent } from "./components/home/home.component";
+import { SecurityGuard } from "./components/security.guard";
 
 const APP_ROUTES : Routes = [
-    {path: 'my-drive', component: HomeComponent},
+    {path: 'my-drive', component: HomeComponent, canActivate: [SecurityGuard]},
     {path: 'home', component: InitComponent}, 
     {path: 'login', component: LoginComponent}, 
     {path: 'signup', component: SignupComponent}, 

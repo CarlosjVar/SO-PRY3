@@ -37,6 +37,7 @@ import { CreateDirComponent } from './components/directories/create-dir/create-d
 import { ReadFileComponent } from './components/files/read-file/read-file.component';
 import { DeleteComponent } from './components/shared/delete/delete.component';
 import { MoveComponent } from './components/shared/move/move.component';
+import { ShareComponent } from './components/shared/share/share.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { MoveComponent } from './components/shared/move/move.component';
     ReadFileComponent,
     DeleteComponent,
     MoveComponent,
+    ShareComponent,
   ],
   imports: [
     BrowserModule,
