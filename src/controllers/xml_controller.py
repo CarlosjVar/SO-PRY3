@@ -252,6 +252,11 @@ def copy_dir(source_dir, target_dir, object, username, type):
         return result
     source_dir_element_result = search_dir(source_dir, selected_user, "")
     target_dir_element_result = search_dir(target_dir, selected_user, "")
+
+    if(source_dir_element_result == None or target_dir_element_result == None):
+        result[1].append(
+            "Nuestros Velvebuscadores no puedieron encontrar ningún directorio relacionado con este usuario.")
+        return result
     source_dir_element = source_dir_element_result[0]
     target_dir_element = target_dir_element_result[0]
     if(type == "dir"):
@@ -280,8 +285,7 @@ def copy_dir(source_dir, target_dir, object, username, type):
             delete_item(target_dir_element, object, "file")
         target_dir_element.append(selected_file)
     tree.write(XML_PATH)
-    result[0] = {
-        "msg": "El omnipotente Velvet rompió las leyes de la metafísica y clonó su item"}
+    result[0] = "El omnipotente Velvet rompió las leyes de la metafísica y clonó su item"
     return result
 
 
@@ -340,8 +344,7 @@ def share_item(source_dir, object, username, username_target, type):
             delete_item(target_dir_element, object, "file")
         target_dir_element.append(selected_file)
     tree.write(XML_PATH)
-    result[0] = {
-        "msg": "El omnipotente Velvet rompió las leyes de la metafísica y compartió su item"}
+    result[0] = "El omnipotente Velvet rompió las leyes de la metafísica y compartió su item"
     return result
 
 
@@ -421,22 +424,10 @@ def calc_subfolders(element):
     name = element.get("virtual")
 
     for directory in element.findall("dir"):
+        if(directory.get("virtual") == 'My shared files'):
+            continue
         size += calc_subfolders(directory)
         print(f"El folder {element.get('virtual')} pesa {size}")
     size += meassureSize(element)
 
     return size
-
-
-def test():
-    username = "Testing"
-    result = [None, []]
-    tree = ET.parse(XML_PATH)
-    root = tree.getroot()
-    users = root.find("usuarios")
-    for usuario in users.findall("usuario"):
-        if (usuario.get("username") == username):
-            selected_user = usuario
-    drive = search_dir(["Drive"], selected_user, "")[0]
-    print("#")
-    print(f"El espacio total es {calc_subfolders(drive)}")
