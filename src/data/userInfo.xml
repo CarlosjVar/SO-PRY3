@@ -65,7 +65,9 @@
             <dir virtual="Drive mio">
                 <dir virtual="Scripts" />
                 <file name="Velvet.txt" ext="txt" date_created="Nov 24, 2021, 10:08:16 PM" date_modified="Nov 24, 2021, 10:08:16 PM" size="29" content="Velvet es en efecto muy guapo" />
-            </dir>
+                <file name="Archivito.txt" ext="txt" date_created="Nov 25, 2021, 5:56:24 PM" date_modified="Nov 25, 2021, 5:56:24 PM" size="8" content="pitotito" />
+                <file name="asd-.xtx" ext="xtx" date_created="Nov 25, 2021, 6:17:44 PM" date_modified="Nov 25, 2021, 6:17:44 PM" size="3" content="asd" />
+            <file name="vpn" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" /><file name="vpn.txt" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" /></dir>
             <dir virtual="My shared files" />
         </usuario>
         <usuario username="Testing3" password="Gato02" size="10">

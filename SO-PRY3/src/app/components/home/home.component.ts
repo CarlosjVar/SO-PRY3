@@ -8,7 +8,8 @@ import { SharedService } from 'src/app/services/shared.service';
 import { MoveComponent } from '../shared/move/move.component';
 import { ToastrService } from 'ngx-toastr';
 import { ShareComponent } from '../shared/share/share.component';
-
+import { FilesService } from 'src/app/services/files.service';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,13 +24,16 @@ export class HomeComponent implements OnInit {
   parent: string | null;
   public DATA!: createFile_[];
   imglist: string[] = [];
-
+  fileReader: FileReader = new FileReader();
   constructor(
     private _dirService: DirectoriesService,
-    public dialog: MatDialog, private toastr: ToastrService,
-    private _sharedService: SharedService
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    private _sharedService: SharedService,
+    private _fileService: FilesService,
+    public datepipe: DatePipe
   ) {
-    document.body.style.backgroundImage = "none";
+    document.body.style.backgroundImage = 'none';
     document.body.style.backgroundAttachment = 'fixed';
     document.body.style.scale = 'cover';
     this.actual = '';
@@ -71,8 +75,7 @@ export class HomeComponent implements OnInit {
         .getInside(this.name, this.complete_parent + this.actual)
         .subscribe({
           complete: () => {
-            if(this.DATA.length>this.imglist.length)
-              this.chooseImg()
+            if (this.DATA.length > this.imglist.length) this.chooseImg();
           },
           next: (res) => {
             this.DATA = res.files;
@@ -81,7 +84,6 @@ export class HomeComponent implements OnInit {
             console.log(errors);
           },
         });
-   
   }
 
   ngOnInit(): void {}
@@ -147,7 +149,10 @@ export class HomeComponent implements OnInit {
             .delete({
               items: [
                 {
-                  from_directory: this.complete_parent.substring(0,this.complete_parent.length-1),
+                  from_directory: this.complete_parent.substring(
+                    0,
+                    this.complete_parent.length - 1
+                  ),
                   target_element: this.actual,
                   username: this.name,
                   type: 'dir',
@@ -167,7 +172,10 @@ export class HomeComponent implements OnInit {
               },
               error: (errors) => {
                 let str: string = errors.error;
-                let msg: string = str.slice(str.indexOf('[') + 2, str.length - 3);
+                let msg: string = str.slice(
+                  str.indexOf('[') + 2,
+                  str.length - 3
+                );
                 this.toastr.error(msg, 'ERROR');
               },
             });
@@ -236,28 +244,65 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openDialogShare():void{
+  openDialogShare(): void {
     const dialogRef = this.dialog.open(ShareComponent, {
       width: '100vh',
       data: {
-        from_directory:this.complete_parent,
-        target_element:this.actual,
-        username:this.name,
-        target_username:"",
-        type:"dir",
-        },
+        from_directory: this.complete_parent,
+        target_element: this.actual,
+        username: this.name,
+        target_username: '',
+        type: 'dir',
+      },
     });
   }
 
   chooseImg(): void {
     let cont = 3;
     for (let index = 0; index < this.DATA.length; index++) {
-      this.imglist.push("../../../assets/img/"+cont.toString()+".png");
+      this.imglist.push('../../../assets/img/' + cont.toString() + '.png');
       cont++;
-      cont > 6 ? cont=3 : true;
-      
+      cont > 6 ? (cont = 3) : true;
     }
-    console.log( this.imglist)
+    console.log(this.imglist);
   }
-  
+  async upload(files: File[]) {
+    const user = localStorage.getItem('username');
+
+    const actual = localStorage.getItem('actual');
+    const complete_parent = localStorage.getItem('complete_parent');
+    let target;
+    if (actual != null && complete_parent != null) {
+      target = complete_parent + actual;
+    }
+
+    const current_file: any = files[0];
+    const dateFile = new Date(current_file.lastModifiedDate);
+    const formattedDate = this.datepipe.transform(dateFile, 'medium');
+    let re = /(\w+)\.(\w+)/;
+    const res = current_file.name.match(re);
+    const content = await current_file.text();
+
+    if (user && target != null) {
+      console.log('pepito');
+      let file_upload: createFile_ = {
+        username: user,
+        size: current_file.size,
+        name: current_file.name,
+        ext: res[2],
+        date_created: formattedDate,
+        date_modified: formattedDate,
+        target_dir: target,
+        content: content,
+      };
+      this._fileService.createFile(file_upload).subscribe({
+        next: (result: any) => {
+          window.location.reload();
+        },
+        error: (error: any) => {
+          this.toastr.error(error, 'Error');
+        },
+      });
+    }
+  }
 }

@@ -10,7 +10,6 @@ XML_PATH = "./data/userInfo.xml"
 
 def xml_write(username, type, target_dir, args):
     result = [None, []]
-
     tree = ET.parse(XML_PATH)
     root = tree.getroot()
     users = root.find("usuarios")
@@ -41,11 +40,11 @@ def xml_write(username, type, target_dir, args):
             return result
 
         attrib = {"name": args["name"], "ext": args["ext"], "date_created": args["date_created"],
-                  "date_modified": args["date_modified"], "size": args["size"], "content": args["content"]}
+                  "date_modified": args["date_modified"], "size": str(args["size"]), "content": args["content"]}
         child_dir = target_dir_element.makeelement(type, attrib)
         target_dir_element.append(child_dir)
         result[0] = File(args["name"], args["ext"], args["date_created"],
-                         args["date_modified"], args["size"], args["content"], target_dir_element_result[1])
+                         args["date_modified"], str(args["size"]), args["content"], target_dir_element_result[1])
     elif(type == "dir"):
         if(not validateName(target_dir_element, args["name"], "dir")):
             result[1].append(
@@ -110,15 +109,19 @@ def modifyFileHelper(target_dir, attributes, name, username):
 
 
 def validateName(element, name, type):
+
     finalSize = 0
     available = True
     if type == "dir":
         for directory in element.findall("dir"):
             if(directory.get("virtual") == name):
+
+                print("Dir no")
                 available = False
     elif type == "file":
         for file in element.findall("file"):
             if(file.get("name") == name):
+                print(f"  Comparando con  {file.get('name')}  file es {name}")
                 available = False
     return available
 
