@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   imglist: string[] = [];
   max_size: string | null = '';
   size_: string | null = '';
-  dirsize_ : string = '';
+  dirsize_: string = '';
 
   constructor(
     private _dirService: DirectoriesService,
@@ -147,8 +147,7 @@ export class HomeComponent implements OnInit {
                 console.log(errors);
               },
             });
-      }
-      else if (result == 2) {
+      } else if (result == 2) {
         if (this.complete_parent != null && this.actual != null)
           this._dirService
             .getInside(this.name, this.complete_parent + this.actual)
@@ -164,8 +163,7 @@ export class HomeComponent implements OnInit {
                 console.log(errors);
               },
             });
-      }
-      else{
+      } else {
         this.getActualSize();
       }
     });
@@ -296,7 +294,7 @@ export class HomeComponent implements OnInit {
   }
 
   openDialogCopy(): void {
-    if(this.isEnoughSpace(parseInt(this.dirsize_))){
+    if (this.isEnoughSpace(parseInt(this.dirsize_))) {
       const dialogRef = this.dialog.open(CopyComponent, {
         width: '60vh',
         data: {
@@ -312,8 +310,7 @@ export class HomeComponent implements OnInit {
           window.location.reload();
         }
       });
-    }
-    else {
+    } else {
       this.toastr.error(
         'No hay suficiente espacio para realizar la acción',
         'ERROR'
@@ -348,6 +345,7 @@ export class HomeComponent implements OnInit {
     const res = current_file.name.match(re);
     const content = await current_file.text();
     if (res[2] != 'txt') {
+      this.toastr.error('Solo se permiten archivos txt', 'ERROR');
       return;
     }
     if (user && target != null) {

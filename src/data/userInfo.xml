@@ -63,26 +63,26 @@
         </usuario>
         <usuario username="Titovare" password="titovare" size="2000">
             <dir virtual="Drive mio">
-                <dir virtual="Scripts">
-                    <file name="vpn" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" />
-                </dir>
                 <file name="asd-.xtx" ext="xtx" date_created="Nov 25, 2021, 6:17:44 PM" date_modified="Nov 25, 2021, 8:38:17 PM" size="5" content="assdg" old_name="asd-.xtx" />
                 <file name="vpn" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" />
                 <file name="vpn.txt" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" />
                 <file name="clases.txt" ext="txt" date_created="Sep 17, 2021, 10:32:06 AM" date_modified="Sep 17, 2021, 10:32:06 AM" size="624" content="Aseguramiento:&#13;&#10;https://us02web.zoom.us/j/5227074585?pwd=eW5pdXJIblljNkJTRVQ0VzB3YXBJdz09&#13;&#10;TEC1971&#13;&#10;&#13;&#10;&#13;&#10;Recuperaci&#243;n:https://itcr.zoom.us/j/89801872249?pwd=MjhDYmlqS3VDcW1tYXh1ZWlyYS9pZz09&#13;&#10;&#13;&#10;CompuSociedad: &#160;https://itcr.zoom.us/j/86907217840?pwd=aHJGR3pPSXJrWkJPTDBVR3Q0ekY4dz09&#13;&#10;&#13;&#10;Seminario:&#13;&#10;https://itcr.zoom.us/j/83078921971?pwd=a2dqR1pHTVZiUm00bWZ5UHlaTVFCZz09&#13;&#10;SEC 1&#13;&#10;&#13;&#10;Sistemas:&#13;&#10;https://itcr.zoom.us/j/87853145631?pwd=SOG02&#13;&#10;&#13;&#10;IO:&#13;&#10;https://us02web.zoom.us/j/84792661685&#13;&#10;&#13;&#10;Recuperaci&#243;n:&#13;&#10;https://itcr.zoom.us/j/89801872249?pwd=MjhDYmlqS3VDcW1tYXh1ZWlyYS9pZz09&#13;&#10;&#13;&#10;Asistencia:&#13;&#10;https://us06web.zoom.us/j/2929827910" />
                 <file name="asd.txt" ext="txt" date_created="Nov 25, 2021, 6:33:23 PM" date_modified="Nov 25, 2021, 6:33:23 PM" size="0" content="" />
-                <dir virtual="asd" />
+                <dir virtual="asd"><dir virtual="Scripts">
+                    <file name="vpn" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" />
+                </dir>
+                </dir>
                 <dir virtual="carp1">
                     <dir virtual="Scripts">
                         <file name="vpn" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" />
                     </dir>
-                </dir>
+                <file name="ased.txt" ext="txt" date_created="Nov 25, 2021, 10:10:42 PM" date_modified="Nov 25, 2021, 10:10:42 PM" size="24" content="adsasdasdasdasdasdadsasd" /><file name="a.txt" ext="txt" date_created="Nov 25, 2021, 10:10:52 PM" date_modified="Nov 25, 2021, 10:10:52 PM" size="21" content="asdasdasdasdasdasdasd" /><file name="ar.txt" ext="txt" date_created="Nov 25, 2021, 10:12:45 PM" date_modified="Nov 25, 2021, 10:12:45 PM" size="10" content="Hola mundo" /><file name="archivo3.txt" ext="txt" date_created="Nov 25, 2021, 10:12:55 PM" date_modified="Nov 25, 2021, 10:12:55 PM" size="704" content="mucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texotmucho texot" /></dir>
                 <dir virtual="carp2">
                     <dir virtual="Scripts">
                         <file name="vpn" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" />
                     </dir>
                 </dir>
-            </dir>
+            <file name="big.txt" ext="txt" date_created="Nov 25, 2021, 10:10:06 PM" date_modified="Nov 25, 2021, 10:10:06 PM" size="78" content="123bhuasdjkasdjbhkasdj basdbjhasdjhbasdbjhasd bjhkadsbhjasdbjhkasd kjasdbjhasd" /></dir>
             <dir virtual="My shared files"><dir virtual="Drive mio">
                 <dir virtual="Scripts">
                     <file name="vpn" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" />
