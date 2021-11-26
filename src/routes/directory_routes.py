@@ -1,7 +1,7 @@
 
 from flask import Flask, request, Blueprint, Response
 from flask_cors import CORS, cross_origin
-from controllers.xml_controller import listContent, xml_write, listContent, copy_dir, delete_dir, modifyFileHelper, move_item, share_item
+from controllers.xml_controller import listContent, xml_write, listContent, copy_dir, delete_dir, modifyFileHelper, move_item, share_item, calc_subfolders_helper
 import json
 directory_module = Blueprint('directory_module', __name__)
 
@@ -145,6 +145,18 @@ def modify_file():
     return result[0].__dict__
 
 
+@directory_module.route("/api/dir/space", methods=["POST"])
+@cross_origin()
+def get_current_space():
+    args = request.get_json()
+    username = args["username"]
+    result = calc_subfolders_helper(username)
+    if len(result[1]) > 0:
+        response_data = {"errors": result[1]}
+        return Response(result[1], status=500, mimetype='application/json')
+    return {"msg":result[0]}
+
+
 @directory_module.route("/api/dir/move", methods=["POST"])
 @cross_origin()
 def move_item_r():
@@ -191,7 +203,3 @@ def share_item_r():
         return Response(result[1], status=500, mimetype='application/json')
     return {"msg": result[0]}
 
-
-@directory_module.route("/api/dir/space", methods=["POST"])
-@cross_origin()
-def get_current_space()

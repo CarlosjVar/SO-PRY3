@@ -420,7 +420,7 @@ def delete_item(element, name, type):
                 return True
     return False
 
-
+#Es esta
 def calc_subfolders(element):
     size = 0
     name = element.get("virtual")
@@ -433,6 +433,25 @@ def calc_subfolders(element):
     size += meassureSize(element)
 
     return size
+
+def calc_subfolders_helper(username):
+    size = 0
+    result = [None, []]
+
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+    users = root.find("usuarios")
+    selected_user = None
+    # Searches for selected user
+    for usuario in users.findall("usuario"):
+        if (usuario.get("username") == username):
+            selected_user = usuario
+    if selected_user is None:
+        result[1].append(
+            "Nuestros Velvuscadores no pudieron encontrar ningún directorio relacionado con este usuario.")
+        return result
+    result[0] = calc_subfolders(selected_user)
+    return result
 
 
 def get_current_spaceD(username):
