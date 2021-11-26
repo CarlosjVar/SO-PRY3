@@ -11,6 +11,7 @@ import { DeleteComponent } from '../../shared/delete/delete.component';
 import { DatePipe } from '@angular/common';
 import { MoveComponent } from '../../shared/move/move.component';
 import { saveAs } from 'file-saver';
+import * as FileSaver from 'file-saver';
 @Component({
   selector: 'app-read-file',
   templateUrl: './read-file.component.html',
@@ -136,5 +137,9 @@ export class ReadFileComponent implements OnInit {
   }
   onDownload() {
     console.log(this.data);
+    var blob = new Blob([this.data.content], {
+      type: 'text/plain;charset=utf-8',
+    });
+    FileSaver.saveAs(blob, this.data.name);
   }
 }

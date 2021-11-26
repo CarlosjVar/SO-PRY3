@@ -194,4 +194,6 @@ def share_item_r():
 
 @directory_module.route("/api/dir/space", methods=["POST"])
 @cross_origin()
-def get_current_space()
+def get_current_space():
+    args = request.get_json()
+    username =
