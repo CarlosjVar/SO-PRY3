@@ -11,6 +11,7 @@ import { DeleteComponent } from '../../shared/delete/delete.component';
 import { DatePipe } from '@angular/common';
 import { MoveComponent } from '../../shared/move/move.component';
 import { ShareComponent } from '../../shared/share/share.component';
+import { CopyComponent } from '../../shared/copy/copy.component';
 
 @Component({
   selector: 'app-read-file',
@@ -148,4 +149,21 @@ export class ReadFileComponent implements OnInit {
     });
   }
 
+  copy():void{
+    const dialogRef = this.dialog.open(CopyComponent, {
+      width: '60vh',
+      data: {
+        user: this.data.username,
+        name: this.data.name,
+        type: 'archivo',
+        a_type: 'file',
+        actual_dir: this.data.target_dir,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        window.location.reload();
+      }
+    });
+  }
 }

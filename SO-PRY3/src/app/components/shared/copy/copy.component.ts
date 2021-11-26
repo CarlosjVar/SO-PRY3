@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { createFile_ } from 'src/app/models/File.model';
 import { SharedService } from 'src/app/services/shared.service';
 
 export interface DialogData {
@@ -13,13 +12,13 @@ export interface DialogData {
 }
 
 @Component({
-  selector: 'app-move',
-  templateUrl: './move.component.html',
-  styleUrls: ['./move.component.css'],
+  selector: 'app-copy',
+  templateUrl: './copy.component.html',
+  styleUrls: ['./copy.component.css'],
 })
-export class MoveComponent implements OnInit {
+export class CopyComponent implements OnInit {
   constructor(
-    public dialogRef: MatDialogRef<MoveComponent>,
+    public dialogRef: MatDialogRef<CopyComponent>,
     private _sharedService: SharedService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
@@ -27,16 +26,15 @@ export class MoveComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close();
   }
 
   ngOnInit(): void {}
-
   onMove(): void {
     if(this.data.actual_dir.endsWith("/"))
-    this.data.actual_dir= this.data.actual_dir.substring(0,this.data.actual_dir.length-1);
+      this.data.actual_dir= this.data.actual_dir.substring(0,this.data.actual_dir.length-1);
     this._sharedService
-      .move({
+      .copy({
         from_directory: this.data.actual_dir,
         target_element: this.data.name,
         to_directory: this.data.new_direction,

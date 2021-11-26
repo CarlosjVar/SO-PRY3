@@ -8,6 +8,7 @@ import { SharedService } from 'src/app/services/shared.service';
 import { MoveComponent } from '../shared/move/move.component';
 import { ToastrService } from 'ngx-toastr';
 import { ShareComponent } from '../shared/share/share.component';
+import { CopyComponent } from '../shared/copy/copy.component';
 
 @Component({
   selector: 'app-home',
@@ -251,6 +252,24 @@ export class HomeComponent implements OnInit {
         target_username:"",
         type:"dir",
         },
+    });
+  }
+
+  openDialogCopy(): void {
+    const dialogRef = this.dialog.open(CopyComponent, {
+      width: '60vh',
+      data: {
+        user: this.name,
+        name: this.actual,
+        type: 'directorio',
+        a_type: 'dir',
+        actual_dir: this.complete_parent,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        window.location.reload();
+      }
     });
   }
 

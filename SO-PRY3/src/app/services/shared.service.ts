@@ -24,4 +24,10 @@ export class SharedService {
       /*localhost:5000/api/dir/move */
       return this.http.post<any>(this.URL+'api/dir/share', data);
     }
+    
+    copy(data:toMove){
+      /*localhost:5000/api/dirs/copy */
+      return this.http.post<any>(this.URL+'api/dirs/copy', data);
+    }
+
 }
