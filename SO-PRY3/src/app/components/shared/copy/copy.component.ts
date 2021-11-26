@@ -38,6 +38,21 @@ export class CopyComponent implements OnInit {
         0,
         this.data.actual_dir.length - 1
       );
+
+    console.log(this.data.new_direction);
+    console.log(this.data.actual_dir + this.data.name);
+    let current_dir = this.data.actual_dir + this.data.name;
+
+    if (
+      this.data.new_direction.split('/').length > current_dir.split('/').length
+    ) {
+      this.toastr.error(
+        'Se intentó copiar un directorio dentro de uno de sus subdirectorios',
+        'Error'
+      );
+      return;
+    }
+
     this._sharedService
       .copy({
         from_directory: this.data.actual_dir,
@@ -56,5 +71,16 @@ export class CopyComponent implements OnInit {
           this.toastr.error(err.error);
         },
       });
+  }
+  isEnoughSpace(val: number): boolean {
+    let max_size = localStorage.getItem('max_drive_size');
+    let actual_size = localStorage.getItem('actual_size');
+    if (max_size != null && actual_size != null) {
+      let total_s = parseInt(max_size);
+      let actual_s = parseInt(actual_size);
+      actual_s += val;
+      if (actual_s > total_s) return false;
+    }
+    return true;
   }
 }

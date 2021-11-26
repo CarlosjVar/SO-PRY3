@@ -413,6 +413,7 @@ def delete_item(element, name, type):
     if(type == "dir"):
         for directory in element.findall("dir"):
             if directory.get("virtual") == name:
+                print(f"quité a {directory.get('virtual')}")
                 element.remove(directory)
                 return True
     else:

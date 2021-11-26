@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   public DATA!: createFile_[];
   imglist: string[] = [];
   max_size: string | null = '';
-
+  size_: string | null = '';
   constructor(
     private _dirService: DirectoriesService,
     public dialog: MatDialog,
@@ -44,8 +44,16 @@ export class HomeComponent implements OnInit {
     this.parent = '';
     this.DATA = [];
     this.max_size = localStorage.getItem('max_drive_size');
+    this.getActualSize();
   }
-
+  getActualSize() {
+    this._sharedService.size({ username: this.name }).subscribe({
+      next: (res) => {
+        localStorage.setItem('actual_size', res.msg.toString());
+        this.size_ = res.msg.toString();
+      },
+    });
+  }
   cargarArchivos() {
     if (this.complete_parent != null && this.actual != null)
       this._dirService
