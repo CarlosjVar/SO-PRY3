@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { itemsToDelete, toDelete, toMove, toShare } from '../models/shared.model';
+import { itemsToDelete, toDelete, toMove, toShare, user } from '../models/shared.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,11 @@ export class SharedService {
     copy(data:toMove){
       /*localhost:5000/api/dirs/copy */
       return this.http.post<any>(this.URL+'api/dirs/copy', data);
+    }
+
+    size(u:user){
+      /*http://localhost:5000/api/dir/space*/
+      return this.http.post<any>(this.URL+'api/dir/space', u);
     }
 
 }

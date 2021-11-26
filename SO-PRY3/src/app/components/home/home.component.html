@@ -1,6 +1,6 @@
 <div class="home">
 
-  <app-sidebar (nameEvent)="nameEventHander($event)"></app-sidebar>
+  <app-sidebar actual_size={{this.size_}} (nameEvent)="nameEventHander($event)"></app-sidebar>
 
   <div class="app-data col" *ngIf="actual!=null && actual!=''">
     <div class="container-title">

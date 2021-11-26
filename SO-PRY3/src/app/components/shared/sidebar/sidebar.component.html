@@ -1,63 +1,64 @@
 <div class="up">
-<div class="title" *ngIf="this.actual== ''">
-  <br>
-  <h2>¡Bienvenido a tu Drive!</h2>
-</div>
-
-
-<div *ngIf="this.actual!= ''">
-  <br>
-  <div class="container-b my-2">
-    <button mat-raised-button class="b-principal mr-2" (click)="volver()">
-      <mat-icon class="white mat-icon-rtl-mirror">arrow_back</mat-icon>
-      Volver
-    </button>
-    <button mat-raised-button class="b-principal" (click)="openDialog()" [disabled]="isInSharedFiles()">
-      <mat-icon class="white mat-icon-rtl-mirror">
-        add_circle_outline
-      </mat-icon>
-      Agregar
-    </button>
+  <div class="title" *ngIf="this.actual== ''">
+    <br>
+    <h2>¡Bienvenido a tu Drive!</h2>
   </div>
-  <br>
-</div>
-<div class="general-container" *ngIf='this.dataSource.data.length != 0'>
-  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl"
-    class="example-tree">
-    <mat-tree-node
-      *matTreeNodeDef="let node"
-      matTreeNodePadding
-      matTreeNodePaddingIndent="10">
-      <button mat-button (click)="cargar(node.name)">
-        <mat-icon>folder</mat-icon>
-        {{ node.name }}
-      </button>
-    </mat-tree-node>
-  </mat-tree>
-  <hr>
-</div>
 
-<div class="title" *ngIf='this.dataSource.data.length === 0'>
-  <h3>No hay carpetas agregadas</h3>
-  <hr>
-</div>
+
+  <div *ngIf="this.actual!= ''">
+    <br>
+    <div class="container-b my-2">
+      <button mat-raised-button class="b-principal mr-2" (click)="volver()">
+        <mat-icon class="white mat-icon-rtl-mirror">arrow_back</mat-icon>
+        Volver
+      </button>
+      <button mat-raised-button class="b-principal" (click)="openDialog()"
+        [disabled]="isInSharedFiles()">
+        <mat-icon class="white mat-icon-rtl-mirror">
+          add_circle_outline
+        </mat-icon>
+        Agregar
+      </button>
+    </div>
+    <br>
+  </div>
+  <div class="general-container" *ngIf='this.dataSource.data.length != 0'>
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl"
+      class="example-tree">
+      <mat-tree-node
+        *matTreeNodeDef="let node"
+        matTreeNodePadding
+        matTreeNodePaddingIndent="10">
+        <button mat-button (click)="cargar(node.name)">
+          <mat-icon>folder</mat-icon>
+          {{ node.name }}
+        </button>
+      </mat-tree-node>
+    </mat-tree>
+    <hr>
+  </div>
+
+  <div class="title" *ngIf='this.dataSource.data.length === 0'>
+    <h3>No hay carpetas agregadas</h3>
+    <hr>
+  </div>
 </div>
 
 <div class="down">
-<div class="container-img">
-  <img class="gif-c" src="../../../../assets/img/cookies.gif">
-</div>
-<hr>
-<br>
-<div>
-  <div class="container-c my-2">
-  <mat-icon class="cloud mr-3">cloud_queue</mat-icon>
-  <h2 class="space">Almacenamiento</h2>
-  <div class="container">
-    <mat-progress-bar mode="determinate" value={{this.result}}></mat-progress-bar>
-    <p>{{this.actual_size}} B de {{this.max_size}} B usado</p>
-    <br>
+  <div class="container-img">
+    <img class="gif-c" src="../../../../assets/img/cookies.gif">
   </div>
+  <hr>
+  <br>
+  <div>
+    <div class="container-c my-2">
+      <mat-icon class="cloud mr-3">cloud_queue</mat-icon>
+      <h2 class="space">Almacenamiento</h2>
+      <div class="container">
+        <mat-progress-bar mode="determinate" value={{this.result}}></mat-progress-bar>
+        <p>{{this.actual_size}} B de {{this.max_size}} B usado</p>
+        <br>
+      </div>
+    </div>
   </div>
-</div>
 </div>

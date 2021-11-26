@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   MatTreeFlatDataSource,
   MatTreeFlattener,
@@ -36,8 +36,10 @@ export class SidebarComponent implements OnInit {
   complete_parent: string = '';
   myDate: Date | undefined;
   max_size: string | null = '';
-  actual_size: string | null = '';
   result: number = 0;
+  
+  @Input() 
+  actual_size: string | null = '';
 
   private _transformer = (node: Directory, level: number) => {
     return {
@@ -79,8 +81,6 @@ export class SidebarComponent implements OnInit {
       },
       next: (res) => {
         this.TREE_DATA = res.directories;
-        this.actual_size = res.size;
-        localStorage.setItem('actual_size', res.size);
         console.log(res);
       },
       error: (errors: Error) => {

@@ -25,3 +25,6 @@ export interface toShare {
   type: string;
 }
 
+export interface user{
+  username: string;
+}
