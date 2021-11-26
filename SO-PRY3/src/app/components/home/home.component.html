@@ -1,88 +1,47 @@
 <div class="home">
+
   <app-sidebar (nameEvent)="nameEventHander($event)"></app-sidebar>
 
-    <app-sidebar (nameEvent)="nameEventHander($event)"></app-sidebar>
-
-    <div class="app-data col" *ngIf="actual!=null && actual!=''">
-        <div class="container-title">
-            <div class="row-content">
-                <div class="ml-2 row-title">
-                    <h2>{{this.complete_p}}</h2>
-                    <mat-icon *ngIf="this.complete_parent!=''">chevron_right </mat-icon>
-                    <h2> {{this.actual}}</h2>
-                </div>
-                <div class="btn-container">
-                    <br>
-                    <button mat-mini-fab (click)="openDialogMove()" *ngIf="complete_parent!=null && complete_parent!=''" matTooltip="Mover directorio"><mat-icon >drive_file_move_outline</mat-icon></button>
-                    <button mat-mini-fab matTooltip="Copiar directorio" (click)="openDialogCopy()"><mat-icon >content_copy</mat-icon></button>
-                    <button mat-mini-fab (click)="openDialogShare()" matTooltip="Compartir directorio"><mat-icon >folder_shared</mat-icon></button>
-                    <button mat-mini-fab (click)="openDialogDelete()" *ngIf="complete_parent!=null && complete_parent!=''" matTooltip="Eliminar directorio"> <mat-icon >folder_delete</mat-icon></button>
-                    <div class="divider"></div>
-                    <button mat-mini-fab class="ml-2" (click)="openDialogDeleteFiles()" matTooltip="Eliminar archivos"><mat-icon>delete_outline</mat-icon></button>
-                    <br>
-                </div>
-            </div>
-            <hr class="mt-0">
+  <div class="app-data col" *ngIf="actual!=null && actual!=''">
+    <div class="container-title">
+      <div class="row-content">
+        <div class="ml-2 row-title">
+          <h2>{{this.complete_p}}</h2>
+          <mat-icon *ngIf="this.complete_parent!=''">chevron_right </mat-icon>
+          <h2> {{this.actual}}</h2>
         </div>
         <div class="btn-container">
-          <br />
-          <button
-            mat-mini-fab
-            (click)="openDialogMove()"
-            *ngIf="complete_parent != null && complete_parent != ''"
-            matTooltip="Mover directorio"
-          >
+          <br>
+          <button mat-mini-fab (click)="openDialogMove()" *ngIf="complete_parent!=null && complete_parent!=''"
+            matTooltip="Mover directorio">
             <mat-icon>drive_file_move_outline</mat-icon>
           </button>
-          <button mat-mini-fab matTooltip="Copiar directorio">
+          <button mat-mini-fab matTooltip="Copiar directorio" (click)="openDialogCopy()">
             <mat-icon>content_copy</mat-icon>
           </button>
-          <button
-            mat-mini-fab
-            (click)="openDialogShare()"
-            matTooltip="Compartir directorio"
-          >
+          <button mat-mini-fab (click)="openDialogShare()" matTooltip="Compartir
+            directorio">
             <mat-icon>folder_shared</mat-icon>
           </button>
-          <button
-            mat-mini-fab
-            (click)="openDialogDelete()"
-            *ngIf="complete_parent != null && complete_parent != ''"
-            matTooltip="Eliminar directorio"
-          >
+          <button mat-mini-fab (click)="openDialogDelete()" *ngIf="complete_parent!=null && complete_parent!=''"
+            matTooltip="Eliminar directorio">
             <mat-icon>folder_delete</mat-icon>
           </button>
-          <button
-            mat-mini-fab
-            (click)="openDialogDeleteFiles()"
-            matTooltip="Eliminar archivos"
-          >
+          <div class="divider"></div>
+          <button mat-mini-fab class="ml-2" (click)="openDialogDeleteFiles()" matTooltip="Eliminar archivos">
             <mat-icon>delete_outline</mat-icon>
           </button>
-          <br />
+          <br>
         </div>
       </div>
-      <hr class="mt-0" />
+      <hr class="mt-0">
     </div>
 
     <div class="m-2 container-data">
       <p>Archivos</p>
-      <div
-        class="container-cards"
-        *ngIf="this.DATA.length !== 0"
-        appDnd
-        (fileDropped)="upload($event)"
-      >
-        <div
-          class="card mb-3"
-          *ngFor="let i of DATA; let d = index"
-          (click)="openDialog(i)"
-        >
-          <img
-            class="card-img-top"
-            src="{{ this.imglist[d] }}"
-            alt="Card image cap"
-          />
+      <div class="container-cards" *ngIf="this.DATA.length !== 0" appDnd (fileDropped)="upload($event)">
+        <div class="card mb-3" *ngFor="let i of DATA; let d= index" (click)="openDialog(i)">
+          <img class="card-img-top" src="{{ this.imglist[d] }}" alt="Card image cap" />
           <div class="card-body">
             <h3 class="pt-2 mb-0 card-title">
               <mat-icon>chrome_reader_mode</mat-icon>{{ i.name }}
@@ -96,16 +55,14 @@
     </div>
   </div>
 
-  <div
-    class="app-data col"
-    style="justify-content: center; align-items: center"
-    *ngIf="actual == null || actual == ''"
-  >
+  <div class="app-data col" style="justify-content: center; align-items:
+    center;" *ngIf="actual==null || actual==''">
     <div class="container-title">
       <div class="row-content">
-        <div class="ml-2 row-title"></div>
+        <div class="ml-2 row-title">
+        </div>
       </div>
     </div>
-    <img class="select-img" src="../../../assets/img/bg - 2.png" alt="" />
+    <img class="select-img" src="../../../assets/img/bg - 2.png" alt="">
   </div>
 </div>

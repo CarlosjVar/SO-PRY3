@@ -60,8 +60,8 @@ import { DndDirective } from './directives/dnd.directive';
     DeleteComponent,
     MoveComponent,
     ShareComponent,
-    CopyComponent
-    DndDirective,
+    CopyComponent,
+    DndDirective
   ],
   imports: [
     BrowserModule,
