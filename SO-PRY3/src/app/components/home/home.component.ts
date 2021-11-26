@@ -282,7 +282,9 @@ export class HomeComponent implements OnInit {
     let re = /(\w+)\.(\w+)/;
     const res = current_file.name.match(re);
     const content = await current_file.text();
-
+    if (res[2] != 'txt') {
+      return;
+    }
     if (user && target != null) {
       console.log('pepito');
       let file_upload: createFile_ = {
@@ -297,7 +299,8 @@ export class HomeComponent implements OnInit {
       };
       this._fileService.createFile(file_upload).subscribe({
         next: (result: any) => {
-          window.location.reload();
+          this.toastr.success('Archivo subido correctamente', 'Éxito');
+          this.nameEventHander(null);
         },
         error: (error: any) => {
           this.toastr.error(error, 'Error');

@@ -40,7 +40,6 @@ export class DndDirective {
     let files = evt.dataTransfer.files;
     if (files.length > 0) {
       console.log(files[0]);
-      this.toastr.success('asd', 'Exito');
       this.fileDropped.emit(files);
     }
   }

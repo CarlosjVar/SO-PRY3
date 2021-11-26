@@ -192,19 +192,6 @@ def share_item_r():
     return {"msg": result[0]}
 
 
-# @directory_module.route("/api/dir/upload", methods=["POST"])
-# @cross_origin()
-# def upload_bulk():
-#     args = request.get_json()
-#     username = args["username"]
-#     target_dir = args["target_dir"]
-#     if target_dir == '':
-#         target_dir = []
-#     else:
-#         target_dir = target_dir.split("/")
-#         target_dir.reverse()
-
-#     if len(result[1]) > 0:
-#         response_data = {"errors": result[1]}
-#         return Response(result[1], status=500, mimetype='application/json')
-#     return result[0]
+@directory_module.route("/api/dir/space", methods=["POST"])
+@cross_origin()
+def get_current_space()

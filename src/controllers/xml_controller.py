@@ -207,7 +207,6 @@ def listContent(target_dir, username):
 
     print(validateName(element, "pepito2", "dir"))
     size = calc_subfolders(element)
-    print(f"El espacio de este directorio es {size}")
     directory = Directory(element.get("virtual"),
                           size, directories, files, name)
     result[0] = directory
@@ -434,3 +433,16 @@ def calc_subfolders(element):
     size += meassureSize(element)
 
     return size
+
+
+def get_current_spaceD(username):
+    tree = ET.parse(XML_PATH)
+    root = tree.getroot()
+    users = root.find("usuarios")
+    selected_user = None
+    # Searches for selected user
+    for usuario in users.findall("usuario"):
+        if (usuario.get("username") == username):
+            selected_user = usuario
+
+    # Searches for target dir
