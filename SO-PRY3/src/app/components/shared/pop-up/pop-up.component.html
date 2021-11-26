@@ -1,24 +1,24 @@
 <div mat-dialog-actions>
   <button class="close" (click)="onNoClick()" cdkFocusInitial>x</button>
 </div>
-<h2 mat-dialog-title class="mb-1"> {{data.name}}</h2>
+<h2 mat-dialog-title class="mb-1">{{ data.name }}</h2>
 <h3>¿Qué desea agregar?</h3>
-<hr>
+<hr />
 <div mat-dialog-content>
-  <br>
+  <br />
   <div class="row">
     <div class="col-6">
       <button mat-raised-button [mat-dialog-close]="1">
-        <img src="../../../../assets/img/1.png">
+        <img src="../../../../assets/img/1.png" />
         <h4>Directorio</h4>
       </button>
     </div>
     <div class="col-6">
       <button mat-raised-button [mat-dialog-close]="2">
-        <img src="../../../../assets/img/2.png">
+        <img src="../../../../assets/img/2.png" />
         <h4>Archivo</h4>
       </button>
     </div>
   </div>
-  <br>
+  <br />
 </div>

@@ -11,19 +11,20 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatCardModule} from '@angular/material/card';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatTreeModule} from '@angular/material/tree';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatSelectModule} from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import { ToastrModule } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,7 +39,7 @@ import { ReadFileComponent } from './components/files/read-file/read-file.compon
 import { DeleteComponent } from './components/shared/delete/delete.component';
 import { MoveComponent } from './components/shared/move/move.component';
 import { ShareComponent } from './components/shared/share/share.component';
-
+import { DndDirective } from './directives/dnd.directive';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ShareComponent } from './components/shared/share/share.component';
     DeleteComponent,
     MoveComponent,
     ShareComponent,
+    DndDirective,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +83,7 @@ import { ShareComponent } from './components/shared/share/share.component';
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [DatePipe],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

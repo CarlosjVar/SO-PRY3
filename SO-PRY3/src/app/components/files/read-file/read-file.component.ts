@@ -10,7 +10,7 @@ import { SharedService } from 'src/app/services/shared.service';
 import { DeleteComponent } from '../../shared/delete/delete.component';
 import { DatePipe } from '@angular/common';
 import { MoveComponent } from '../../shared/move/move.component';
-
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-read-file',
   templateUrl: './read-file.component.html',
@@ -58,12 +58,16 @@ export class ReadFileComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this._sharedService
-          .delete({items:[{
-            from_directory: this.data.target_dir,
-            target_element: this.data.name,
-            username: this.data.username,
-            type: 'file',
-          }]})
+          .delete({
+            items: [
+              {
+                from_directory: this.data.target_dir,
+                target_element: this.data.name,
+                username: this.data.username,
+                type: 'file',
+              },
+            ],
+          })
           .subscribe({
             next: (res) => {
               console.log(res);
@@ -89,7 +93,7 @@ export class ReadFileComponent implements OnInit {
       .modifyFile({
         username: this.data.username,
         name: this.data.name,
-        old_name:  this.data.name,
+        old_name: this.data.name,
         ext: this.data.ext,
         date_created: this.data.date_created,
         date_modified: date,
@@ -108,12 +112,12 @@ export class ReadFileComponent implements OnInit {
       });
   }
 
-  cancelarEdit():void{
+  cancelarEdit(): void {
     this.edit = !this.edit;
     this.data.content = this.content_;
   }
 
-  move():void{
+  move(): void {
     const dialogRef = this.dialog.open(MoveComponent, {
       width: '60vh',
       data: {
@@ -130,5 +134,7 @@ export class ReadFileComponent implements OnInit {
       }
     });
   }
-
+  onDownload() {
+    console.log(this.data);
+  }
 }
