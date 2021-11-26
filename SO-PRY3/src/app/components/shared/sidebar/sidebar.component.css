@@ -119,3 +119,17 @@ button.mat-focus-indicator.b-principal.mat-raised-button.mat-button-base.mat-but
     flex-direction: column;
     align-items: center;
 }
+
+.gif-c{
+    width: 50%;
+}
+
+.container-img{
+    display: flex;
+    justify-content: center;
+}
+
+mat-tree.mat-tree.cdk-tree.example-tree {
+    overflow-y: auto;
+    max-height: 240px;
+}
