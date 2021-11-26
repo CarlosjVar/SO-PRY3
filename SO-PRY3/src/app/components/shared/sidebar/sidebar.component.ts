@@ -13,6 +13,7 @@ import { CreateFileComponent } from '../../files/create-file/create-file.compone
 import { CreateDirComponent } from '../../directories/create-dir/create-dir.component';
 import { FilesService } from 'src/app/services/files.service';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 interface ExampleFlatNode {
   expandable: boolean;
@@ -68,6 +69,7 @@ export class SidebarComponent implements OnInit {
   constructor(
     private _dirService: DirectoriesService,
     private _fileService: FilesService,
+    private toastr: ToastrService,
     private datePipe: DatePipe,
     private router: Router,
     public dialog: MatDialog
@@ -134,7 +136,8 @@ export class SidebarComponent implements OnInit {
           this.TREE_DATA = res.directories;
           this.dataSource.data = this.TREE_DATA;
         },
-        error: (errors: Error) => {
+        error: (errors) => {
+          this.toastr.success(errors, 'Error');
           console.log(errors);
         },
       });
@@ -161,7 +164,8 @@ export class SidebarComponent implements OnInit {
       next: (res) => {
         this.TREE_DATA = res.directories;
       },
-      error: (errors: Error) => {
+      error: (errors) => {
+        this.toastr.error(errors, 'Error');
         console.log(errors);
       },
     });
@@ -185,7 +189,8 @@ export class SidebarComponent implements OnInit {
       next: (res) => {
         this.TREE_DATA = res.directories;
       },
-      error: (errors: Error) => {
+      error: (errors) => {
+        this.toastr.error(errors.error);
         console.log(errors);
       },
     });
@@ -235,8 +240,10 @@ export class SidebarComponent implements OnInit {
           .subscribe({
             next: (res) => {
               this.onNameChange();
-              if(this.actual_size!=null){
-                this.actual_size=(parseInt(this.actual_size)+size).toString();
+              if (this.actual_size != null) {
+                this.actual_size = (
+                  parseInt(this.actual_size) + size
+                ).toString();
                 this.calculateSpace();
               }
             },
@@ -285,11 +292,9 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  isInSharedFiles():boolean{
-    if(this.actual=="My shared files")
-      return true
-    if(this.complete_parent?.includes("My shared files"))
-      return true
+  isInSharedFiles(): boolean {
+    if (this.actual == 'My shared files') return true;
+    if (this.complete_parent?.includes('My shared files')) return true;
     return false;
   }
 }
