@@ -33,6 +33,7 @@ export class CopyComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  
   onMove(): void {
     if (this.data.actual_dir.endsWith('/'))
       this.data.actual_dir = this.data.actual_dir.substring(

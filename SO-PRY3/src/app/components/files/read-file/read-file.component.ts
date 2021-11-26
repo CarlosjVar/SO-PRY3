@@ -96,28 +96,40 @@ export class ReadFileComponent implements OnInit {
   guardarEdit(): void {
     this.myDate = new Date();
     let date = this.datePipe.transform(Date.now(), 'medium');
-    this._fileService
-      .modifyFile({
-        username: this.data.username,
-        name: this.data.name,
-        old_name: this.data.name,
-        ext: this.data.ext,
-        date_created: this.data.date_created,
-        date_modified: date,
-        content: this.data.content,
-        target_dir: this.data.target_dir,
-        size: unescape(encodeURIComponent(this.data.content)).length.toString(),
-      })
-      .subscribe({
-        next: (res) => {
-          this.edit = !this.edit;
-          this.salida = 2;
-        },
-        error: (err) => {
-          this.toastr.error(err, 'Error');
-          console.log(err);
-        },
-      });
+
+    if (
+      this.isEnoughSpace(unescape(encodeURIComponent(this.data.content)).length)
+    )
+      this._fileService
+        .modifyFile({
+          username: this.data.username,
+          name: this.data.name,
+          old_name: this.data.name,
+          ext: this.data.ext,
+          date_created: this.data.date_created,
+          date_modified: date,
+          content: this.data.content,
+          target_dir: this.data.target_dir,
+          size: unescape(
+            encodeURIComponent(this.data.content)
+          ).length.toString(),
+        })
+        .subscribe({
+          next: (res) => {
+            this.edit = !this.edit;
+            this.salida = 2;
+          },
+          error: (err) => {
+            this.toastr.error(err, 'Error');
+            console.log(err);
+          },
+        });
+    else {
+      this.toastr.error(
+        'No hay suficiente espacio para realizar la acción',
+        'ERROR'
+      );
+    }
   }
 
   cancelarEdit(): void {
@@ -160,27 +172,49 @@ export class ReadFileComponent implements OnInit {
   }
 
   copy(): void {
-    const dialogRef = this.dialog.open(CopyComponent, {
-      width: '60vh',
-      data: {
-        user: this.data.username,
-        name: this.data.name,
-        type: 'archivo',
-        a_type: 'file',
-        actual_dir: this.data.target_dir,
-      },
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        window.location.reload();
-      }
-    });
+    console.log(parseInt(this.data.size));
+    if (this.isEnoughSpace(parseInt(this.data.size))){
+      const dialogRef = this.dialog.open(CopyComponent, {
+        width: '60vh',
+        data: {
+          user: this.data.username,
+          name: this.data.name,
+          type: 'archivo',
+          a_type: 'file',
+          actual_dir: this.data.target_dir,
+        },
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          window.location.reload();
+        }
+      });
+    }
+    else {
+      this.toastr.error(
+        'No hay suficiente espacio para realizar la acción',
+        'ERROR'
+      );
+    }
   }
+
   onDownload() {
     console.log(this.data);
     var blob = new Blob([this.data.content], {
       type: 'text/plain;charset=utf-8',
     });
     FileSaver.saveAs(blob, this.data.name);
+  }
+
+  isEnoughSpace(val: number): boolean {
+    let max_size = localStorage.getItem('max_drive_size');
+    let actual_size = localStorage.getItem('actual_size');
+    if (max_size != null && actual_size != null) {
+      let total_s = parseInt(max_size);
+      let actual_s = parseInt(actual_size);
+      actual_s += val;
+      if (actual_s > total_s) return false;
+    }
+    return true;
   }
 }

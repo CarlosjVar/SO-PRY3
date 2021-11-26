@@ -28,6 +28,8 @@ export class HomeComponent implements OnInit {
   imglist: string[] = [];
   max_size: string | null = '';
   size_: string | null = '';
+  dirsize_ : string = '';
+
   constructor(
     private _dirService: DirectoriesService,
     public dialog: MatDialog,
@@ -46,6 +48,18 @@ export class HomeComponent implements OnInit {
     this.max_size = localStorage.getItem('max_drive_size');
     this.getActualSize();
   }
+
+  isEnoughSpace(val: number): boolean {
+    let max_size = localStorage.getItem('max_drive_size');
+    let actual_size = localStorage.getItem('actual_size');
+    if (max_size != null && actual_size != null) {
+      let total_s = parseInt(max_size);
+      let actual_s = parseInt(actual_size);
+      actual_s += val;
+      if (actual_s > total_s) return false;
+    }
+    return true;
+  }
   getActualSize() {
     this._sharedService.size({ username: this.name }).subscribe({
       next: (res) => {
@@ -62,6 +76,7 @@ export class HomeComponent implements OnInit {
           complete: () => {},
           next: (res) => {
             this.DATA = res.files;
+            this.dirsize_ = res.size;
           },
           error: (errors: any) => {
             console.log(errors);
@@ -90,6 +105,7 @@ export class HomeComponent implements OnInit {
             if (this.DATA.length > this.imglist.length) this.chooseImg();
           },
           next: (res) => {
+            this.dirsize_ = res.size;
             this.DATA = res.files;
           },
           error: (errors: Error) => {
@@ -124,7 +140,7 @@ export class HomeComponent implements OnInit {
               complete: () => {},
               next: (res) => {
                 this.DATA = res.files;
-                console.log(res);
+                this.dirsize_ = res.size;
               },
               error: (errors: Error) => {
                 console.log(errors);
@@ -139,6 +155,7 @@ export class HomeComponent implements OnInit {
               complete: () => {},
               next: (res) => {
                 this.DATA = res.files;
+                this.dirsize_ = res.size;
                 console.log(this.DATA);
               },
               error: (errors: Error) => {
@@ -274,21 +291,29 @@ export class HomeComponent implements OnInit {
   }
 
   openDialogCopy(): void {
-    const dialogRef = this.dialog.open(CopyComponent, {
-      width: '60vh',
-      data: {
-        user: this.name,
-        name: this.actual,
-        type: 'directorio',
-        a_type: 'dir',
-        actual_dir: this.complete_parent,
-      },
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        window.location.reload();
-      }
-    });
+    if(this.isEnoughSpace(parseInt(this.dirsize_))){
+      const dialogRef = this.dialog.open(CopyComponent, {
+        width: '60vh',
+        data: {
+          user: this.name,
+          name: this.actual,
+          type: 'directorio',
+          a_type: 'dir',
+          actual_dir: this.complete_parent,
+        },
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          window.location.reload();
+        }
+      });
+    }
+    else {
+      this.toastr.error(
+        'No hay suficiente espacio para realizar la acción',
+        'ERROR'
+      );
+    }
   }
 
   chooseImg(): void {
