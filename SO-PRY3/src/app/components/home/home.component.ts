@@ -141,13 +141,14 @@ export class HomeComponent implements OnInit {
               next: (res) => {
                 this.DATA = res.files;
                 this.dirsize_ = res.size;
+                this.getActualSize();
               },
               error: (errors: Error) => {
                 console.log(errors);
               },
             });
       }
-      if (result == 2) {
+      else if (result == 2) {
         if (this.complete_parent != null && this.actual != null)
           this._dirService
             .getInside(this.name, this.complete_parent + this.actual)
@@ -157,11 +158,15 @@ export class HomeComponent implements OnInit {
                 this.DATA = res.files;
                 this.dirsize_ = res.size;
                 console.log(this.DATA);
+                this.getActualSize();
               },
               error: (errors: Error) => {
                 console.log(errors);
               },
             });
+      }
+      else{
+        this.getActualSize();
       }
     });
   }

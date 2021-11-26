@@ -132,10 +132,8 @@
                     <file name="1" ext="1" date_created="Nov 25, 2021, 3:12:15 PM" date_modified="Nov 25, 2021, 3:12:15 PM" size="1" content="f" />
                     <dir virtual="Gato2" />
                 </dir>
-                <file name="1" ext="1" date_created="Nov 25, 2021, 3:12:15 PM" date_modified="Nov 25, 2021, 3:12:15 PM" size="1" content="f" />
-                <file name="3" ext="3" date_created="Nov 25, 2021, 3:12:19 PM" date_modified="Nov 25, 2021, 3:12:19 PM" size="1" content="f" />
+                <file name="1" ext="1" date_created="Nov 25, 2021, 3:12:15 PM" date_modified="Nov 25, 2021, 9:55:22 PM" size="2" content="fg" old_name="1" />
                 <file name="g" ext="g" date_created="Nov 25, 2021, 3:12:27 PM" date_modified="Nov 25, 2021, 3:12:27 PM" size="1" content="g" />
-                <file name="f" ext="f" date_created="Nov 25, 2021, 3:12:31 PM" date_modified="Nov 25, 2021, 3:12:31 PM" size="1" content="f" />
                 <file name="d" ext="d" date_created="Nov 25, 2021, 3:12:42 PM" date_modified="Nov 25, 2021, 3:12:42 PM" size="1" content="d" />
                 <dir virtual="Gato2" />
                 <dir virtual="Gato3" />
