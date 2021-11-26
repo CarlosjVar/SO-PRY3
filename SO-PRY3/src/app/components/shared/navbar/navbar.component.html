@@ -35,6 +35,9 @@
   <img src="../../../assets/img/logo-3.png">
 
   <span class="example-spacer"></span>
+  <div class="name mr-2 row">
+    <p class="p mb-0 pr-2"><mat-icon>person</mat-icon>{{this.username}}</p>    
+  </div> 
   <span class="mr-2"></span>
   <button  mat-flat-button color="full" [routerLinkActive]="['active']" (click)="logout()">Cerrar Sesión</button>
 </mat-toolbar>

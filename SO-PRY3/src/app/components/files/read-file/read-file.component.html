@@ -1,29 +1,25 @@
 <div *ngIf="!this.edit">
-  <div mat-dialog-actions>
-    <button class="close mr-1" [matMenuTriggerFor]="belowMenu">
-      <mat-icon>more_horiz</mat-icon>
-    </button>
-    <mat-menu class="my-class" #belowMenu="matMenu" yPosition="below">
-      <button mat-menu-item (click)="editMode()">Editar</button>
-      <button mat-menu-item (click)="openDialogDelete()">Eliminar</button>
-      <button mat-menu-item (click)="move()">Mover</button>
-      <button mat-menu-item (click)="onNoClick()">Copiar</button>
-      <button mat-menu-item (click)="onNoClick()">Compartir</button>
+    <div mat-dialog-actions>
+        <button class="close mr-1" [matMenuTriggerFor]="belowMenu">
+            <mat-icon>more_horiz</mat-icon>
+        </button>
+        <mat-menu class="my-class" #belowMenu="matMenu" yPosition="below">
+            <button mat-menu-item (click)="editMode()">Editar</button>
+            <button mat-menu-item (click)="openDialogDelete()">Eliminar</button>
+            <button mat-menu-item (click)="move()">Mover</button>
+            <button mat-menu-item (click)="copy()">Copiar</button>
+            <button mat-menu-item (click)="share()">Compartir</button>
+        </mat-menu>
+        <button class="close mr-1" #tooltip="matTooltip"
+            (click)="tooltip.show()" matTooltip="{{this.info}}"
+            matTooltipClass="example-tooltip-red">
+            <mat-icon>info_outline</mat-icon>
+        </button>
+        <button class="close" (click)="onNoClick()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
       <button mat-menu-item (click)="onDownload()">Descargar</button>
-    </mat-menu>
-    <button
-      class="close mr-1"
-      #tooltip="matTooltip"
-      (click)="tooltip.show()"
-      matTooltip="{{ this.info }}"
-      matTooltipClass="example-tooltip-red"
-    >
-      <mat-icon>info_outline</mat-icon>
-    </button>
-    <button class="close" (click)="onNoClick()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
 
   <div class="text">
     <h2 mat-dialog-title>

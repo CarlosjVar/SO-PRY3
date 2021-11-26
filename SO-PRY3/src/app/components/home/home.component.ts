@@ -8,6 +8,8 @@ import { SharedService } from 'src/app/services/shared.service';
 import { MoveComponent } from '../shared/move/move.component';
 import { ToastrService } from 'ngx-toastr';
 import { ShareComponent } from '../shared/share/share.component';
+import { CopyComponent } from '../shared/copy/copy.component';
+
 import { FilesService } from 'src/app/services/files.service';
 import { DatePipe } from '@angular/common';
 @Component({
@@ -24,7 +26,8 @@ export class HomeComponent implements OnInit {
   parent: string | null;
   public DATA!: createFile_[];
   imglist: string[] = [];
-  fileReader: FileReader = new FileReader();
+  max_size: string | null = "";
+
   constructor(
     private _dirService: DirectoriesService,
     public dialog: MatDialog,
@@ -40,6 +43,7 @@ export class HomeComponent implements OnInit {
     this.complete_parent = '';
     this.parent = '';
     this.DATA = [];
+    this.max_size = localStorage.getItem('max_drive_size');
   }
 
   cargarArchivos() {
@@ -103,7 +107,7 @@ export class HomeComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result == 1) {
+      if (result == 1) { //eliminar
         if (this.complete_parent != null && this.actual != null)
           this._dirService
             .getInside(this.name, this.complete_parent + this.actual)
@@ -111,7 +115,7 @@ export class HomeComponent implements OnInit {
               complete: () => {},
               next: (res) => {
                 this.DATA = res.files;
-                console.log(this.DATA);
+                console.log(res);
               },
               error: (errors: Error) => {
                 console.log(errors);
@@ -244,20 +248,42 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openDialogShare(): void {
+  openDialogShare():void{
+    let dir = this.complete_parent;
+    if(this.complete_parent!=null && this.complete_parent.endsWith("/"))
+      dir=this.complete_parent.substring(0,this.complete_parent.length-1);
     const dialogRef = this.dialog.open(ShareComponent, {
       width: '100vh',
       data: {
-        from_directory: this.complete_parent,
-        target_element: this.actual,
-        username: this.name,
-        target_username: '',
-        type: 'dir',
+        from_directory:dir,
+        target_element:this.actual,
+        username:this.name,
+        target_username:"",
+        type:"dir",
+        },
+    });
+  }
+
+  openDialogCopy(): void {
+    const dialogRef = this.dialog.open(CopyComponent, {
+      width: '60vh',
+      data: {
+        user: this.name,
+        name: this.actual,
+        type: 'directorio',
+        a_type: 'dir',
+        actual_dir: this.complete_parent,
       },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        window.location.reload();
+      }
     });
   }
 
   chooseImg(): void {
+    this.imglist=[];
     let cont = 3;
     for (let index = 0; index < this.DATA.length; index++) {
       this.imglist.push('../../../assets/img/' + cont.toString() + '.png');

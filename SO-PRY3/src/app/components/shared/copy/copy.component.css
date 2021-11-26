@@ -1,3 +1,13 @@
+*{
+    text-align: center;
+}
+
+
+.gif{
+    width: 30%;
+}
+
+
 .mat-dialog-actions{
     display: flex;
     justify-content: flex-end;
@@ -9,9 +19,7 @@
     text-decoration: none;
     color: #A5A5A5;
 }
-h4{
-    color: #495057; 
-}
-.gif{
-    width: 40%;
+
+button.mat-focus-indicator.mat-stroked-button.mat-button-base.mat-full{
+    color: white !important;
 }

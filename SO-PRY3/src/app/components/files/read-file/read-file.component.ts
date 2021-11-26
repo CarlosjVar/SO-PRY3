@@ -10,6 +10,9 @@ import { SharedService } from 'src/app/services/shared.service';
 import { DeleteComponent } from '../../shared/delete/delete.component';
 import { DatePipe } from '@angular/common';
 import { MoveComponent } from '../../shared/move/move.component';
+import { ShareComponent } from '../../shared/share/share.component';
+import { CopyComponent } from '../../shared/copy/copy.component';
+
 import { saveAs } from 'file-saver';
 import * as FileSaver from 'file-saver';
 @Component({
@@ -120,6 +123,40 @@ export class ReadFileComponent implements OnInit {
 
   move(): void {
     const dialogRef = this.dialog.open(MoveComponent, {
+      width: '60vh',
+      data: {
+        user: this.data.username,
+        name: this.data.name,
+        type: 'archivo',
+        a_type: 'file',
+        actual_dir: this.data.target_dir,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        window.location.reload();
+      }
+    });
+  }
+
+  share():void{
+    let dir = this.data.target_dir;
+    if(this.data.target_dir!=null && this.data.target_dir.endsWith("/"))
+      dir=this.data.target_dir.substring(0,this.data.target_dir.length-1);
+    const dialogRef = this.dialog.open(ShareComponent, {
+      width: '90vh',
+      data: {
+        from_directory:dir,
+        target_element:this.data.name,
+        username:this.data.username,
+        target_username:"",
+        type:"file",
+        },
+    });
+  }
+
+  copy():void{
+    const dialogRef = this.dialog.open(CopyComponent, {
       width: '60vh',
       data: {
         user: this.data.username,

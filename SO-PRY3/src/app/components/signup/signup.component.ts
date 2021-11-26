@@ -35,6 +35,7 @@ export class SignupComponent implements OnInit {
  
     this._userService.signUp(this.newUser).subscribe({
       complete: () => { localStorage.setItem('username', this.username);
+      localStorage.setItem('max_drive_size', this.username);
       this.router.navigate(['/', 'my-drive']);  }, // completeHandler
       error: () => { console.log("error") },    // errorHandler 
     })

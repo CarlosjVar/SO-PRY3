@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  username :string | null= "";
   constructor( private router: Router ) { 
   }
 
@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   }
 
   hasRoute(route: string) {
+    this.username = localStorage.getItem("username");
     return this.router.url.includes(route);
   }
 

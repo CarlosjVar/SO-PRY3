@@ -19,10 +19,11 @@ app-sidebar {
 }
 
 .app-data {
-  width: calc(100vh - 40vh);
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
+    width: calc(100vh - 40vh);
+    height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
 }
 
 .container-data p {
@@ -176,4 +177,17 @@ img.cookies {
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
   }
+}
+
+
+.divider{
+    width: 1vh;
+    height: 100%;
+    border-right: 1px solid rgba(190, 190, 190, 0.521);
+}
+
+app-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

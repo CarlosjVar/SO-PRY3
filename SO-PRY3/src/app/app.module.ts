@@ -25,6 +25,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -39,6 +40,7 @@ import { ReadFileComponent } from './components/files/read-file/read-file.compon
 import { DeleteComponent } from './components/shared/delete/delete.component';
 import { MoveComponent } from './components/shared/move/move.component';
 import { ShareComponent } from './components/shared/share/share.component';
+import { CopyComponent } from './components/shared/copy/copy.component';
 import { DndDirective } from './directives/dnd.directive';
 
 @NgModule({
@@ -58,6 +60,7 @@ import { DndDirective } from './directives/dnd.directive';
     DeleteComponent,
     MoveComponent,
     ShareComponent,
+    CopyComponent
     DndDirective,
   ],
   imports: [
@@ -82,6 +85,7 @@ import { DndDirective } from './directives/dnd.directive';
     MatSelectModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
+    MatProgressBarModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

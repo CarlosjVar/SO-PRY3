@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {  MatTreeFlatDataSource,  MatTreeFlattener } from '@angular/material/tree';
+import {
+  MatTreeFlatDataSource,
+  MatTreeFlattener,
+} from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { DirectoriesService } from 'src/app/services/directories.service';
 import { Router } from '@angular/router';
@@ -32,6 +35,9 @@ export class SidebarComponent implements OnInit {
   actual: string = '';
   complete_parent: string = '';
   myDate: Date | undefined;
+  max_size: string | null = '';
+  actual_size: string | null = '';
+  result: number = 0;
 
   private _transformer = (node: Directory, level: number) => {
     return {
@@ -67,14 +73,40 @@ export class SidebarComponent implements OnInit {
     this._dirService.geDirectories(this.name).subscribe({
       complete: () => {
         this.dataSource.data = this.TREE_DATA;
+        this.max_size = localStorage.getItem('max_drive_size');
+        this.calculateSpace();
+        console.log(this.result);
       },
       next: (res) => {
         this.TREE_DATA = res.directories;
+        this.actual_size = res.size;
+        localStorage.setItem('actual_size', res.size);
+        console.log(res);
       },
       error: (errors: Error) => {
         console.log(errors);
       },
     });
+  }
+
+  isEnoughSpace(val: number): boolean {
+    if (this.max_size != null && this.actual_size != null) {
+      let total_s = parseInt(this.max_size);
+      let actual_s = parseInt(this.actual_size);
+      actual_s += val;
+      if (actual_s > total_s) return false;
+    }
+    return true;
+  }
+
+  calculateSpace() {
+    if (this.max_size != null && this.actual_size != null) {
+      let total_s = parseInt(this.max_size);
+      let actual_s = parseInt(this.actual_size);
+      console.log(this.actual_size);
+      console.log(actual_s);
+      this.result = (actual_s * 100) / total_s;
+    }
   }
 
   ngOnInit(): void {}
@@ -89,7 +121,7 @@ export class SidebarComponent implements OnInit {
         localStorage.setItem('actual', this.actual);
         localStorage.setItem('complete_parent', this.complete_parent);
         localStorage.setItem('parent', this.parent);
-        this.onNameChange ();
+        this.onNameChange();
       }
     });
     this._dirService
@@ -124,7 +156,7 @@ export class SidebarComponent implements OnInit {
         this.parent = this.complete_parent;
         this.checkCompleteParent();
         this.dataSource.data = this.TREE_DATA;
-        this.onNameChange ();
+        this.onNameChange();
       },
       next: (res) => {
         this.TREE_DATA = res.directories;
@@ -148,7 +180,7 @@ export class SidebarComponent implements OnInit {
         this.actual = name_;
         this.complete_parent = path_;
         this.checkCompleteParent();
-        this.onNameChange ();
+        this.onNameChange();
       },
       next: (res) => {
         this.TREE_DATA = res.directories;
@@ -187,25 +219,31 @@ export class SidebarComponent implements OnInit {
       }
       this.myDate = new Date();
       let date = this.datePipe.transform(Date.now(), 'medium');
-      this._fileService
-        .createFile({
-          username: this.name,
-          name: result.name,
-          ext: ext,
-          date_created: date,
-          date_modified: date,
-          content: result.content,
-          target_dir: this.complete_parent + this.actual,
-          size: unescape(encodeURIComponent(result.content)).length.toString(),
-        })
-        .subscribe({
-          next: (res) => {
-            this.onNameChange ();
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
+      let size = unescape(encodeURIComponent(result.content)).length;
+      if (this.isEnoughSpace(size))
+        this._fileService
+          .createFile({
+            username: this.name,
+            name: result.name,
+            ext: ext,
+            date_created: date,
+            date_modified: date,
+            content: result.content,
+            target_dir: this.complete_parent + this.actual,
+            size: size.toString(),
+          })
+          .subscribe({
+            next: (res) => {
+              this.onNameChange();
+              if(this.actual_size!=null){
+                this.actual_size=(parseInt(this.actual_size)+size).toString();
+                this.calculateSpace();
+              }
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
     });
   }
 
@@ -232,19 +270,26 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  onNameChange () {
+  onNameChange() {
     localStorage.setItem('actual', this.actual);
     localStorage.setItem('complete_parent', this.complete_parent);
     localStorage.setItem('parent', this.parent);
     this.nameEvent.emit(this.actual);
   }
 
-  checkCompleteParent(){
-    if(this.complete_parent!= null && this.complete_parent!=""){
+  checkCompleteParent() {
+    if (this.complete_parent != null && this.complete_parent != '') {
       if (!this.complete_parent.endsWith('/')) {
-        this.complete_parent = this.complete_parent+"/";
+        this.complete_parent = this.complete_parent + '/';
       }
     }
   }
 
+  isInSharedFiles():boolean{
+    if(this.actual=="My shared files")
+      return true
+    if(this.complete_parent?.includes("My shared files"))
+      return true
+    return false;
+  }
 }

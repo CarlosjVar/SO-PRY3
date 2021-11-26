@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     this._userService.logIn(this.newUser).subscribe({
       next: (user: UserLogin) => {
         localStorage.setItem('username', user.username);
+        localStorage.setItem('max_drive_size', user.max_drive_size.toString());
         this.router.navigate(['/', 'my-drive']);
         this.toastr.success("Sesión iniciada con éxito","Bienvenido")
       }, // completeHandler
