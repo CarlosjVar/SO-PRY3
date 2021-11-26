@@ -10,19 +10,22 @@ directory_module = Blueprint('directory_module', __name__)
 @cross_origin()
 def create_dir():
 
-    args = request.get_json()
-    username = args["username"]
-    target_dir = args["target_dir"]
-    if target_dir == '':
-        target_dir = []
-    else:
-        target_dir = target_dir.split("/")
-        target_dir.reverse()
-    result = xml_write(username, "dir", target_dir, args)
-    if len(result[1]) > 0:
-        response_data = {"errors": result[1]}
-        return Response(result[1], status=500, mimetype='application/json')
-    return (result[0].toJson())
+    try:
+        args = request.get_json()
+        username = args["username"]
+        target_dir = args["target_dir"]
+        if target_dir == '':
+            target_dir = []
+        else:
+            target_dir = target_dir.split("/")
+            target_dir.reverse()
+        result = xml_write(username, "dir", target_dir, args)
+        if len(result[1]) > 0:
+            response_data = {"errors": result[1][0]}
+            return Response(result[1], status=500, mimetype='application/json')
+        return (result[0].toJson())
+    except:
+        return {"errors": "Ocurrió un error al crear la carpeta, por favor revise sus datos"}
 
 
 @directory_module.route("/api/file/create", methods=["POST"])
@@ -154,7 +157,7 @@ def get_current_space():
     if len(result[1]) > 0:
         response_data = {"errors": result[1]}
         return Response(result[1], status=500, mimetype='application/json')
-    return {"msg":result[0]}
+    return {"msg": result[0]}
 
 
 @directory_module.route("/api/dir/move", methods=["POST"])
@@ -202,4 +205,3 @@ def share_item_r():
         response_data = {"errors": result[1]}
         return Response(result[1], status=500, mimetype='application/json')
     return {"msg": result[0]}
-

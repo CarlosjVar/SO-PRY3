@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   parent: string | null;
   public DATA!: createFile_[];
   imglist: string[] = [];
-  max_size: string | null = "";
+  max_size: string | null = '';
 
   constructor(
     private _dirService: DirectoriesService,
@@ -54,10 +54,10 @@ export class HomeComponent implements OnInit {
           complete: () => {},
           next: (res) => {
             this.DATA = res.files;
-            console.log(this.DATA);
           },
-          error: (errors: Error) => {
+          error: (errors: any) => {
             console.log(errors);
+            this.toastr.error(errors, 'Error');
           },
         });
   }
@@ -107,7 +107,8 @@ export class HomeComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result == 1) { //eliminar
+      if (result == 1) {
+        //eliminar
         if (this.complete_parent != null && this.actual != null)
           this._dirService
             .getInside(this.name, this.complete_parent + this.actual)
@@ -248,19 +249,19 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openDialogShare():void{
+  openDialogShare(): void {
     let dir = this.complete_parent;
-    if(this.complete_parent!=null && this.complete_parent.endsWith("/"))
-      dir=this.complete_parent.substring(0,this.complete_parent.length-1);
+    if (this.complete_parent != null && this.complete_parent.endsWith('/'))
+      dir = this.complete_parent.substring(0, this.complete_parent.length - 1);
     const dialogRef = this.dialog.open(ShareComponent, {
       width: '100vh',
       data: {
-        from_directory:dir,
-        target_element:this.actual,
-        username:this.name,
-        target_username:"",
-        type:"dir",
-        },
+        from_directory: dir,
+        target_element: this.actual,
+        username: this.name,
+        target_username: '',
+        type: 'dir',
+      },
     });
   }
 
@@ -283,7 +284,7 @@ export class HomeComponent implements OnInit {
   }
 
   chooseImg(): void {
-    this.imglist=[];
+    this.imglist = [];
     let cont = 3;
     for (let index = 0; index < this.DATA.length; index++) {
       this.imglist.push('../../../assets/img/' + cont.toString() + '.png');

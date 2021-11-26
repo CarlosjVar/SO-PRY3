@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { createFile_ } from 'src/app/models/File.model';
 import { SharedService } from 'src/app/services/shared.service';
 
@@ -21,6 +22,7 @@ export class MoveComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<MoveComponent>,
     private _sharedService: SharedService,
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
     this.data.new_direction = this.data.actual_dir;
@@ -33,8 +35,11 @@ export class MoveComponent implements OnInit {
   ngOnInit(): void {}
 
   onMove(): void {
-    if(this.data.actual_dir.endsWith("/"))
-    this.data.actual_dir= this.data.actual_dir.substring(0,this.data.actual_dir.length-1);
+    if (this.data.actual_dir.endsWith('/'))
+      this.data.actual_dir = this.data.actual_dir.substring(
+        0,
+        this.data.actual_dir.length - 1
+      );
     this._sharedService
       .move({
         from_directory: this.data.actual_dir,
@@ -49,7 +54,7 @@ export class MoveComponent implements OnInit {
           this.dialogRef.close(true);
         },
         error: (err) => {
-          console.log(err);
+          this.toastr.error(err.error);
         },
       });
   }

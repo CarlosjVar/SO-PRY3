@@ -15,6 +15,7 @@ import { CopyComponent } from '../../shared/copy/copy.component';
 
 import { saveAs } from 'file-saver';
 import * as FileSaver from 'file-saver';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-read-file',
   templateUrl: './read-file.component.html',
@@ -34,7 +35,8 @@ export class ReadFileComponent implements OnInit {
     public dialog: MatDialog,
     private datePipe: DatePipe,
     private _sharedService: SharedService,
-    private _fileService: FilesService
+    private _fileService: FilesService,
+    private toastr: ToastrService
   ) {
     this.info =
       'Extensión: ' +
@@ -78,6 +80,7 @@ export class ReadFileComponent implements OnInit {
               this.dialogRef.close(1);
             },
             error: (err) => {
+              this.toastr.error(err, 'Error');
               console.log(err);
             },
           });
@@ -111,6 +114,7 @@ export class ReadFileComponent implements OnInit {
           this.salida = 2;
         },
         error: (err) => {
+          this.toastr.error(err, 'Error');
           console.log(err);
         },
       });
@@ -139,23 +143,23 @@ export class ReadFileComponent implements OnInit {
     });
   }
 
-  share():void{
+  share(): void {
     let dir = this.data.target_dir;
-    if(this.data.target_dir!=null && this.data.target_dir.endsWith("/"))
-      dir=this.data.target_dir.substring(0,this.data.target_dir.length-1);
+    if (this.data.target_dir != null && this.data.target_dir.endsWith('/'))
+      dir = this.data.target_dir.substring(0, this.data.target_dir.length - 1);
     const dialogRef = this.dialog.open(ShareComponent, {
       width: '90vh',
       data: {
-        from_directory:dir,
-        target_element:this.data.name,
-        username:this.data.username,
-        target_username:"",
-        type:"file",
-        },
+        from_directory: dir,
+        target_element: this.data.name,
+        username: this.data.username,
+        target_username: '',
+        type: 'file',
+      },
     });
   }
 
-  copy():void{
+  copy(): void {
     const dialogRef = this.dialog.open(CopyComponent, {
       width: '60vh',
       data: {

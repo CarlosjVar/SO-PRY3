@@ -61,20 +61,72 @@
 
             </dir>
         </usuario>
-        <usuario username="Titovare" password="titovare">
+        <usuario username="Titovare" password="titovare" size="2000">
             <dir virtual="Drive mio">
-                <dir virtual="Scripts" />
+                <dir virtual="Scripts"><file name="asd.ryr" ext="ryr" date_created="Nov 25, 2021, 6:31:05 PM" date_modified="Nov 25, 2021, 6:31:05 PM" size="3" content="123" />
+                </dir>
                 <file name="Velvet.txt" ext="txt" date_created="Nov 24, 2021, 10:08:16 PM" date_modified="Nov 24, 2021, 10:08:16 PM" size="29" content="Velvet es en efecto muy guapo" />
-                <file name="Archivito.txt" ext="txt" date_created="Nov 25, 2021, 5:56:24 PM" date_modified="Nov 25, 2021, 5:56:24 PM" size="8" content="pitotito" />
-                <file name="asd-.xtx" ext="xtx" date_created="Nov 25, 2021, 6:17:44 PM" date_modified="Nov 25, 2021, 6:17:44 PM" size="3" content="asd" />
+                <file name="asd-.xtx" ext="xtx" date_created="Nov 25, 2021, 6:17:44 PM" date_modified="Nov 25, 2021, 8:38:17 PM" size="5" content="assdg" old_name="asd-.xtx" />
                 <file name="vpn" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" />
                 <file name="vpn.txt" ext="txt" date_created="Nov 18, 2021, 12:44:44 PM" date_modified="Nov 18, 2021, 12:44:44 PM" size="48" content="anyconnect&#13;&#10;TEC&#13;&#10;ITCRfod2021*&#13;&#10;VM&#13;&#10;tec&#13;&#10;T3c2021I" />
                 <file name="clases.txt" ext="txt" date_created="Sep 17, 2021, 10:32:06 AM" date_modified="Sep 17, 2021, 10:32:06 AM" size="624" content="Aseguramiento:&#13;&#10;https://us02web.zoom.us/j/5227074585?pwd=eW5pdXJIblljNkJTRVQ0VzB3YXBJdz09&#13;&#10;TEC1971&#13;&#10;&#13;&#10;&#13;&#10;Recuperaci&#243;n:https://itcr.zoom.us/j/89801872249?pwd=MjhDYmlqS3VDcW1tYXh1ZWlyYS9pZz09&#13;&#10;&#13;&#10;CompuSociedad: &#160;https://itcr.zoom.us/j/86907217840?pwd=aHJGR3pPSXJrWkJPTDBVR3Q0ekY4dz09&#13;&#10;&#13;&#10;Seminario:&#13;&#10;https://itcr.zoom.us/j/83078921971?pwd=a2dqR1pHTVZiUm00bWZ5UHlaTVFCZz09&#13;&#10;SEC 1&#13;&#10;&#13;&#10;Sistemas:&#13;&#10;https://itcr.zoom.us/j/87853145631?pwd=SOG02&#13;&#10;&#13;&#10;IO:&#13;&#10;https://us02web.zoom.us/j/84792661685&#13;&#10;&#13;&#10;Recuperaci&#243;n:&#13;&#10;https://itcr.zoom.us/j/89801872249?pwd=MjhDYmlqS3VDcW1tYXh1ZWlyYS9pZz09&#13;&#10;&#13;&#10;Asistencia:&#13;&#10;https://us06web.zoom.us/j/2929827910" />
-                <file name="asd.ryr" ext="ryr" date_created="Nov 25, 2021, 6:31:05 PM" date_modified="Nov 25, 2021, 6:31:05 PM" size="3" content="123" />
                 <file name="asd.txt" ext="txt" date_created="Nov 25, 2021, 6:33:23 PM" date_modified="Nov 25, 2021, 6:33:23 PM" size="0" content="" />
-                <file name="assd.txt" ext="txt" date_created="Nov 25, 2021, 6:33:23 PM" date_modified="Nov 25, 2021, 6:54:55 PM" size="6" content="asdasd" old_name="assd.txt" />
+                <dir virtual="asd" /></dir>
+            <dir virtual="My shared files" />
+        </usuario>
+        <usuario username="Testing3" password="Gato02" size="10">
+            <dir virtual="Drive" />
+            <dir virtual="My shared files" />
+        </usuario>
+        <usuario username="Gato" password="123" size="2000">
+            <dir virtual="Velvet">
+                <dir virtual="Gato" />
+                <dir virtual="Gato2" />
+                <dir virtual="Gato3" />
+                <file name="File.txt" ext="txt" date_created="Nov 25, 2021, 1:09:37 PM" date_modified="Nov 25, 2021, 1:09:37 PM" size="660" content="Si lo que queremos es que todas las p&#225;ginas hijas de una ruta est&#233;n protegidas lo que tenemos que hacer es cambiar la un par de cosas del guard. EL guard ahora no implementar&#225; de CanActivate sino de CanActivateChild, y el m&#233;todo de dentro de la clase, como es obvio, tambi&#233;n cambiar&#225; a CanActivateChild(). El resto de cosas del guard se mantienen.&#10;&#10;Para usar este guard para todos los hijos hacemos lo mismo que antes (a&#241;adiendo el guard en el componente padre), a&#241;adi&#233;ndolo a la ruta, pero esta vez el campo de la ruta se llamar&#225; canActivateChild.&#10;&#10;Cambiando lo que hemos hecho antes por CanDeactivate o por CanLoad podemos usar este tipo de guards." />
+                <dir virtual="Gato4">
+                    <dir virtual="Hola" />
+                    <dir virtual="Adios" />
+                    <file name="Gato2" ext="Gato2" date_created="Nov 25, 2021, 1:15:40 PM" date_modified="Nov 25, 2021, 1:15:40 PM" size="18" content="Gato guapo y gordo" />
+                </dir>
+                <file name="File2.txt" ext="txt" date_created="Nov 25, 2021, 1:13:10 PM" date_modified="Nov 25, 2021, 1:13:10 PM" size="64" content="temporaltemporaltemporaltemporaltemporaltemporaltemporaltemporal" />
+                <file name="Hola.txt" ext="txt" date_created="Nov 25, 2021, 1:45:50 PM" date_modified="Nov 25, 2021, 1:45:50 PM" size="241" content="Colores que combinan con Rojo: con amarillo, blanco, marr&#243;n, verde, azul y negro.&#10;Colores que combinan con Rojo claro: con azul, verde, beige, blanco y gris.&#10;Colores que combinan con Rojo oscuro: azul claro, gris, naranja, beige y amarillo." />
             </dir>
             <dir virtual="My shared files" />
         </usuario>
-    <usuario username="Testing3" password="Gato02" size="10"><dir virtual="Drive" /><dir virtual="My shared files" /></usuario><usuario username="Gato" password="123" size="2000"><dir virtual="Velvet"><dir virtual="Gato" /><dir virtual="Gato2" /><dir virtual="Gato3" /><file name="File.txt" ext="txt" date_created="Nov 25, 2021, 1:09:37 PM" date_modified="Nov 25, 2021, 1:09:37 PM" size="660" content="Si lo que queremos es que todas las p&#225;ginas hijas de una ruta est&#233;n protegidas lo que tenemos que hacer es cambiar la un par de cosas del guard. EL guard ahora no implementar&#225; de CanActivate sino de CanActivateChild, y el m&#233;todo de dentro de la clase, como es obvio, tambi&#233;n cambiar&#225; a CanActivateChild(). El resto de cosas del guard se mantienen.&#10;&#10;Para usar este guard para todos los hijos hacemos lo mismo que antes (a&#241;adiendo el guard en el componente padre), a&#241;adi&#233;ndolo a la ruta, pero esta vez el campo de la ruta se llamar&#225; canActivateChild.&#10;&#10;Cambiando lo que hemos hecho antes por CanDeactivate o por CanLoad podemos usar este tipo de guards." /><dir virtual="Gato4"><dir virtual="Hola" /><dir virtual="Adios" /><file name="Gato2" ext="Gato2" date_created="Nov 25, 2021, 1:15:40 PM" date_modified="Nov 25, 2021, 1:15:40 PM" size="18" content="Gato guapo y gordo" /></dir><file name="File2.txt" ext="txt" date_created="Nov 25, 2021, 1:13:10 PM" date_modified="Nov 25, 2021, 1:13:10 PM" size="64" content="temporaltemporaltemporaltemporaltemporaltemporaltemporaltemporal" /><file name="Hola.txt" ext="txt" date_created="Nov 25, 2021, 1:45:50 PM" date_modified="Nov 25, 2021, 1:45:50 PM" size="241" content="Colores que combinan con Rojo: con amarillo, blanco, marr&#243;n, verde, azul y negro.&#10;Colores que combinan con Rojo claro: con azul, verde, beige, blanco y gris.&#10;Colores que combinan con Rojo oscuro: azul claro, gris, naranja, beige y amarillo." /></dir><dir virtual="My shared files" /></usuario><usuario username="Paolanc" password="123456" size="2000"><dir virtual="Velvet"><dir virtual="Gato"><file name="1" ext="1" date_created="Nov 25, 2021, 3:12:15 PM" date_modified="Nov 25, 2021, 3:12:15 PM" size="1" content="f" /><dir virtual="Gato2" /></dir><file name="1" ext="1" date_created="Nov 25, 2021, 3:12:15 PM" date_modified="Nov 25, 2021, 3:12:15 PM" size="1" content="f" /><file name="3" ext="3" date_created="Nov 25, 2021, 3:12:19 PM" date_modified="Nov 25, 2021, 3:12:19 PM" size="1" content="f" /><file name="g" ext="g" date_created="Nov 25, 2021, 3:12:27 PM" date_modified="Nov 25, 2021, 3:12:27 PM" size="1" content="g" /><file name="f" ext="f" date_created="Nov 25, 2021, 3:12:31 PM" date_modified="Nov 25, 2021, 3:12:31 PM" size="1" content="f" /><file name="d" ext="d" date_created="Nov 25, 2021, 3:12:42 PM" date_modified="Nov 25, 2021, 3:12:42 PM" size="1" content="d" /><dir virtual="Gato2" /><dir virtual="Gato3" /><dir virtual="Gato 4" /><dir virtual="Gato 5" /><dir virtual="Gato 6" /></dir><dir virtual="My shared files"><dir virtual="Velvet"><dir virtual="Gato" /><dir virtual="Gato2" /><dir virtual="Gato3" /><file name="File.txt" ext="txt" date_created="Nov 25, 2021, 1:09:37 PM" date_modified="Nov 25, 2021, 1:09:37 PM" size="660" content="Si lo que queremos es que todas las p&#225;ginas hijas de una ruta est&#233;n protegidas lo que tenemos que hacer es cambiar la un par de cosas del guard. EL guard ahora no implementar&#225; de CanActivate sino de CanActivateChild, y el m&#233;todo de dentro de la clase, como es obvio, tambi&#233;n cambiar&#225; a CanActivateChild(). El resto de cosas del guard se mantienen.&#10;&#10;Para usar este guard para todos los hijos hacemos lo mismo que antes (a&#241;adiendo el guard en el componente padre), a&#241;adi&#233;ndolo a la ruta, pero esta vez el campo de la ruta se llamar&#225; canActivateChild.&#10;&#10;Cambiando lo que hemos hecho antes por CanDeactivate o por CanLoad podemos usar este tipo de guards." /><dir virtual="Gato4"><dir virtual="Hola" /><dir virtual="Adios" /><file name="Gato2" ext="Gato2" date_created="Nov 25, 2021, 1:15:40 PM" date_modified="Nov 25, 2021, 1:15:40 PM" size="18" content="Gato guapo y gordo" /></dir><file name="File2.txt" ext="txt" date_created="Nov 25, 2021, 1:13:10 PM" date_modified="Nov 25, 2021, 1:13:10 PM" size="64" content="temporaltemporaltemporaltemporaltemporaltemporaltemporaltemporal" /><file name="Hola.txt" ext="txt" date_created="Nov 25, 2021, 1:45:50 PM" date_modified="Nov 25, 2021, 1:45:50 PM" size="241" content="Colores que combinan con Rojo: con amarillo, blanco, marr&#243;n, verde, azul y negro.&#10;Colores que combinan con Rojo claro: con azul, verde, beige, blanco y gris.&#10;Colores que combinan con Rojo oscuro: azul claro, gris, naranja, beige y amarillo." /></dir><file name="Hola.txt" ext="txt" date_created="Nov 25, 2021, 1:45:50 PM" date_modified="Nov 25, 2021, 1:45:50 PM" size="241" content="Colores que combinan con Rojo: con amarillo, blanco, marr&#243;n, verde, azul y negro.&#10;Colores que combinan con Rojo claro: con azul, verde, beige, blanco y gris.&#10;Colores que combinan con Rojo oscuro: azul claro, gris, naranja, beige y amarillo." /></dir></usuario></usuarios>
+        <usuario username="Paolanc" password="123456" size="2000">
+            <dir virtual="Velvet">
+                <dir virtual="Gato">
+                    <file name="1" ext="1" date_created="Nov 25, 2021, 3:12:15 PM" date_modified="Nov 25, 2021, 3:12:15 PM" size="1" content="f" />
+                    <dir virtual="Gato2" />
+                </dir>
+                <file name="1" ext="1" date_created="Nov 25, 2021, 3:12:15 PM" date_modified="Nov 25, 2021, 3:12:15 PM" size="1" content="f" />
+                <file name="3" ext="3" date_created="Nov 25, 2021, 3:12:19 PM" date_modified="Nov 25, 2021, 3:12:19 PM" size="1" content="f" />
+                <file name="g" ext="g" date_created="Nov 25, 2021, 3:12:27 PM" date_modified="Nov 25, 2021, 3:12:27 PM" size="1" content="g" />
+                <file name="f" ext="f" date_created="Nov 25, 2021, 3:12:31 PM" date_modified="Nov 25, 2021, 3:12:31 PM" size="1" content="f" />
+                <file name="d" ext="d" date_created="Nov 25, 2021, 3:12:42 PM" date_modified="Nov 25, 2021, 3:12:42 PM" size="1" content="d" />
+                <dir virtual="Gato2" />
+                <dir virtual="Gato3" />
+                <dir virtual="Gato 4" />
+                <dir virtual="Gato 5" />
+                <dir virtual="Gato 6" />
+            </dir>
+            <dir virtual="My shared files">
+                <dir virtual="Velvet">
+                    <dir virtual="Gato" />
+                    <dir virtual="Gato2" />
+                    <dir virtual="Gato3" />
+                    <file name="File.txt" ext="txt" date_created="Nov 25, 2021, 1:09:37 PM" date_modified="Nov 25, 2021, 1:09:37 PM" size="660" content="Si lo que queremos es que todas las p&#225;ginas hijas de una ruta est&#233;n protegidas lo que tenemos que hacer es cambiar la un par de cosas del guard. EL guard ahora no implementar&#225; de CanActivate sino de CanActivateChild, y el m&#233;todo de dentro de la clase, como es obvio, tambi&#233;n cambiar&#225; a CanActivateChild(). El resto de cosas del guard se mantienen.&#10;&#10;Para usar este guard para todos los hijos hacemos lo mismo que antes (a&#241;adiendo el guard en el componente padre), a&#241;adi&#233;ndolo a la ruta, pero esta vez el campo de la ruta se llamar&#225; canActivateChild.&#10;&#10;Cambiando lo que hemos hecho antes por CanDeactivate o por CanLoad podemos usar este tipo de guards." />
+                    <dir virtual="Gato4">
+                        <dir virtual="Hola" />
+                        <dir virtual="Adios" />
+                        <file name="Gato2" ext="Gato2" date_created="Nov 25, 2021, 1:15:40 PM" date_modified="Nov 25, 2021, 1:15:40 PM" size="18" content="Gato guapo y gordo" />
+                    </dir>
+                    <file name="File2.txt" ext="txt" date_created="Nov 25, 2021, 1:13:10 PM" date_modified="Nov 25, 2021, 1:13:10 PM" size="64" content="temporaltemporaltemporaltemporaltemporaltemporaltemporaltemporal" />
+                    <file name="Hola.txt" ext="txt" date_created="Nov 25, 2021, 1:45:50 PM" date_modified="Nov 25, 2021, 1:45:50 PM" size="241" content="Colores que combinan con Rojo: con amarillo, blanco, marr&#243;n, verde, azul y negro.&#10;Colores que combinan con Rojo claro: con azul, verde, beige, blanco y gris.&#10;Colores que combinan con Rojo oscuro: azul claro, gris, naranja, beige y amarillo." />
+                </dir>
+                <file name="Hola.txt" ext="txt" date_created="Nov 25, 2021, 1:45:50 PM" date_modified="Nov 25, 2021, 1:45:50 PM" size="241" content="Colores que combinan con Rojo: con amarillo, blanco, marr&#243;n, verde, azul y negro.&#10;Colores que combinan con Rojo claro: con azul, verde, beige, blanco y gris.&#10;Colores que combinan con Rojo oscuro: azul claro, gris, naranja, beige y amarillo." />
+            </dir>
+        </usuario>
+    </usuarios>
 </root>
