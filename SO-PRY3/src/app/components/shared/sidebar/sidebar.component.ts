@@ -38,8 +38,8 @@ export class SidebarComponent implements OnInit {
   myDate: Date | undefined;
   max_size: string | null = '';
   result: number = 0;
-  
-  @Input() 
+
+  @Input()
   actual_size: string | null = '';
 
   private _transformer = (node: Directory, level: number) => {
@@ -92,9 +92,11 @@ export class SidebarComponent implements OnInit {
   }
 
   isEnoughSpace(val: number): boolean {
-    if (this.max_size != null && this.actual_size != null) {
-      let total_s = parseInt(this.max_size);
-      let actual_s = parseInt(this.actual_size);
+    let max_size = localStorage.getItem('max_drive_size');
+    let actual_size = localStorage.getItem('actual_size');
+    if (max_size != null && actual_size != null) {
+      let total_s = parseInt(max_size);
+      let actual_s = parseInt(actual_size);
       actual_s += val;
       if (actual_s > total_s) return false;
     }
@@ -103,6 +105,8 @@ export class SidebarComponent implements OnInit {
 
   calculateSpace() {
     if (this.max_size != null && this.actual_size != null) {
+      console.log(this.actual_size);
+
       let total_s = parseInt(this.max_size);
       let actual_s = parseInt(this.actual_size);
       console.log(this.actual_size);
@@ -114,6 +118,10 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {}
 
   cargar(nombre: string) {
+    console.log(
+      `Complete ${this.complete_parent} parent ${this.parent} actual ${this.actual}`
+    );
+
     this.dataSource.data.forEach((x) => {
       if (x.virtual_route === nombre) {
         this.complete_parent = x.parent;
@@ -137,8 +145,7 @@ export class SidebarComponent implements OnInit {
           this.dataSource.data = this.TREE_DATA;
         },
         error: (errors) => {
-          this.toastr.success(errors, 'Error');
-          console.log(errors);
+          this.toastr.error(errors.error, 'Error');
         },
       });
   }

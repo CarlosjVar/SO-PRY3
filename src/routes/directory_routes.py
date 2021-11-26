@@ -70,6 +70,7 @@ def list_items():
 @cross_origin()
 def copy_item():
     args = request.get_json()
+    print(args)
     source_dir = args["from_directory"]
     if source_dir == '':
         source_dir = []
