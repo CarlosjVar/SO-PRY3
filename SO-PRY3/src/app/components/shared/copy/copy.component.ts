@@ -10,6 +10,7 @@ export interface DialogData {
   a_type: string;
   new_direction: string;
   actual_dir: string;
+  size: string;
 }
 
 @Component({
